@@ -294,5 +294,5 @@ RPROMPT='$(_mnml_wrap MNML_RPROMPT)'
 
 _mnml_bind_widgets
 
-bindkey -M main  "^M" buffer-empty
-bindkey -M vicmd "^M" buffer-empty
+# bindkey -M main  "^M" buffer-empty
+# bindkey -M vicmd "^M" buffer-empty
