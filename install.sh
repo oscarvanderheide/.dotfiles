@@ -14,7 +14,6 @@ brew update
 brew tap homebrew/bundle
 brew bundle
 
-
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
 rm -rf $HOME/.zshrc
 ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
@@ -34,3 +33,8 @@ ln -s $HOME/.dotfiles/.mackup.cfg $HOME/.mackup.cfg
 # Set macOS preferences
 # We will run this last because this will reload the shell
 source .macos
+
+# Set git options (from https://spin.atomicobject.com/2020/05/05/git-configurations-default/)
+git config --global pull.rebase true
+git config --global fetch.prune true
+git config --global diff.colorMoved zebra
