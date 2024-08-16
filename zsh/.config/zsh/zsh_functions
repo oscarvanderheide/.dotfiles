@@ -1,0 +1,4 @@
+# Print path with new line after each entry
+path() {
+    echo $PATH | tr : '\n'
+}
