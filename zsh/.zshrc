@@ -5,12 +5,15 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Powerlevel10k transient prompt
+POWERLEVEL9K_TRANSIENT_PROMPT=always
+
 # Replace cd with z from zoxide
 eval "$(zoxide init zsh)"
 alias cd='z'
 
 # Replace ls with eza
-alias ls='eza --group-directories-first --icons --sort=newest -l --git --color=always --no-user --no-permissions --time=modified --time-style=relative --tree --level=1'
+alias ls='eza'
 
 # Set colors for ls (LS_COLORS)
 export LS_COLORS="$(vivid generate tokyonight-night)"
@@ -55,5 +58,14 @@ fif() {
 # Enable custom zsh functions defined in separete file
 source $HOME/.config/zsh/zsh_functions
 
+# Custom location for .gitconfig
+export GIT_CONFIG=~/.config/git/.gitconfig 
+
 # Convenient aliases
 source $HOME/.config/zsh/zsh_aliases
+
+# Transient prompt
+POWERLEVEL9K_TRANSIENT_PROMPT=always
+
+# Quickly "j"ump to commonly used directory using zi from zoxide
+bindkey -s 'j' 'zi\n'

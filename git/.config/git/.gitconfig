@@ -1,0 +1,5 @@
+[core]
+	excludesfile = /Users/oscar/.config/git/.gitignore_global
+[user]
+	name = oscar
+	email = oscarvanderheide@gmail.com
