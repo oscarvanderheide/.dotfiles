@@ -20,6 +20,15 @@ brew 'zsh-syntax-highlighting'
 brew 'lf' # Terminal file manager
 brew 'tealdeer' # tldr in rust (easier man pages)
 brew 'ripgrep' # Better grep
+brew 'cheat' # Cheatsheets for terminal utilities
+brew 'yazi' 
+brew 'ffmpegthumbnailer' 
+brew 'sevenzip' 
+brew 'jq' 
+brew 'poppler' 
+brew 'fd' 
+brew 'font-symbols-only-nerd-font'
+brew 'luarocks'
 
 # Not sure I need this: don't install for now
 # brew 'mackup' # mac backup thing
