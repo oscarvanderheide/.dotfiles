@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Powerlevel10k transient prompt
-POWERLEVEL9K_TRANSIENT_PROMPT=always
+# POWERLEVEL9K_TRANSIENT_PROMPT=always
 
 # Replace vim with nvim
 alias vim='nvim'
@@ -45,11 +45,12 @@ autoload -U compinit; compinit
 
 # zsh plugins (without oh-my-zsh)
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
 
 # Enable powerlevel10k (without oh-my-zsh)
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+# source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -82,8 +83,6 @@ export GIT_CONFIG=~/.config/git/.gitconfig
 # Convenient aliases
 source $HOME/.config/zsh/zsh_aliases
 
-# Transient prompt
-POWERLEVEL9K_TRANSIENT_PROMPT=always
 
 # Keybindings for being able to use both auto-complete and auto-suggestions 
 bindkey '^I'   complete-word       # tab          | complete
@@ -100,8 +99,8 @@ unset GIT_CONFIG
 
 # Display options for fzf
 # export FORGIT_FZF_DEFAULT_OPTS=" --exact --border --cycle --reverse --height '30%' "
-export FZF_DEFAULT_COMMAND="fd --type f"
-
+# export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
@@ -121,10 +120,10 @@ export FZF_CTRL_R_OPTS="
 
 
 # Use TAB to cycle rather than select the first option
-bindkey '^I' menu-complete
+# bindkey '^I' menu-complete
 
 # fzf-tab (see https://github.com/Aloxaf/fzf-tab)
-source ~/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
+# source ~/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
 
 # Interactive find-in-files 
 fif() (
@@ -156,7 +155,7 @@ function y() {
 }
 
 # Show system info on start of new shell
-fastfetch
+# fastfetch
 
 # Enable fzf-based tab completion
 source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
@@ -184,3 +183,9 @@ export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
 
 # Add location with custom scripts to path
 export PATH="$HOME/.local/bin::$PATH"
+
+# Node.js (needed for Github Copilot in nvim)
+export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+
+# Enable starship prompt
+eval "$(starship init zsh)"

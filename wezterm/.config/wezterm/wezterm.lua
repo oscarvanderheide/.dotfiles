@@ -13,6 +13,7 @@ local scheme_def = wezterm.color.get_builtin_schemes()[scheme]
 config.color_scheme = scheme
 config.colors = {
 	tab_bar = {
+		background = scheme_def.background,
 		active_tab = {
 			bg_color = scheme_def.background,
 			fg_color = scheme_def.foreground,
@@ -20,10 +21,14 @@ config.colors = {
 	},
 }
 
+-- Something to enable Cmd as modifier key in nvim
+config.enable_kitty_keyboard = true
+config.enable_csi_u_key_encoding = false
+
 -- Change default font (needed for powerlevel10k)
 -- config.font = wezterm.font('MesloLGS Nerd Font Mono')
 config.font = wezterm.font("JetBrains Mono")
-config.font_size = 12
+config.font_size = 14
 
 -- Disable the macOS traffic light
 config.window_decorations = "RESIZE"
@@ -35,7 +40,7 @@ config.macos_window_background_blur = 10
 
 -- Monospace tab bar font
 config.use_fancy_tab_bar = false
-
+config.hide_tab_bar_if_only_one_tab = false
 -- Disable annoying exit confirmations
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior = "Close"
@@ -49,7 +54,7 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = false
 config.freetype_load_target = "HorizontalLcd"
 
 -- Set initial columns and rows to large values
@@ -76,6 +81,49 @@ config.keys = {
 	{ key = "]", mods = "CMD", action = wezterm.action({ ActivatePaneDirection = "Prev" }) },
 }
 
+-- wezterm.plugin.require("https://gitlab.com/xarvex/presentation.wez").apply_to_config(config)
+-- local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
+-- Change the background of tabline_c section for normal mode
+-- tabline.setup({
+-- 	options = {
+-- 		icons_enabled = true,
+-- 		theme = "Catppuccin Mocha",
+-- 		-- theme = "Nord",
+-- 		color_overrides = {},
+-- 		section_separators = {
+-- 			left = "", -- wezterm.nerdfonts.pl_left_hard_divider,
+-- 			right = "", -- wezterm.nerdfonts.pl_right_hard_divider,
+-- 		},
+-- 		component_separators = {
+-- 			left = "", -- wezterm.nerdfonts.pl_left_soft_divider,
+-- 			right = "", -- wezterm.nerdfonts.pl_right_soft_divider,
+-- 		},
+-- 		tab_separators = {
+-- 			left = "", -- wezterm.nerdfonts.pl_left_hard_divider,
+-- 			right = "", -- wezterm.nerdfonts.pl_right_hard_divider,
+-- 		},
+-- 	},
+-- 	sections = {
+-- 		tabline_a = { "" },
+-- 		tabline_b = { "" },
+-- 		tabline_c = { "" },
+-- 		tab_inactive = { "" },
+-- 		tab_active = {
+-- 			"index",
+-- 			{ "parent", padding = 0 },
+-- 			"/",
+-- 			{ "cwd", padding = { left = 0, right = 1 } },
+-- 			{ "zoomed", padding = 0 },
+-- 		},
+-- 		-- tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
+-- 		tabline_x = { "" },
+-- 		tabline_y = { "" },
+-- 		tabline_z = { "workspace" },
+-- 	},
+-- 	extensions = {},
+-- })
+-- tabline.apply_to_config(config)
+
 -- SSH stuff
 config.ssh_domains = {
 	{
@@ -86,6 +134,83 @@ config.ssh_domains = {
 		remote_address = "roodnoot",
 		-- The username to use on the remote host
 		username = "oheide",
+	},
+}
+
+local act = wezterm.action
+
+wezterm.on("update-right-status", function(window, pane)
+	window:set_right_status(window:active_workspace())
+end)
+
+config.keys = {
+	-- Prompt for a name to use for a new workspace and switch to it.
+	{
+		key = "N",
+		mods = "CMD|SHIFT",
+		action = act.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Fuchsia" } },
+				{ Text = "Enter name for new workspace" },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					window:perform_action(
+						act.SwitchToWorkspace({
+							name = line,
+						}),
+						pane
+					)
+				end
+			end),
+		}),
+	},
+}
+
+-- Workspace switcher plugin
+-- local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+-- workspace_switcher.apply_to_config(config)
+-- config.keys = {
+-- 	{ key = "s", mods = "ALT", action = wezterm.action.ShowLauncher({ flags = "WORKSPACES" }) },
+-- }
+-- config.keys = {
+-- 	{
+-- 		key = "s",
+-- 		mods = "ALT",
+-- 		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+-- 	},
+-- 	{ key = "n", mods = "ALT", action = act.SwitchWorkspaceRelative(1) },
+-- 	{ key = "p", mods = "ALT", action = act.SwitchWorkspaceRelative(-1) },
+-- }
+local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
+sessionizer.apply_to_config(config)
+
+sessionizer.config = {
+	-- Only shows git repositories in the sessionizer
+	paths = {
+		"/Users/oscar/.julia/dev", -- this could for example be "/home/<your_username>/dev"
+		"/Users/oscar/.dotfiles",
+		"/Users/oscar/tmp",
+	},
+	command_options = {
+		fd_path = "/opt/homebrew/bin/fd",
+	},
+}
+
+config.keys = {
+	{
+		key = "s",
+		mods = "ALT",
+		action = sessionizer.show,
+	},
+	{
+		key = "s",
+		mods = "ALT|SHIFT",
+		action = sessionizer.switch_to_most_recent,
 	},
 }
 
