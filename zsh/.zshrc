@@ -1,19 +1,13 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Powerlevel10k transient prompt
-# POWERLEVEL9K_TRANSIENT_PROMPT=always
-
 # Replace vim with nvim
 alias vim='nvim'
+alias v='nvim'
 
 # Replace cd with z from zoxide
 eval "$(zoxide init zsh)"
 alias cd='z'
+
+# Quick jump to most used directories (using zi)
+bindkey -s 'jj' 'zi\n'
 
 # Replace ls with eza
 alias ls='eza'
@@ -23,16 +17,12 @@ alias lt3='ls --tree --level=3'
 
 # Set colors for ls (LS_COLORS)
 export LS_COLORS="$(vivid generate iceberg-dark)"
-# export LS_COLORS="$(vivid generate jellybeans)"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+# Enable fzf-git keybindings
 source $HOME/.config/zsh/fzf-git.sh
-
-# export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-
-# Quick jump to most used directories (using zi)
-bindkey -s 'jj' 'zi\n'
 
 #autolist=yes        # Automatically lists options when ambiguous
 #zstyle ':completion:*' menu select   # Allows you to cycle through options with arrow keys
@@ -47,22 +37,15 @@ autoload -U compinit; compinit
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
-
-# Enable powerlevel10k (without oh-my-zsh)
-# source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Connect to UMCU vpn
 alias vpn="$HOME/roodnoot/umcu_vpn.sh"
 
+# Replace cat with bat (disable automatic use of less with bat)
+alias cat='bat  --pager=never'
+
 # Set bat theme
 export BAT_THEME="Nord"
-
-# Disable automatic use of less with bat
-alias bat='bat --pager=never'
 
 # Use ripgrep config file
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep
@@ -83,9 +66,8 @@ export GIT_CONFIG=~/.config/git/.gitconfig
 # Convenient aliases
 source $HOME/.config/zsh/zsh_aliases
 
-
 # Keybindings for being able to use both auto-complete and auto-suggestions 
-bindkey '^I'   complete-word       # tab          | complete
+# bindkey '^I'   complete-word       # tab          | complete
 bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 
 # Define the fda function for interactive directory selection
@@ -100,6 +82,9 @@ unset GIT_CONFIG
 # Display options for fzf
 # export FORGIT_FZF_DEFAULT_OPTS=" --exact --border --cycle --reverse --height '30%' "
 # export FZF_DEFAULT_COMMAND="fd --type f"
+
+# export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_OPTS='--layout=reverse --border'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
@@ -122,8 +107,6 @@ export FZF_CTRL_R_OPTS="
 # Use TAB to cycle rather than select the first option
 # bindkey '^I' menu-complete
 
-# fzf-tab (see https://github.com/Aloxaf/fzf-tab)
-# source ~/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
 
 # Interactive find-in-files 
 fif() (
@@ -145,7 +128,7 @@ fif() (
 )
 
 # yazi shortcut and change directory upon exit
-function y() {
+function yazi_cd() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
@@ -154,26 +137,48 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+bindkey -s yy 'yazi_cd\n'
 # Show system info on start of new shell
 # fastfetch
 
 # Enable fzf-based tab completion
 source $HOME/.config/zsh/fzf-tab/fzf-tab.plugin.zsh
+
+# # disable sort when completing `git checkout`
+# zstyle ':completion:*:git-checkout:*' sort false
+# # set descriptions format to enable group support
+# # NOTE: don't use escape sequences here, fzf-tab will ignore them
+# zstyle ':completion:*:descriptions' format '[%d]'
+# # set list-colors to enable filename colorizing
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+# zstyle ':completion:*' menu no
+# # preview directory's content with eza when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# # switch group using `<` and `>`
+# zstyle ':fzf-tab:*' switch-group '<' '>'
+# # tmux style popup
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:*' fzf-flags '--height=50% --layout=reverse'
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
-# NOTE: don't use escape sequences here, fzf-tab will ignore them
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
 zstyle ':completion:*:descriptions' format '[%d]'
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
 # preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# custom fzf flags
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept --height 40%
+# To make fzf-tab follow FZF_DEFAULT_OPTS.
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+# zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
-# tmux style popup
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Set custom location for .tmux.conf
 alias tmux='tmux -f ~/.config/tmux/.tmux.conf'
@@ -189,3 +194,5 @@ export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 
 # Enable starship prompt
 eval "$(starship init zsh)"
+
+source /Users/oscar/.config/broot/launcher/bash/br
