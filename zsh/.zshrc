@@ -8,12 +8,17 @@ alias cd='z'
 
 # Quick jump to most used directories (using zi)
 bindkey -s 'jj' 'zi\n'
+bindkey -s 'kk' 'ls\n'
 
 # Replace ls with eza
 alias ls='eza'
 alias l='ls' 
 alias lt2='ls --tree --level=2'
 alias lt3='ls --tree --level=3'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
 # Set colors for ls (LS_COLORS)
 export LS_COLORS="$(vivid generate iceberg-dark)"
@@ -30,13 +35,16 @@ source $HOME/.config/zsh/fzf-git.sh
 # needed for fzf-tab
 autoload -U compinit; compinit
 
+# Set nvim as delault editor
+export EDITOR=nvim
+
 # Enable forgit (note that it introduces a bunch of aliases)
-[ -f $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh ] && source $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh
+source $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh
 
 # zsh plugins (without oh-my-zsh)
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Connect to UMCU vpn
 alias vpn="$HOME/roodnoot/umcu_vpn.sh"
@@ -48,7 +56,11 @@ alias cat='bat  --pager=never'
 export BAT_THEME="Nord"
 
 # Use ripgrep config file
-export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/config
+
+# Replace grep with rg 
+alias grep='rg'
+alias rg='rg --hidden --smart-case'
 
 # using ripgrep combined with preview
 # find-in-file - usage: fif <searchTerm>
@@ -181,7 +193,7 @@ zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept --height 40%
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # Set custom location for .tmux.conf
-alias tmux='tmux -f ~/.config/tmux/.tmux.conf'
+# alias tmux='tmux -f ~/.config/tmux/.tmux.conf'
 
 # Use python installed with homebrew
 export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
@@ -196,3 +208,9 @@ export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 eval "$(starship init zsh)"
 
 source /Users/oscar/.config/broot/launcher/bash/br
+
+# Quickly open nvim and zsh config files in nvim
+alias zz='nvim ~/.zshrc'
+alias vv='nvim ~/.config/nvim/; exec zsh'
+
+

@@ -1,0 +1,133 @@
+# TAKEN FROM https://markmcb.com/cli/tmux-zsh-fzf-ui/#install-tmux
+
+# Fix colors 
+set -g default-terminal "tmux-256color"
+set -ag terminal-overrides ",xterm-255color:RGB"
+set-option -sa terminal-overrides ",xterm*:Tc"
+
+# set shell to zsh
+set-option -g default-shell /bin/zsh
+
+# set prefix to C-a
+unbind C-b
+set -g prefix C-a
+bind-key C-a send-prefix
+
+# easy reload ~/.tmux.conf
+bind-key r source-file ~/.config/tmux/.tmux.conf
+
+# split pane commands
+bind-key | split-window -h -c '#{pane_current_path}'
+bind-key - split-window -v -c '#{pane_current_path}'
+
+# disable confirmation for kill-window and kill-pane
+bind-key & kill-window
+bind-key x kill-pane
+
+# cycle through panes
+set-option -g repeat-time 500 #milliseconds
+bind-key -r p select-pane -t :.+
+bind-key -r P select-pane -t :.-
+
+# set window and pane index to 1 (0 by default) for easier direct access
+set-option -g base-index 1
+setw -g pane-base-index 1
+
+# auto-rename based on current working directory
+set-option -g status-interval 5
+set-option -g automatic-rename on
+set-option -g automatic-rename-format '#{b:pane_current_path}'
+
+# move between windows and sessions
+bind-key -r h previous-window
+bind-key -r j switch-client -n
+bind-key -r k switch-client -p
+bind-key -r l next-window
+
+# Add homebrew to path for macOS
+set-environment -g PATH "/opt/homebrew/bin:/bin:/usr/bin"
+
+# STYLE
+
+# Pane seperation colors, i.e., lines between panes
+set -g pane-active-border-style 'fg=colour243'
+set -g pane-border-style 'fg=colour236'
+
+# Brighter text for active window pane
+# set -g window-style 'fg=colour245'
+# set -g window-active-style 'fg=colour252'
+
+# Add padding to window names, and visual flag for window activity
+set-option -g window-status-format ' #W#{?window_activity_flag,!,} '
+set-option -g window-status-separator ''
+
+# Default gray on gray status bar style
+set-option -g status-style bg=colour236,fg=colour248
+
+# Inactive window labels match the color of the status bar
+set-window-option -g window-status-style bg=colour236,fg=colour248
+
+# Active window label is slightly highlighted. Append -Z if a pane is zoomed.
+# set-window-option -g window-status-current-style bg=colour24,fg=colour14
+# set-window-option -g window-status-current-style bg=colour239,fg=colour251
+# set-option -g window-status-current-format ' #W#{?window_zoomed_flag,-Z,} '
+
+# Left status
+# set -g status-left "#[bg=colour239,fg=colour252]"
+
+# Right status
+# set -g status-right "#[bg=colour238,fg=colour244] %d %b %H:%M "
+
+## Plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin "mark-pitblado/catppuccin-tmux"
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+set -g @catppuccin_flavor 'mocha' 
+set -g @catppuccin_window_status_style "rounded"
+# run ~/.config/tmux/plugins/catppuccin.tmux
+## STATUS BAR
+# default statusbar colors
+#――――――――――――――――――――――――――――――――
+# set -g focus-events on
+set -g status-style bg=default
+# set -g status-left-length 90
+# set -g status-right-length 90
+# set -g status-justify centre
+# set-option -g status-position top
+# set-option -g status-bg default
+# set-option -g status-fg colour240
+set -g status-position top 
+set -g status-left ""
+set -g status-right ""
+# set -g status-left-length 85
+# set -g status-left "working on#[fg=colour135] #S"
+# set -g window-status-current-format "#[fg=black,bold bg=default]│#[fg=white bg=cyan]#W#[fg=black,bold bg=default]│"
+# set -g window-status-current-format "#[fg=black,bold bg=default]│#[fg=colour135 bg=black]#W#[fg=black,bold bg=default]│"
+# set -g status-style bg=default
+# set -g status-right "#[fg=magenta] #[bg=gray] %b %d %Y %l:%M %p"
+# set -g status-right '#(gitmux "#{pane_current_path}")' 
+# set -g status-justify centre
+# MOUSE
+
+# Enable mouse support by default, but make it easy to turn on/off
+set-option -g mouse on
+bind-key m set-option -g mouse
+
+# If you have sessions, and put #S in the status bar, click or
+# scroll on the session name to cycle through sessions
+bind-key -n MouseUp1StatusLeft switch-client -n
+bind-key -n WheelDownStatusLeft switch-client -n
+bind-key -n WheelUpStatusLeft switch-client -p
+
+# increase scrollback
+set-option -g history-limit 50000
+
+# Use fzf to find projects and launch them in new tmux session (from primeagen)
+bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer.sh"
+
+# Change default tmux path
+# set-environment -g TMUX_PLUGIN_MANAGER_PATH '/Users/oscar/.config/tmux/plugins'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
