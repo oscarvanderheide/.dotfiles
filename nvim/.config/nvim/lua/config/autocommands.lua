@@ -17,13 +17,13 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 
 -- Open Telescope file finder when opening a directory
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    if vim.fn.argv(0) == '' then
-      require('telescope.builtin').find_files()
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   callback = function()
+--     if vim.fn.argv(0) == '' then
+--       require('telescope.builtin').find_files()
+--     end
+--   end,
+-- })
 
 -- Prevent automatically commenting lines after starting a new line in insert mode
 vim.api.nvim_create_autocmd('FileType', {
@@ -52,3 +52,4 @@ vim.api.nvim_create_autocmd('FileType', {
 --   pattern = 'julia',
 --   callback = SET_JULIA_KEYMAPS,
 -- })
+

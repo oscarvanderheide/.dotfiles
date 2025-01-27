@@ -35,6 +35,13 @@ set('n', 'U', '<C-r>', { noremap = true, silent = true, desc = 'Undo' })
 -- Exit terminal mode with double Esc
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- Yank/paste using system clipboard
+set('n', '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
+set('n', '<leader>Y', 'gg"+yG', { noremap = true, silent = true, desc = 'Yank entire buffer to clipboard' })
+set('n', '<leader>yy', '"+yy', { noremap = true, silent = true, desc = 'Yank line to clipboard' })
+set('n', '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
+set('n', '<leader>P', '"+P', { noremap = true, silent = true, desc = 'Paste from clipboard' })
+
 -- Change d to delete without yanking
 set('n', 'd', '"_d', { noremap = true, silent = true, desc = 'Delete without yanking' })
 set('n', '<leader>d', 'd', { noremap = true, silent = true, desc = 'Delete with yanking' })
@@ -79,8 +86,3 @@ end, { desc = 'Comment selection' })
 vim.keymap.set('n', '<leader>rn', function()
   return ':IncRename ' .. vim.fn.expand '<cword>'
 end, { expr = true, desc = 'Re[N]ame Incremental' })
-
-
-set({'n','v'}, '<leader>cc', ':CopilotChat<CR>', {noremap = true, silent = true})
-set({'n','v'}, '<leader>ce', ':CopilotChatExplain<CR>', {noremap = true, silent = true})
-set({'n','v'}, '<leader>cr', ':CopilotChatReset<CR>', {noremap = true, silent = true})

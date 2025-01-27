@@ -45,5 +45,10 @@ return {
       },
       -- filetypes = {},
     },
+    keys = {
+      { '<leader>cc', ':CopilotChat<CR>', mode = { 'n', 'v' }, noremap = true, silent = true },
+      { '<leader>ce', ':CopilotChatExplain<CR>', mode = { 'n', 'v' }, noremap = true, silent = true },
+      { '<leader>cr', ':CopilotChatReset<CR>', mode = { 'n', 'v' }, noremap = true, silent = true },
+    },
   },
 }
