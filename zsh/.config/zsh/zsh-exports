@@ -1,0 +1,51 @@
+# Set bat theme
+export BAT_THEME="Nord"
+
+# Use ripgrep config file
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/config
+
+# Set colors for ls (LS_COLORS)
+export LS_COLORS="$(vivid generate iceberg-dark)"
+
+# Set nvim as default editor
+export EDITOR=nvim
+
+# Custom location for .gitconfig
+export GIT_CONFIG=$HOME/.config/git/.gitconfig 
+
+# Add location with custom scripts to path
+export PATH="$HOME/.local/bin::$PATH"
+
+# Customize fzf
+export FZF_DEFAULT_OPTS='--layout=reverse --border'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Platform specific options:
+case "$(uname -s)" in
+  Darwin) # == macOS
+    # Use python installed with homebrew
+    export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
+    # Node.js (needed for Github Copilot in nvim)
+    export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+  ;;
+  Linux)
+    alias ls='ls --color=auto'
+  ;;
+esac
+
+
+
