@@ -16,6 +16,11 @@ function zsh_add_plugin() {
         zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh" 
     else
         git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
+        if [ $? -ne 0 ]; then
+            echo "Failed to clone plugin: $1"
+        else
+            echo "Successfully cloned plugin: $1"
+        fi
     fi
 }
 
