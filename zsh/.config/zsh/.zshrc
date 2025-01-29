@@ -53,31 +53,51 @@ unset GIT_CONFIG
 # Use TAB to cycle rather than select the first option
 # bindkey '^I' menu-complete
 
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-zstyle ':completion:*' menu no
-# preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-# custom fzf flags
-# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept --height 40%
-# To make fzf-tab follow FZF_DEFAULT_OPTS.
-# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
-# zstyle ':fzf-tab:*' use-fzf-default-opts yes
-# switch group using `<` and `>`
-zstyle ':fzf-tab:*' switch-group '<' '>'
+# # disable sort when completing `git checkout`
+# zstyle ':completion:*:git-checkout:*' sort false
+# # set descriptions format to enable group support
+# # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+# zstyle ':completion:*:descriptions' format '[%d]'
+# # set list-colors to enable filename colorizing
+# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+# # zstyle ':completion:*' menu no
+# # preview directory's content with eza when completing cd
+# # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# # custom fzf flags
+# # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+# # zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept --height 40%
+# # To make fzf-tab follow FZF_DEFAULT_OPTS.
+# # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+# # zstyle ':fzf-tab:*' use-fzf-default-opts yes
+# # switch group using `<` and `>`
+# # zstyle ':fzf-tab:*' switch-group '<' '>'
+# zstyle ':completion:*:*:cd:*' tag-order local-directories
+# zstyle ':completion:*:cd:*' ignored-patterns '.*'
 
-# Set custom location for .tmux.conf
-# alias tmux='tmux -f ~/.config/tmux/.tmux.conf'
+zstyle ':completion:*' completer _expand _complete _ignored _match _correct _approximate _prefix
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' condition 0
+zstyle ':completion:*' expand prefix
+zstyle ':completion:*' file-sort name
+zstyle ':completion:*' format 'Completing %d ...'
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt '%SViewing %p: Keep TABBING to select or insert characters manually... %s'
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' menu select=0
+zstyle ':completion:*' original true
+zstyle ':completion:*' preserve-prefix '//[^/]##/'
+zstyle ':completion:*' prompt 'Found %e errors...'
+zstyle ':completion:*' select-prompt '%SScrolling... currently at %p%s'
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' substitute 1
+zstyle ':completion:*' verbose true
 
-# Quick jump to most used directories (using zi)
-bindkey -s 'jj' 'zi\n' # Jump to most used directories
-bindkey -s 'kk' 'ls\n' # List files in current directory
-bindkey -s 'yy' 'yazi_cd\n' # Open yazi and change dir upon exit
-bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+
