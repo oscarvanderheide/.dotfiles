@@ -1,0 +1,19 @@
+# Set emacs keybindings
+bindkey -e
+
+# Enable Ctrl + Left/Right Arrow for word movement
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Enable delete key
+bindkey '^[[3~' delete-char
+
+# Quick jump to most used directories (using zi)
+bindkey -s 'jj' 'zi\n' # Jump to most used directories
+
+# Open yazi and change dir upon exit
+bindkey -s 'yy' 'yazi_cd\n' 
+
+# Shift + Tab to accept autosuggestions
+bindkey '^[[Z' autosuggest-accept  
+

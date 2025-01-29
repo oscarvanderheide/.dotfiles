@@ -1,27 +1,38 @@
 # Set location of .zshrc (note that I create an alias in ~ to this file to make it easier to edit)
 export ZDOTDIR=$HOME/.config/zsh
 
+# Settings for command history
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY           # Share history between terminal sessions
+setopt HIST_IGNORE_ALL_DUPS    # Ignore duplicate commands in history
+setopt HIST_SAVE_NO_DUPS       # Don't save duplicates to the history file
+setopt INC_APPEND_HISTORY      # Immediately append commands to the history file
+setopt HIST_REDUCE_BLANKS      # Remove extra blanks from commands
+
 # Load custom zsh files from .config/zsh
 source $HOME/.config/zsh/zsh-functions
 source $HOME/.config/zsh/zsh-exports
 source $HOME/.config/zsh/zsh-aliases
+source $HOME/.config/zsh/zsh-keybinds
 
 # Some useful options
+setopt no_beep
 setopt auto_cd 				# Automatically cd into a directory if the command is a directory
 setopt extended_glob 	# Enable extended globbing
-setopt nomatch 				# If a glob does not match, return the glob itself
 # setopt menucomplete
 
 # Enable plugins (auto-installs if missing)
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "wfxr/forgit"
-zsh_add_plugin "Aloxaf/fzf-tab"
+# zsh_add_plugin "Aloxaf/fzf-tab"
 
-# Setup of zoxide (cd replacement)
+# Enable zoxide (cd replacement)
 eval "$(zoxide init zsh)"
 
-# Set up fzf key bindings and fuzzy completion
+# Enable fzf (fuzzy finder)
 source <(fzf --zsh)
 
 # Enable starship prompt
