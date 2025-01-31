@@ -59,7 +59,7 @@ unset GIT_CONFIG
 # # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
 # zstyle ':completion:*:descriptions' format '[%d]'
 # # set list-colors to enable filename colorizing
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 # # zstyle ':completion:*' menu no
 # # preview directory's content with eza when completing cd
@@ -84,7 +84,6 @@ zstyle ':completion:*' format 'Completing %d ...'
 zstyle ':completion:*' glob 1
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' insert-unambiguous true
-zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt '%SViewing %p: Keep TABBING to select or insert characters manually... %s'
 zstyle ':completion:*' list-suffixes true
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
