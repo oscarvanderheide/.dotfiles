@@ -2,6 +2,9 @@
 
 local set = vim.keymap.set
 
+-- Quit neovim
+set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' })
+
 -- Change word under cursor
 set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change inner word' })
 
@@ -64,7 +67,9 @@ set('n', 'N', 'Nzzzv', { desc = 'Center after going to previous search item' })
 
 -- Move selected lines up or down like in VSCode
 set('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines down' })
-set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selected lines up' })
+set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move current line up' })
+set('n', '<A-j>', "V:m '>+1<CR>gv=gv<Esc>", { desc = 'Select current line and move it down' })
+set('n', '<A-k>', "V:m '<-2<CR>gv=gv<Esc>", { desc = 'Move current line up' })
 
 -- Quickly alternate between two buffers
 set('n', ',', '<C-^>', { noremap = true, silent = true, desc = 'Alternate two buffers' })
