@@ -18,58 +18,153 @@ return {
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       vim.cmd.colorscheme 'nord'
+      -- Change background color to something darker, same as wezterm background
+      vim.cmd 'highlight Normal guibg=#282C35'
     end,
   },
+  {
+    'dgox16/oldworld.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+  },
 
-  -- Lualine: Customize the statusline
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      local empty_lines = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
+      -- I like nord
+      local nord = {
+        --16 colors
+        black = '#2E3440', -- nord0 in palette
+        dark_gray = '#3B4252', -- nord1 in palette
+        gray = '#434C5E', -- nord2 in palette
+        light_gray = '#4C566A', -- nord3 in palette
+        light_gray_bright = '#616E88', -- out of palette
+        darkest_white = '#D8DEE9', -- nord4 in palette
+        darker_white = '#E5E9F0', -- nord5 in palette
+        white = '#ECEFF4', -- nord6 in palette
+        teal = '#8FBCBB', -- nord7 in palette
+        off_blue = '#88C0D0', -- nord8 in palette
+        glacier = '#81A1C1', -- nord9 in palette
+        blue = '#5E81AC', -- nord10 in palette
+        red = '#BF616A', -- nord11 in palette
+        orange = '#D08770', -- nord12 in palette
+        yellow = '#EBCB8B', -- nord13 in palette
+        green = '#A3BE8C', -- nord14 in palette
+        purple = '#B48EAD', -- nord15 in palette
+        none = 'NONE',
       }
+
+      -- I use a darker background than the default nord background
+      local my_bg = '#282C35'
+
+      -- Set colors for different vim modes
+      local modecolor = {
+        n = nord.glacier,
+        i = nord.yellow,
+        v = nord.purple,
+        [''] = nord.purple,
+        V = nord.red,
+        c = nord.yellow,
+        no = nord.red,
+        s = nord.yellow,
+        S = nord.yellow,
+        [''] = nord.yellow,
+        ic = nord.yellow,
+        R = nord.green,
+        Rv = nord.purple,
+        cv = nord.red,
+        ce = nord.red,
+        r = nord.light_gray,
+        rm = nord.light_gray,
+        ['r?'] = nord.light_gray,
+        ['!'] = nord.red,
+        t = nord.glacier,
+      }
+
+      local theme = {
+        normal = {
+          a = { fg = my_bg, bg = nord.blue },
+          b = { fg = nord.blue, bg = nord.white },
+          c = { fg = nord.white, bg = my_bg },
+          z = { fg = nord.white, bg = my_bg },
+        },
+        insert = { a = { fg = my_bg, bg = nord.orange } },
+        visual = { a = { fg = my_bg, bg = nord.green } },
+        replace = { a = { fg = my_bg, bg = nord.green } },
+      }
+
+      local space = {
+        function()
+          return ' '
+        end,
+        color = { bg = my_bg },
+      }
+
+      local filename = {
+        'filename',
+        color = { bg = nord.blue, fg = my_bg },
+        separator = { left = '', right = '' },
+      }
+
+      local branch = {
+        'branch',
+        icon = '',
+        color = { bg = nord.green, fg = my_bg },
+        separator = { left = '', right = '' },
+      }
+
+      local diff = {
+        'diff',
+        color = { bg = my_bg, fg = my_bg },
+        separator = { left = '', right = '' },
+        symbols = { added = ' ', modified = ' ', removed = ' ' },
+
+        diff_color = {
+          added = { fg = nord.green },
+          modified = { fg = nord.yellow },
+          removed = { fg = nord.red },
+        },
+      }
+
+      local modes = {
+        'mode',
+        color = function()
+          local mode_color = modecolor
+          return { bg = mode_color[vim.fn.mode()], fg = my_bg }
+        end,
+        separator = { left = '', right = '' },
+      }
+
       require('lualine').setup {
         options = {
-          refresh = {
-            statusline = 100,
-            tabline = 100,
-            winbar = 100,
-          },
+          --
+          --     -- globalstatus = vim.o.laststatus == 3,
+          disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'ministarter', 'snacks_dashboard' } },
+          icons_enabled = true,
+          theme = theme,
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
+          ignore_focus = {},
+          always_divide_middle = true,
+          globalstatus = true,
         },
-        sections = empty_lines,
-        inactive_sections = empty_lines,
-        tabline = empty_lines,
-        winbar = {
+
+        sections = {
+          lualine_a = { modes },
+          lualine_b = { space },
+          lualine_c = { filename },
+          lualine_x = { space },
+          lualine_y = { space },
+          lualine_z = { diff, space, branch },
+        },
+        inactive_sections = {
           lualine_a = {},
-          lualine_b = { 'filename' },
-          lualine_c = {},
-          lualine_x = {}, -- { 'filetype' },
-          lualine_y = {
-            function()
-              return vim.fn.getcwd()
-            end,
-          },
-          -- lualine_z = { { 'filename', path = 0 } }, --{ 'location' }
+          lualine_b = {},
+          lualine_c = { 'filename' },
+          lualine_x = { 'location' },
+          lualine_y = {},
+          lualine_z = {},
         },
-        inactive_winbar = {
-          lualine_a = {},
-          lualine_b = { 'filename' },
-          lualine_c = {},
-          lualine_x = {}, -- { 'filetype' },
-          lualine_y = {
-            function()
-              return vim.fn.getcwd()
-            end,
-          },
-          -- lualine_z = { { 'filename', path = 0 } }, --{ 'location' }
-        },
-        extensions = {},
       }
     end,
   },
@@ -115,82 +210,45 @@ return {
     'echasnovski/mini.hipatterns',
     event = 'VeryLazy',
     dependencies = { 'GCBallesteros/NotebookNavigator.nvim' },
+
     opts = function()
       local nn = require 'notebook-navigator'
+      local utils = require 'notebook-navigator.utils'
 
-      local opts = { highlighters = { cells = nn.minihipatterns_spec } }
+      -- My own custom highlight group for code cells using Nord's yellow color
+      vim.api.nvim_set_hl(0, 'NotebookCellHighlight', { fg = '#EBCB8B', bold = true })
+
+      local opts = {
+        highlighters = {
+          cell_delimiter = {
+            -- Set the pattern to the cell marker as defined in NotebookNavigator plugin
+            pattern = function(buf_id)
+              local cell_marker = utils.get_cell_marker(buf_id, nn.config.cell_markers)
+              if cell_marker then
+                local regex_cell_marker = '^' .. cell_marker .. '%s*.*'
+                return regex_cell_marker
+              else
+                return nil
+              end
+            end,
+            -- Group name, doesn't really matter
+            group = 'MiniHipatternsCustom',
+            -- Calculate the length of the line to be added s.t. the total length is 80
+            extmark_opts = function(_, match, _)
+              local display_width = vim.fn.strdisplaywidth(match)
+              local horizontal_line = {
+                virt_text = { { string.rep('─', 80 - display_width), 'NotebookCellHighlight' } },
+                line_hl_group = 'NotebookCellHighlight',
+                hl_eol = true,
+              }
+              return horizontal_line
+            end,
+          },
+        },
+      }
       return opts
     end,
   },
-
-  -- Mini Clue: Keymap hints + hydra mode (note the "clues" are defined in configs of other plugins)
-  -- {
-  --   'echasnovski/mini.clue',
-  --   version = '*',
-  --   config = function()
-  --     require('mini.clue').setup {
-  --       triggers = {
-  --         -- Leader triggers
-  --         { mode = 'n', keys = '<Leader>' },
-  --         { mode = 'x', keys = '<Leader>' },
-  --
-  --         -- Built-in completion
-  --         { mode = 'i', keys = '<C-x>' },
-  --
-  --         -- `g` key
-  --         { mode = 'n', keys = 'g' },
-  --         { mode = 'x', keys = 'g' },
-  --
-  --         -- Marks
-  --         { mode = 'n', keys = "'" },
-  --         { mode = 'n', keys = '`' },
-  --         { mode = 'x', keys = "'" },
-  --         { mode = 'x', keys = '`' },
-  --
-  --         -- Registers
-  --         { mode = 'n', keys = '"' },
-  --         { mode = 'x', keys = '"' },
-  --         { mode = 'i', keys = '<C-r>' },
-  --         { mode = 'c', keys = '<C-r>' },
-  --
-  --         -- Window commands
-  --         { mode = 'n', keys = '<C-w>' },
-  --
-  --         -- `z` key
-  --         { mode = 'n', keys = 'z' },
-  --         { mode = 'x', keys = 'z' },
-  --       },
-  --
-  --       clues = {
-  --         -- Enhance this by adding descriptions for <Leader> mapping groups
-  --         require('mini.clue').gen_clues.builtin_completion(),
-  --         require('mini.clue').gen_clues.g(),
-  --         require('mini.clue').gen_clues.marks(),
-  --         require('mini.clue').gen_clues.registers(),
-  --         require('mini.clue').gen_clues.windows(),
-  --         require('mini.clue').gen_clues.z(),
-  --
-  --         -- Treewalker navigation with postkeys to stay in submode
-  --         { mode = 'n', keys = '<Leader>wj', postkeys = '<Leader>w', desc = 'Down' },
-  --         { mode = 'n', keys = '<Leader>wk', postkeys = '<Leader>w', desc = 'Up' },
-  --         { mode = 'n', keys = '<Leader>wh', postkeys = '<Leader>w', desc = 'Left' },
-  --         { mode = 'n', keys = '<Leader>wl', postkeys = '<Leader>w', desc = 'Right' },
-  --
-  --         -- Notebook navigator with postkeys to stay in submode
-  --         { mode = 'n', keys = '<Leader>hj', postkeys = '<Leader>h', desc = 'Down' },
-  --         { mode = 'n', keys = '<Leader>hk', postkeys = '<Leader>h', desc = 'Up' },
-  --         { mode = 'n', keys = '<Leader>hx', postkeys = '<Leader>h', desc = 'Execute' },
-  --         { mode = 'n', keys = '<Leader>hX', postkeys = '<Leader>h', desc = 'Execute and Move' },
-  --         { mode = 'n', keys = '<Leader>hc', postkeys = '<Leader>h', desc = 'Comment' },
-  --       },
-  --       -- Delay before showing clue window
-  --       window = { -- Floating window config
-  --         config = { width = 'auto' },
-  --         delay = 300,
-  --       },
-  --     }
-  --   end,
-  -- },
 
   -- Which-Key: Keymap hints
   {
