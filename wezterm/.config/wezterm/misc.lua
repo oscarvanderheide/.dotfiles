@@ -1,0 +1,86 @@
+return function(config)
+	local wezterm = require("wezterm")
+
+	-- PLUGINS
+	-- Sessionizer
+	-- -- Workspace switcher plugin
+	-- -- local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+	-- -- config.keys = {
+	-- -- workspace_switcher.apply_to_config(config)
+	-- -- 	{ key = "s", mods = "ALT", action = wezterm.action.ShowLauncher({ flags = "WORKSPACES" }) },
+	-- -- }
+	-- -- config.keys = {
+	-- -- 	{
+	-- -- 		key = "s",
+	-- -- 		mods = "ALT",
+	-- -- 		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+	-- -- 	},
+	-- -- 	{ key = "n", mods = "ALT", action = act.SwitchWorkspaceRelative(1) },
+	-- -- 	{ key = "p", mods = "ALT", action = act.SwitchWorkspaceRelative(-1) },
+	-- -- }
+	-- local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
+	-- sessionizer.apply_to_config(config)
+	-- --
+	-- sessionizer.config = {
+	-- 	-- Only shows git repositories in the sessionizer
+	-- 	paths = {
+	-- 		"/Users/oscar/.julia/dev", -- this could for example be "/home/<your_username>/dev"
+	-- 		"/Users/oscar/.dotfiles",
+	-- 		"/Users/oscar/tmp",
+	-- 	},
+	-- 	command_options = {
+	-- 		fd_path = "/opt/homebrew/bin/fd",
+	-- 	},
+	-- keys = {
+	-- 	{
+	-- 		key = "r",
+	-- 		mods = "OPT",
+	-- 		action = sessionizer.show,
+	-- 	},
+	-- 	{
+	-- 		key = ".",
+	-- 		mods = "OPT",
+	-- 		action = sessionizer.switch_to_most_recent,
+	-- 	},
+	-- },
+	-- }
+	-- -- Presentation mode
+	-- wezterm.plugin.require("https://gitlab.com/xarvex/presentation.wez").apply_to_config(config, {
+	-- 	font_size_multiplier = 1.8, -- sets for both "presentation" and "presentation_full"
+	-- 	presentation = {
+	-- 		keybind = { key = "t", mods = "ALT" }, -- setting a keybind
+	-- 	},
+	-- 	presentation_full = {
+	-- 		font_size_multiplier = 2.4, -- overwrites "font_size_multiplier" for "presentation_full"
+	-- 	},
+	-- 	font_weight = "Bold",
+	-- })
+	--
+	-- -- Sessionizer
+	-- local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
+	-- sessionizer.apply_to_config(config)
+	-- --
+	-- sessionizer.config = {
+	-- 	-- Only shows git repositories in the sessionizer
+	-- 	paths = {
+	-- 		"/Users/oscar/.julia/dev", -- this could for example be "/home/<your_username>/dev"
+	-- 		"/Users/oscar/.dotfiles",
+	-- 		"/Users/oscar/tmp",
+	-- 	},
+	-- 	command_options = {
+	-- 		fd_path = "/opt/homebrew/bin/fd",
+	-- 	},
+	-- 	-- keys = {
+	-- 	-- 	{
+	-- 	-- 		key = "r",
+	-- 	-- 		mods = "OPT",
+	-- 	-- 		action = sessionizer.show,
+	-- 	-- 	},
+	-- 	-- 	{
+	-- 	-- 		key = ".",
+	-- 	-- 		mods = "OPT",
+	-- 	-- 		action = sessionizer.switch_to_most_recent,
+	-- 	-- 	},
+	-- 	-- },
+	-- }
+end
