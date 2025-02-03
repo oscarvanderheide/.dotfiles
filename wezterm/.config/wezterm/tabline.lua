@@ -2,14 +2,37 @@ return function(config)
 	local wezterm = require("wezterm")
 	local nord = require("nord")
 	local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
+
+	local scheme_def = wezterm.color.get_builtin_schemes()["nord"]
+	config.colors = {
+		tab_bar = {
+			background = nord.black,
+			new_tab = {
+				bg_color = nord.black,
+				fg_color = scheme_def.foreground,
+			},
+			active_tab = {
+				bg_color = nord.gray,
+				fg_color = nord.darkest_white,
+			},
+			inactive_tab = {
+				bg_color = nord.black,
+				fg_color = nord.darkest_white,
+			},
+			inactive_tab_hover = {
+				bg_color = nord.glacier,
+				fg_color = "#000000",
+			},
+		},
+	}
 	tabline.setup({
 		options = {
-			icons_enabled = false,
+			icons_enabled = true,
 			theme = "nord", -- tabline theme
 			icons_only = true,
-			color_overrides = {
-				tab = {
-					active = { fg = nord.bg, bg = nord.glacier },
+			tab = {
+				color_overrides = {
+					active = { fg = nord.bg, bg = nord.dark_gray },
 					inactive = { fg = nord.white, bg = nord.black },
 					inactive_hover = { fg = nord.bg, bg = nord.pink },
 				},

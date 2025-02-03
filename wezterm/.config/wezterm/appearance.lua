@@ -6,30 +6,6 @@ return function(config)
 	local scheme = "nord"
 	config.color_scheme = scheme
 
-	-- Make the tab bar have the same color scheme
-	local scheme_def = wezterm.color.get_builtin_schemes()[scheme]
-	config.colors = {
-		tab_bar = {
-			background = nord.black,
-			new_tab = {
-				bg_color = nord.black,
-				fg_color = scheme_def.foreground,
-			},
-			active_tab = {
-				bg_color = nord.glacier,
-				fg_color = "#000000",
-			},
-			inactive_tab = {
-				bg_color = nord.black,
-				fg_color = scheme_def.foreground,
-			},
-			inactive_tab_hover = {
-				bg_color = nord.pink,
-				fg_color = "#000000",
-			},
-		},
-	}
-
 	-- Disable the macOS traffic light but keep resizable border
 	config.window_decorations = "RESIZE"
 
