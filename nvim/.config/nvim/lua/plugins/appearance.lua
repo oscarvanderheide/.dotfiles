@@ -54,7 +54,7 @@ return {
         none = 'NONE',
         -- my own additions
         pink = '#b48da7', -- my own	addition
-        bg = '#282C35', -- A bit darker than nord's default background
+        bg = '#2E3440', -- A bit darker than nord's default background
       }
 
       -- Set colors for different vim modes
@@ -246,7 +246,12 @@ return {
           },
         },
       }
-      return opts
+      -- Apply the configuration only for Python and Julia files
+      if vim.bo.filetype == 'python' or vim.bo.filetype == 'julia' then
+        return opts
+      else
+        return {}
+      end
     end,
   },
 

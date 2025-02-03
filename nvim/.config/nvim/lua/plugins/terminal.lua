@@ -29,8 +29,10 @@ return {
       end
 
       -- Use Ctrl-\ to toggle the terminal
-      vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true, desc = '[T]erminal' })
-      vim.api.nvim_set_keymap('t', '<leader>t', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true, desc = '[T]erminal' })
+      vim.api.nvim_set_keymap('n', '<leader>T', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true, desc = '[T]erminal in vsplit' })
+
+      vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>stop<CR>', { noremap = true, silent = true, desc = 'Back to [t]erminal' })
+      -- vim.api.nvim_set_keymap('t', '<leader>t', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true, desc = '[T]erminal' })
       -- vim.keymap.set('n', '<leader>t', '<cmd>stop<CR>', { desc = 'Toggle Terminal' })
     end,
   },

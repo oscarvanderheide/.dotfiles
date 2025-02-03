@@ -2,7 +2,9 @@ return function(config)
 	local wezterm = require("wezterm")
 	local nord = require("nord")
 	local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
-
+	-- Increase tab bar width
+	config.tab_max_width = 32
+	-- Set colors
 	local scheme_def = wezterm.color.get_builtin_schemes()["nord"]
 	config.colors = {
 		tab_bar = {
