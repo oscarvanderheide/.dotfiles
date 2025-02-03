@@ -1,10 +1,10 @@
-# Set location of .zshrc (note that I create an alias in ~ to this file to make it easier to edit)
 export ZDOTDIR=$HOME/.config/zsh
+# Set location of .zshrc (note that I create an alias in ~ to this file to make it easier to edit)
 
 # Settings for command history
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
 SAVEHIST=10000
+HISTSIZE=10000
 setopt SHARE_HISTORY           # Share history between terminal sessions
 setopt HIST_IGNORE_ALL_DUPS    # Ignore duplicate commands in history
 setopt HIST_SAVE_NO_DUPS       # Don't save duplicates to the history file
@@ -43,6 +43,8 @@ eval "$(starship init zsh)"
 
 # needed for fzf-tab
 autoload -U compinit; compinit
+ZCOMPDUMP=$HOME/.zcompdump
+ZCOMPCACHE=$HOME/.zcompcache
 
 # Keybindings for being able to use both auto-complete and auto-suggestions 
 # bindkey '^I'   complete-word       # tab          | complete
