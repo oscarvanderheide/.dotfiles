@@ -52,10 +52,10 @@ return {
         green = '#A3BE8C', -- nord14 in palette
         purple = '#B48EAD', -- nord15 in palette
         none = 'NONE',
+        -- my own additions
+        pink = '#b48da7', -- my own	addition
+        bg = '#282C35', -- A bit darker than nord's default background
       }
-
-      -- I use a darker background than the default nord background
-      local my_bg = '#282C35'
 
       -- Set colors for different vim modes
       local modecolor = {
@@ -83,46 +83,46 @@ return {
 
       local theme = {
         normal = {
-          a = { fg = my_bg, bg = nord.blue },
+          a = { fg = nord.bg, bg = nord.blue },
           b = { fg = nord.blue, bg = nord.white },
-          c = { fg = nord.white, bg = my_bg },
-          z = { fg = nord.white, bg = my_bg },
+          c = { fg = nord.white, bg = nord.bg },
+          z = { fg = nord.white, bg = nord.bg },
         },
-        insert = { a = { fg = my_bg, bg = nord.orange } },
-        visual = { a = { fg = my_bg, bg = nord.green } },
-        replace = { a = { fg = my_bg, bg = nord.green } },
+        insert = { a = { fg = nord.bg, bg = nord.orange } },
+        visual = { a = { fg = nord.bg, bg = nord.green } },
+        replace = { a = { fg = nord.bg, bg = nord.green } },
       }
 
       local space = {
         function()
           return ' '
         end,
-        color = { bg = my_bg },
+        color = { bg = nord.bg },
       }
 
       local filename = {
         'filename',
-        color = { bg = nord.blue, fg = my_bg },
+        color = { bg = nord.blue, fg = nord.bg },
         separator = { left = '', right = '' },
       }
 
       local branch = {
         'branch',
         icon = '',
-        color = { bg = nord.green, fg = my_bg },
+        color = { bg = nord.green, fg = nord.bg },
         separator = { left = '', right = '' },
       }
 
       local diff = {
         'diff',
-        color = { bg = my_bg, fg = my_bg },
+        color = { bg = nord.bg, fg = nord.bg },
         separator = { left = '', right = '' },
         symbols = { added = ' ', modified = ' ', removed = ' ' },
 
         diff_color = {
           added = { fg = nord.green },
           modified = { fg = nord.yellow },
-          removed = { fg = nord.red },
+          removed = { fg = nord.pink },
         },
       }
 
@@ -130,7 +130,7 @@ return {
         'mode',
         color = function()
           local mode_color = modecolor
-          return { bg = mode_color[vim.fn.mode()], fg = my_bg }
+          return { bg = mode_color[vim.fn.mode()], fg = nord.bg }
         end,
         separator = { left = '', right = '' },
       }
