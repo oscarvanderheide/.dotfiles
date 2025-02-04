@@ -20,7 +20,7 @@ source $HOME/.config/zsh/zsh-keybinds
 # Some useful options
 setopt no_beep
 setopt auto_cd 				# Automatically cd into a directory if the command is a directory
-setopt extended_glob 	# Enable extended globbing
+# setopt extended_glob 	# Enable extended globbing
 # setopt menucomplete
 
 # Enable plugins (auto-installs if missing)
@@ -42,9 +42,9 @@ eval "$(starship init zsh)"
 #zstyle ':completion:*' menu select   # Allows you to cycle through options with arrow keys
 
 # needed for fzf-tab
-autoload -U compinit; compinit
 ZCOMPDUMP=$HOME/.zcompdump
 ZCOMPCACHE=$HOME/.zcompcache
+autoload -U compinit; compinit
 
 # Keybindings for being able to use both auto-complete and auto-suggestions 
 # bindkey '^I'   complete-word       # tab          | complete
