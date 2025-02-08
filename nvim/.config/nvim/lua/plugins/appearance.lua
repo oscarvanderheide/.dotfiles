@@ -184,26 +184,52 @@ return {
   -- },
 
   -- Cinnamon: Smooth scrolling
-  {
-    'declancm/cinnamon.nvim',
-    opts = {
-      keymaps = {
-        basic = true, -- enables a smooth scrolling for a few movements
-        extra = false, -- additional movements, I think it's a bit too much
-      },
-    },
-  },
+  -- {
+  --   'declancm/cinnamon.nvim',
+  --   config = function()
+  --     local cinnamon = require 'cinnamon'
+  --     cinnamon.setup {
+  --       disabled = false,
+  --       keymaps = {
+  --         basic = false, -- enables smooth scrolling for a few movements, disabled for now
+  --         extra = false, -- additional movements, I think it's a bit too much
+  --       },
+  --       options = { -- Delay between each movement step (in ms)
+  --         delay = 5,
+  --         max_delta = {
+  --           -- Maximum distance for line movements before scroll
+  --           -- animation is skipped. Set to `false` to disable
+  --           line = false,
+  --           -- Maximum distance for column movements before scroll
+  --           -- animation is skipped. Set to `false` to disable
+  --           column = false,
+  --           -- Maximum duration for a movement (in ms). Automatically scales the
+  --           -- delay and step size
+  --           time = 2000,
+  --         },
+  --       },
+  --     }
+  --
+  --     -- Centered scrolling:
+  --     vim.keymap.set('n', '<C-U>', function()
+  --       cinnamon.scroll '<C-U>zz'
+  --     end)
+  --     vim.keymap.set('n', '<C-D>', function()
+  --       cinnamon.scroll '<C-D>zz'
+  --     end)
+  --   end,
+  -- },
 
   -- Smear: Smooth cursor movement
-  {
-    'sphamba/smear-cursor.nvim',
-    opts = { -- Default  Range
-      stiffness = 0.6, -- 0.6      [0, 1]
-      trailing_stiffness = 0.3, -- 0.3      [0, 1]
-      distance_stop_animating = 0.1, -- 0.1      > 0
-      hide_target_hack = false, -- true     boolean
-    },
-  },
+  -- {
+  --   'sphamba/smear-cursor.nvim',
+  --   opts = { -- Default  Range
+  --     stiffness = 0.6, -- 0.6      [0, 1]
+  --     trailing_stiffness = 0.3, -- 0.3      [0, 1]
+  --     distance_stop_animating = 0.1, -- 0.1      > 0
+  --     hide_target_hack = false, -- true     boolean
+  --   },
+  -- },
 
   -- Mini.HiPatterns: Add line to cells in notebooks
   {
