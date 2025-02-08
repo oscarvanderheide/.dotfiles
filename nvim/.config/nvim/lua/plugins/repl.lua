@@ -3,22 +3,26 @@ return {
     -- Iron: Interactive Repl (I kinda like the + operator)
     'Vigemus/iron.nvim',
     keys = {
+      -- Keymaps to either open REPL in a floating window or as a vertical split
+      -- The keymap <leader>rr is then used to toggle, respecting how it was opened
       {
-        '<leader>i',
+        '<leader>rf',
         function()
           open_repl_float()
         end,
         desc = '󱠤 Open REPL (Float)',
       },
       {
-        '<leader>I',
+        '<leader>rv',
         function()
           open_repl_vertical()
         end,
         desc = '󱠤 Open REPL (Vertical Split)',
       },
-      { '<leader>r', vim.cmd.IronRestart, desc = '󱠤 Restart REPL' },
       { '+', mode = { 'n', 'x' }, desc = '󱠤 Send-to-REPL Operator' },
+
+      { '<leader>rr', vim.cmd.IronRepl, desc = '󱠤 Toggle REPL' },
+      { '<leader>rR', vim.cmd.IronRestart, desc = '󱠤 Restart REPL' },
     },
     config = function()
       local iron = require 'iron.core'
@@ -78,6 +82,9 @@ return {
             lua = {
               command = { 'lua' },
             },
+            bash = {
+              command = { 'pwd' },
+            },
           },
         },
         ignore_blank_lines = true,
@@ -111,7 +118,7 @@ return {
         activate_hydra_keys = '<leader>h',
         cell_markers = {
           julia = '##', -- Set the code cell marker for Julia
-          python = '##',
+          python = '##', -- Set the code cell markers for Python
         },
         repl_provider = 'iron',
         syntax_highlight = false, -- Set custom highlight group for code cells
