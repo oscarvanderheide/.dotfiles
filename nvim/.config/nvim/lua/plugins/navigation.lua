@@ -25,12 +25,13 @@ return {
 
   -- Treewalker: Move in and out of nodes and between neighbours
   {
-    'oscarvanderheide/treewalker.nvim',
+    -- 'oscarvanderheide/treewalker.nvim',
+    dir = '/Users/oscar/tmp/treewalker.nvim',
     opts = {
       branch = 'oscar/select_node',
       highlight = true, -- default is false
     },
-    dependencies = { 'nvimtools/hydra.nvim' },
+    dependencies = { 'nvimtools/hydra.nvim', 'nvim-treesitter/nvim-treesitter' },
     config = function(_, opts)
       local tw = require 'treewalker'
       local Hydra = require 'hydra'
@@ -63,11 +64,38 @@ return {
           { 'l', tw.move_in, { desc = 'Move in', nowait = true } },
           { 'h', tw.move_out, { desc = 'Move out', nowait = true } },
           -- Actions on nodes
-          { 'v', tw.select_node, { desc = 'Select node', nowait = true } },
-          { 'V', tw.select_node_lines, { desc = 'Select node lines', nowait = true } },
-          { 'c', tw.comment_node, { desc = 'Comment node', nowait = true } },
-          { 'y', tw.yank_node, { desc = 'Yank node', nowait = true } },
-          { 'd', tw.delete_node, { desc = 'Delete node', nowait = true } },
+          {
+            'v',
+            function()
+              require('nvim-treesitter.incremental_selection').node_incremental()
+            end,
+            { desc = 'Visually select node', nowait = true, silent = true },
+          },
+          -- { 'V', tw.select_node_lines, { desc = 'Select node lines', nowait = true } },
+          {
+            'c',
+            function()
+              require('nvim-treesitter.incremental_selection').node_incremental()
+              vim.cmd 'normal gc'
+            end,
+            { desc = 'Comment node', nowait = true, silent = true },
+          },
+          {
+            'y',
+            function()
+              require('nvim-treesitter.incremental_selection').node_incremental()
+              vim.cmd 'normal! y'
+            end,
+            { desc = 'Yank node', nowait = true, silent = true },
+          },
+          {
+            'd',
+            function()
+              require('nvim-treesitter.incremental_selection').node_incremental()
+              vim.cmd 'normal! d'
+            end,
+            { desc = 'Delete node', nowait = true, silent = true },
+          },
           -- Exit keys
           { 'q', nil, { exit = true, nowait = true, desc = 'Exit' } },
           { '<esc>', nil, { exit = true, nowait = true, desc = 'Exit' } },
@@ -96,49 +124,5 @@ return {
         mode = { 'n', 'o', 'x' },
       },
     },
-  },
-
-  -- Tabout: Move out of things like brackets with tab in insert mode
-  {
-    lazy = false,
-    'abecodes/tabout.nvim',
-    config = function()
-      require('tabout').setup {
-        tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
-        backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-        act_as_tab = true, -- shift content if tab out is not possible
-        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-        default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-        default_shift_tab = '<C-d>', -- reverse shift default action,
-        enable_backwards = true, -- well ...
-        completion = true, -- if the tabkey is used in a completion pum
-        tabouts = {
-          { open = "'", close = "'" },
-          { open = '"', close = '"' },
-          { open = '`', close = '`' },
-          { open = '(', close = ')' },
-          { open = '[', close = ']' },
-          { open = '{', close = '}' },
-        },
-        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-        exclude = {}, -- tabout will ignore these filetypes
-      }
-    end,
-    dependencies = { -- These are optional
-      'nvim-treesitter/nvim-treesitter',
-      'zbirenbaum/copilot.lua',
-      -- 'L3MON4D3/LuaSnip',
-      -- 'hrsh7th/nvim-cmp',
-    },
-    opt = true, -- Set this to true if the plugin is optional
-    event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
-    priority = 1000,
-  },
-  {
-    'L3MON4D3/LuaSnip',
-    keys = function()
-      -- Disable default tab keybinding in LuaSnip
-      return {}
-    end,
   },
 }
