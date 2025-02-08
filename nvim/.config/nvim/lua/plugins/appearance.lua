@@ -216,7 +216,7 @@ return {
       local utils = require 'notebook-navigator.utils'
 
       -- My own custom highlight group for code cells using Nord's yellow color
-      vim.api.nvim_set_hl(0, 'NotebookCellHighlight', { fg = '#EBCB8B', bold = true })
+      vim.api.nvim_set_hl(0, 'NotebookCellHighlight', { fg = '#EBCB8B', bold = false })
 
       local opts = {
         highlighters = {
