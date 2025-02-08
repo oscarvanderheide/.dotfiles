@@ -1,5 +1,17 @@
 [core]
 	excludesfile = /Users/oscar/.config/git/.gitignore_global
+  ; pager = delta
 [user]
 	name = Oscar van der Heide
 	email = o.vanderheide@umcutrecht.nl
+; [interactive]
+; 	diffFilter = delta --color-only
+; [delta]
+; 	navigate = true
+; [merge]
+;   conflictStyle = zdiff3
+; [include]
+;   path = /Users/oscar/.config/git/themes.gitconfig
+; [delta]
+;   features = chamelion
+;   side-by-side = true
