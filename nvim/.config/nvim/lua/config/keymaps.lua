@@ -9,16 +9,14 @@ set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' }
 set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change inner word' })
 
 -- Remap J and K to move paragraphs
-set('n', 'J', '}', { noremap = true, silent = true, desc = 'Move to next paragraph' })
-set('n', 'K', '{', { noremap = true, silent = true, desc = 'Move to previous paragraph' })
+set({ 'n', 'o' }, 'J', '}', { noremap = true, silent = true, desc = 'Move to next paragraph' })
+set({ 'n', 'o' }, 'K', '{', { noremap = true, silent = true, desc = 'Move to previous paragraph' })
 
 -- Keymaps for quickly moving up and down within a buffer (add smooth scrolling with cinnamon)
 set({ 'n', 'v' }, '<C-j>', function()
-  -- require('cinnamon').scroll '15j'
   vim.cmd 'normal! 6j'
 end, { silent = true })
 set({ 'n', 'v' }, '<C-k>', function()
-  -- require('cinnamon').scroll '15k'
   vim.cmd 'normal! 6k'
 end, { silent = true })
 
@@ -37,6 +35,25 @@ set('n', 'U', '<C-r>', { noremap = true, silent = true, desc = 'Undo' })
 
 -- Exit terminal mode with double Esc
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Use <C-h> to move to REPL/Copilot window and directly start typing, or move to editor
+local function switch_to_next_window()
+  -- Switch to the next window and, for REPL or Copilot windows, enter insert mode
+  vim.cmd 'wincmd w'
+  local filetype = vim.bo.filetype
+  if filetype == 'iron' or filetype == 'copilot-chat' then
+    vim.cmd 'startinsert!'
+  end
+end
+
+local function from_repl_to_next_window()
+  vim.cmd 'stopinsert'
+  vim.cmd 'wincmd w'
+end
+
+set('n', '<C-h>', switch_to_next_window, { noremap = false, silent = true, desc = 'Move to REPL/Copilot' })
+set('i', '<C-h>', from_repl_to_next_window, { noremap = true, silent = true, desc = 'Move to next window' })
+set('t', '<C-h>', '<C-\\><C-n><C-w>w', { noremap = true, silent = true, desc = 'Move back to editor' })
 
 -- Yank/paste using system clipboard
 set('n', '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
