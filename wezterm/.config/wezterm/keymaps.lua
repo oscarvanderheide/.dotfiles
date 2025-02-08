@@ -6,74 +6,18 @@ return function(config)
 
 	local cmd_or_ctrl = is_macos and "CMD" or "CTRL"
 
-	if is_macos then
-		config.keys = {
-			-- Shortcut for starting a new workspace
-			{
-				key = "T",
-				mods = "CMD|SHIFT",
-				action = wezterm.action.SwitchToWorkspace,
-			},
-			-- Shortcut for listing and switching workspaces
-			{
-				key = "L",
-				mods = "CMD|SHIFT",
-				action = wezterm.action.ShowLauncherArgs({
-					flags = "WORKSPACES",
-				}),
-			},
-			-- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
-			{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
-			-- Make Option-Right equivalent to Alt-f; forward-word
-			{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
-			-- Make Cmd-Left move to the start of the line
-			{ key = "LeftArrow", mods = "CMD", action = wezterm.action({ SendString = "\x1bOH" }) },
-			-- Make Cmd-Right move to the ending of the line
-			{ key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\x1bOF" }) },
-			-- Don't confirm upon closing tab
-			{ key = "w", mods = "CMD", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
-			-- Use CMD + SHIFT + \ to split horizontally
-			{
-				key = "\\",
-				mods = "CMD|SHIFT",
-				action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-			},
-			-- Use CMD + SHIFT + - to split horizontally
-			{ key = "-", mods = "CMD|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-			-- Cycle to the next pane
-			{ key = "[", mods = "CMD", action = wezterm.action({ ActivatePaneDirection = "Next" }) },
-			-- Cycle to the previous pane
-			{ key = "]", mods = "CMD", action = wezterm.action({ ActivatePaneDirection = "Prev" }) },
-			-- Open Wezterm's config with Cmd + ,
-			{
-				key = ",",
-				mods = "CMD",
-				action = wezterm.action.SpawnCommandInNewTab({
-					cwd = wezterm.home_dir,
-					args = { "nvim", wezterm.config_file },
-				}),
-			},
-			-- Switch to copy mode with Cmd + X
-			{
-				key = "X",
-				mods = "CMD",
-				action = wezterm.action.ActivateCopyMode,
-			},
-		}
-	end
-
-	-- if is_linux then
+	-- if is_macos then
 	config.keys = {
 		-- Shortcut for starting a new workspace
 		{
 			key = "T",
-			mods = "CTRL|SHIFT",
+			mods = "CMD|SHIFT",
 			action = wezterm.action.SwitchToWorkspace,
 		},
 		-- Shortcut for listing and switching workspaces
 		{
 			key = "L",
-			mods = "CTRL|SHIFT",
+			mods = "CMD|SHIFT",
 			action = wezterm.action.ShowLauncherArgs({
 				flags = "WORKSPACES",
 			}),
@@ -83,30 +27,27 @@ return function(config)
 		-- Make Option-Right equivalent to Alt-f; forward-word
 		{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 		-- Make Cmd-Left move to the start of the line
-		{ key = "LeftArrow", mods = "CTRL", action = wezterm.action({ SendString = "\x1bOH" }) },
+		{ key = "LeftArrow", mods = "CMD", action = wezterm.action({ SendString = "\x1bOH" }) },
 		-- Make Cmd-Right move to the ending of the line
-		{ key = "RightArrow", mods = "CTRL", action = wezterm.action({ SendString = "\x1bOF" }) },
+		{ key = "RightArrow", mods = "CMD", action = wezterm.action({ SendString = "\x1bOF" }) },
 		-- Don't confirm upon closing tab
-		{ key = "w", mods = "ALT", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+		{ key = "w", mods = "CMD", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
 		-- Use CMD + SHIFT + \ to split horizontally
 		{
 			key = "\\",
-			mods = "CTRL|SHIFT",
+			mods = "CMD|SHIFT",
 			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 		},
 		-- Use CMD + SHIFT + - to split horizontally
-		{ key = "-", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ key = "-", mods = "CMD|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		-- Cycle to the next pane
-		{ key = "[", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Next" }) },
+		{ key = "[", mods = "CMD", action = wezterm.action({ ActivatePaneDirection = "Next" }) },
 		-- Cycle to the previous pane
-		{ key = "]", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Prev" }) },
-
-		{ key = "]", mods = "ALT|SHIFT", action = wezterm.action.ActivateTabRelative(1) },
-		{ key = "[", mods = "ALT|SHIFT", action = wezterm.action.ActivateTabRelative(-1) },
+		{ key = "]", mods = "CMD", action = wezterm.action({ ActivatePaneDirection = "Prev" }) },
 		-- Open Wezterm's config with Cmd + ,
 		{
 			key = ",",
-			mods = "ALT",
+			mods = "CMD",
 			action = wezterm.action.SpawnCommandInNewTab({
 				cwd = wezterm.home_dir,
 				args = { "nvim", wezterm.config_file },
@@ -115,9 +56,68 @@ return function(config)
 		-- Switch to copy mode with Cmd + X
 		{
 			key = "X",
-			mods = "ALT",
+			mods = "CMD",
 			action = wezterm.action.ActivateCopyMode,
 		},
 	}
 	-- end
+
+	if is_linux then
+		config.keys = {
+			-- Shortcut for starting a new workspace
+			{
+				key = "T",
+				mods = "CTRL|SHIFT",
+				action = wezterm.action.SwitchToWorkspace,
+			},
+			-- Shortcut for listing and switching workspaces
+			{
+				key = "L",
+				mods = "CTRL|SHIFT",
+				action = wezterm.action.ShowLauncherArgs({
+					flags = "WORKSPACES",
+				}),
+			},
+			-- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
+			{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
+			-- Make Option-Right equivalent to Alt-f; forward-word
+			{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
+			-- Make Cmd-Left move to the start of the line
+			{ key = "LeftArrow", mods = "CTRL", action = wezterm.action({ SendString = "\x1bOH" }) },
+			-- Make Cmd-Right move to the ending of the line
+			{ key = "RightArrow", mods = "CTRL", action = wezterm.action({ SendString = "\x1bOF" }) },
+			-- Don't confirm upon closing tab
+			{ key = "w", mods = "ALT", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+			-- Use CMD + SHIFT + \ to split horizontally
+			{
+				key = "\\",
+				mods = "CTRL|SHIFT",
+				action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+			},
+			-- Use CMD + SHIFT + - to split horizontally
+			{ key = "-", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+			-- Cycle to the next pane
+			{ key = "[", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Next" }) },
+			-- Cycle to the previous pane
+			{ key = "]", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Prev" }) },
+
+			{ key = "]", mods = "ALT|SHIFT", action = wezterm.action.ActivateTabRelative(1) },
+			{ key = "[", mods = "ALT|SHIFT", action = wezterm.action.ActivateTabRelative(-1) },
+			-- Open Wezterm's config with Cmd + ,
+			{
+				key = ",",
+				mods = "ALT",
+				action = wezterm.action.SpawnCommandInNewTab({
+					cwd = wezterm.home_dir,
+					args = { "nvim", wezterm.config_file },
+				}),
+			},
+			-- Switch to copy mode with Cmd + X
+			{
+				key = "X",
+				mods = "ALT",
+				action = wezterm.action.ActivateCopyMode,
+			},
+		}
+	end
 end
