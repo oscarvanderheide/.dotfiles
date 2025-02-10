@@ -1,9 +1,9 @@
 return {
-  { -- highlight, edit, and navigate code
+  {
+    -- Treesitter: highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSupdate',
     main = 'nvim-treesitter.configs', -- sets main module to use for opts
-    -- [[ configure treesitter ]] see `:help nvim-treesitter`
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       -- 'nvim-treesitter/nvim-treesitter-context', -- Shows e.g. function name on top for functions that extend beyond the screen
@@ -126,12 +126,5 @@ return {
         enable = true,
       },
     },
-    -- there are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. you should go explore a few and see what interests you:
-    --
-    --    - incremental selection: included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 }
--- vim: ts=2 sts=2 sw=2 et

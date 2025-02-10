@@ -1,4 +1,5 @@
 return {
+
   {
     -- Iron: Interactive Repl (I kinda like the + operator)
     'Vigemus/iron.nvim',
@@ -98,8 +99,8 @@ return {
     end,
   },
 
-  -- Notebook Navigator: Quickly jump between and execute code cells
   {
+    -- Notebook Navigator: Quickly jump between and execute code cells
     'GCBallesteros/NotebookNavigator.nvim',
     dependencies = {
       'echasnovski/mini.comment',
@@ -115,7 +116,7 @@ return {
       local utils = require 'notebook-navigator.utils'
 
       nn.setup {
-        activate_hydra_keys = '<leader>h',
+        activate_hydra_keys = '<leader>n',
         cell_markers = {
           julia = '##', -- Set the code cell marker for Julia
           python = '##', -- Set the code cell markers for Python
@@ -127,16 +128,4 @@ return {
     end,
     -- Now, override minihipatterns_spec after setup has run
   },
-  -- {
-  --   -- Enable things like vih to select code cells
-  --   'echasnovski/mini.ai',
-  --   event = 'VeryLazy',
-  --   dependencies = { 'GCBallesteros/NotebookNavigator.nvim' },
-  --   opts = function()
-  --     local nn = require 'notebook-navigator'
-  --
-  --     local opts = { custom_textobjects = { h = nn.miniai_spec } }
-  --     return opts
-  --   end,
-  -- },
 }

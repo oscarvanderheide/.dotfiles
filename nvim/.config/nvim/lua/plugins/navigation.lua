@@ -1,7 +1,7 @@
 return {
 
-  -- Flash: Jump labels for faster navigation and selection
   {
+    -- Flash: Jump labels for faster navigation and selection
     'folke/flash.nvim',
     event = 'VeryLazy',
     ---@type Flash.Config
@@ -23,8 +23,8 @@ return {
     },
   },
 
-  -- Treewalker: Move in and out of nodes and between neighbours
   {
+    -- Treewalker: Move in and out of nodes and between neighbours
     -- 'oscarvanderheide/treewalker.nvim',
     dir = '/Users/oscar/tmp/treewalker.nvim',
     opts = {
@@ -42,12 +42,14 @@ return {
         name = 'Treewalker',
         mode = { 'n', 'v' },
         body = '<leader>w',
-        hint = [[Treewalker Hydra: 
-  - _j_/_k_: Next/Previous node
-  - _h_/_l_: In/Out of node
-  - _v_: Select node
-  - _q_/_<esc>_: Exit
-        ]],
+        hint = 'Treewalker Hydra:\n'
+          .. '- _j_/_k_: Next/Previous node\n'
+          .. '- _h_/_l_: In/Out node \n'
+          .. '- _v_: Select node\n'
+          .. '- _y_: Yank node\n'
+          .. '- _d_: Delete node\n'
+          .. '- _c_: Comment node\n'
+          .. '- _q_/_<esc>_: Exit',
         config = {
           -- foreign_keys = nil,
           color = 'pink', -- "red" | "amaranth" | "teal" | "pink"
@@ -104,8 +106,8 @@ return {
     end,
   },
 
-  -- Spider: Word movements that feel more natural to me (e.g. CamelCase is considered two words)
   {
+    -- Spider: Word movements that feel more natural to me (e.g. CamelCase is considered two words)
     'chrisgrieser/nvim-spider',
     keys = {
       {

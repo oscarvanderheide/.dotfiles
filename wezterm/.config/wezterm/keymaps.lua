@@ -18,9 +18,7 @@ return function(config)
 		{
 			key = "L",
 			mods = "CMD|SHIFT",
-			action = wezterm.action.ShowLauncherArgs({
-				flags = "WORKSPACES",
-			}),
+			action = wezterm.action.SendString("\x1b[99;5u"), -- Custom escape sequence
 		},
 		-- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
 		{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },

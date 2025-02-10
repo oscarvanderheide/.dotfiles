@@ -50,3 +50,6 @@ unset GIT_CONFIG
 
 # Use TAB to cycle rather than select the first option
 # bindkey '^I' menu-complete
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/oscar/.lmstudio/bin"

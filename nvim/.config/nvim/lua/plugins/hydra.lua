@@ -1,5 +1,5 @@
 return {
-  'nvimtools/hydra.nvim',
+  -- 'nvimtools/hydra.nvim',
   -- config = function()
   --   local Hydra = require 'hydra'
   --   Hydra {

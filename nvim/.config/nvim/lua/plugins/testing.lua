@@ -1,4 +1,16 @@
 return {
+  'thinca/vim-visualstar',
+  -- return {
+  --   'tanvirtin/vgit.nvim',
+  --   branch = 'v1.0.x',
+  --   -- or               , tag = 'v1.0.2',
+  --   dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' },
+  --   -- Lazy loading on 'VimEnter' event is necessary.
+  --   event = 'VimEnter',
+  --   config = function()
+  --     require('vgit').setup()
+  --   end,
+  -- }
   -- Tabout: Move out of things like brackets with tab in insert mode
   -- {
   --   lazy = false,
@@ -34,5 +46,103 @@ return {
   --   opt = true, -- Set this to true if the plugin is optional
   --   event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
   --   priority = 1000,
+  -- },
+
+  -- Evergarden: Colortheme
+  -- {
+  --   'comfysage/evergarden',
+  --   priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+  --   opts = {
+  --     transparent_background = true,
+  --     variant = 'medium', -- 'hard'|'medium'|'soft'
+  --     overrides = {}, -- add custom overrides
+  --   },
+  --   init = function()
+  --     vim.cmd.colorscheme 'evergarden'
+  --   end,
+  -- },
+  -- Visimatch: Highlight all instances of the selected word
+  -- {
+  --   'wurli/visimatch.nvim',
+  --   opts = {},
+  -- },
+  -- tpipeline: Integrate nvim statusline into tmux statusline
+
+  -- Illuminate: Highlight all instances of the word under the cursor
+  -- {
+  --   'RRethy/vim-illuminate',
+  -- },
+
+  -- Cinnamon: Smooth scrolling
+  -- {
+  --   'declancm/cinnamon.nvim',
+  --   config = function()
+  --     local cinnamon = require 'cinnamon'
+  --     cinnamon.setup {
+  --       disabled = false,
+  --       keymaps = {
+  --         basic = false, -- enables smooth scrolling for a few movements, disabled for now
+  --         extra = false, -- additional movements, I think it's a bit too much
+  --       },
+  --       options = { -- Delay between each movement step (in ms)
+  --         delay = 5,
+  --         max_delta = {
+  --           -- Maximum distance for line movements before scroll
+  --           -- animation is skipped. Set to `false` to disable
+  --           line = false,
+  --           -- Maximum distance for column movements before scroll
+  --           -- animation is skipped. Set to `false` to disable
+  --           column = false,
+  --           -- Maximum duration for a movement (in ms). Automatically scales the
+  --           -- delay and step size
+  --           time = 2000,
+  --         },
+  --       },
+  --     }
+  --
+  --     -- Centered scrolling:
+  --     vim.keymap.set('n', '<C-U>', function()
+  --       cinnamon.scroll '<C-U>zz'
+  --     end)
+  --     vim.keymap.set('n', '<C-D>', function()
+  --       cinnamon.scroll '<C-D>zz'
+  --     end)
+  --   end,
+  -- },
+
+  -- Smear: Smooth cursor movement
+  -- {
+  --   'sphamba/smear-cursor.nvim',
+  --   opts = { -- Default  Range
+  --     stiffness = 0.6, -- 0.6      [0, 1]
+  --     trailing_stiffness = 0.3, -- 0.3      [0, 1]
+  --     distance_stop_animating = 0.1, -- 0.1      > 0
+  --     hide_target_hack = false, -- true     boolean
+  --   },
+  -- },
+
+  -- {
+  -- Autopairs: automatically adds closing ),] or } (disabled because it annoyed me)
+  -- 'windwp/nvim-autopairs',
+  -- event = 'InsertEnter',
+  -- -- Optional dependency
+  -- dependencies = { 'hrsh7th/nvim-cmp' },
+  -- config = function()
+  --   require('nvim-autopairs').setup {}
+  --   -- If you want to automatically add `(` after selecting a function or method
+  --   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+  --   local cmp = require 'cmp'
+  --   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+  -- end,
+  -- },
+  -- Neogen: Automatically add docstrings to your functions
+  -- {
+  --   'danymat/neogen',
+  --   config = true,
+  --   -- Uncomment next line if you want to follow only stable versions
+  --   -- version = "*",
+  --   keys = {
+  --     { '<Leader>nf', ":lua require('neogen').generate()<CR>" },
+  --   },
   -- },
 }

@@ -1,33 +1,28 @@
 return {
-
-  -- Nord: Colortheme
-  -- {
-  --   'comfysage/evergarden',
-  --   priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
-  --   opts = {
-  --     transparent_background = true,
-  --     variant = 'medium', -- 'hard'|'medium'|'soft'
-  --     overrides = {}, -- add custom overrides
-  --   },
-  --   init = function()
-  --     vim.cmd.colorscheme 'evergarden'
-  --   end,
-  -- },
   {
+    -- Colortheme: Nord
     'gbprod/nord.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       vim.cmd.colorscheme 'nord'
       -- Change background color to something darker, same as wezterm background
       vim.cmd 'highlight Normal guibg=#282C35'
+
+      -- Set custom colors for search and incsearch
+      -- The default nord ones are too bright for my taste
+      vim.api.nvim_set_hl(0, 'Search', { bg = '#555500', fg = 'white' })
+      vim.api.nvim_set_hl(0, 'IncSearch', { bg = '#777700', fg = 'white' })
     end,
   },
+
   {
+    -- Colortheme: Oldworld
     'dgox16/oldworld.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
   },
 
   {
+    -- Lualine: Customize statusline
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
@@ -169,8 +164,8 @@ return {
     end,
   },
 
-  -- Indent-Blankline: Visual indent lines
   {
+    -- Indent-Blankline: Visual indent lines
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     ---@module "ibl"
@@ -178,61 +173,8 @@ return {
     opts = {},
   },
 
-  -- Illuminate: Highlight all instances of the word under the cursor
-  -- {
-  --   'RRethy/vim-illuminate',
-  -- },
-
-  -- Cinnamon: Smooth scrolling
-  -- {
-  --   'declancm/cinnamon.nvim',
-  --   config = function()
-  --     local cinnamon = require 'cinnamon'
-  --     cinnamon.setup {
-  --       disabled = false,
-  --       keymaps = {
-  --         basic = false, -- enables smooth scrolling for a few movements, disabled for now
-  --         extra = false, -- additional movements, I think it's a bit too much
-  --       },
-  --       options = { -- Delay between each movement step (in ms)
-  --         delay = 5,
-  --         max_delta = {
-  --           -- Maximum distance for line movements before scroll
-  --           -- animation is skipped. Set to `false` to disable
-  --           line = false,
-  --           -- Maximum distance for column movements before scroll
-  --           -- animation is skipped. Set to `false` to disable
-  --           column = false,
-  --           -- Maximum duration for a movement (in ms). Automatically scales the
-  --           -- delay and step size
-  --           time = 2000,
-  --         },
-  --       },
-  --     }
-  --
-  --     -- Centered scrolling:
-  --     vim.keymap.set('n', '<C-U>', function()
-  --       cinnamon.scroll '<C-U>zz'
-  --     end)
-  --     vim.keymap.set('n', '<C-D>', function()
-  --       cinnamon.scroll '<C-D>zz'
-  --     end)
-  --   end,
-  -- },
-
-  -- Smear: Smooth cursor movement
-  -- {
-  --   'sphamba/smear-cursor.nvim',
-  --   opts = { -- Default  Range
-  --     stiffness = 0.6, -- 0.6      [0, 1]
-  --     trailing_stiffness = 0.3, -- 0.3      [0, 1]
-  --     distance_stop_animating = 0.1, -- 0.1      > 0
-  --     hide_target_hack = false, -- true     boolean
-  --   },
-  -- },
-
-  -- Mini.HiPatterns: Add line to cells in notebooks
   {
+    -- Mini.HiPatterns: Add line to cells in notebooks
     'echasnovski/mini.hipatterns',
     event = 'VeryLazy',
     dependencies = { 'GCBallesteros/NotebookNavigator.nvim' },
@@ -281,8 +223,8 @@ return {
     end,
   },
 
-  -- Which-Key: Keymap hints
   {
+    -- Which-Key: Keymap hints
     'folke/which-key.nvim',
     event = 'VimEnter',
     opts = {
@@ -303,10 +245,9 @@ return {
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
     },
   },
-  -- Visimatch: Highlight all instances of the selected word
-  {
-    'wurli/visimatch.nvim',
-    opts = {},
-  },
-  -- tpipeline: Integrate nvim statusline into tmux statusline
+
+  -- {
+  --   -- Vim-Cool: Remove highlighting  after searching and readd it when searching again
+  --   'romainl/vim-cool',
+  -- },
 }

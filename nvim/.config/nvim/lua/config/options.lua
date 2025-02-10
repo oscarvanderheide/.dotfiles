@@ -21,33 +21,7 @@ vim.opt.splitright = true -- Vertical splits open to the right
 vim.opt.splitbelow = true -- Horizontal splits open below
 vim.opt.inccommand = 'split' -- Preview substitutions live
 vim.opt.incsearch = true -- Incremental search
-
--- vim.opt.hlsearch = true -- No highlighting after search
--- vim.g.root_spec = { 'cwd' }
-vim.api.nvim_create_augroup('vimrc_incsearch_highlight', { clear = true })
---
--- Enable search highlighting and cursorline on CmdlineEnter
-vim.api.nvim_create_autocmd('CmdlineEnter', {
-  pattern = { '/', '\\?' },
-  callback = function()
-    vim.opt.hlsearch = true
-    vim.opt.cursorline = true
-  end,
-  group = 'vimrc_incsearch_highlight',
-})
-
--- Disable search highlighting and cursorline on CmdlineLeave
-vim.api.nvim_create_autocmd('CmdlineLeave', {
-  pattern = { '/', '\\?' },
-  callback = function()
-    vim.opt.hlsearch = false
-    vim.opt.cursorline = false
-  end,
-  group = 'vimrc_incsearch_highlight',
-})
-
 vim.opt.cursorline = false -- Highlight current line
-
 vim.opt.scrolloff = 16 -- Keep lines above and below the cursor
 vim.opt.termguicolors = true -- Enable more colors
 vim.opt.cmdheight = 0 -- Hide the command line
@@ -60,5 +34,4 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
-
 -- vim.opt.colorcolumn = '80,120'

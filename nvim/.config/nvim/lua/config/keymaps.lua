@@ -5,14 +5,28 @@ local set = vim.keymap.set
 -- Quit neovim
 set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' })
 
--- Change word under cursor
-set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change inner word' })
+-- Toggle search higlighting
+set('n', '<esc>', '<cmd>noh<CR>', { noremap = true, silent = true, desc = 'Toggle search highlighting' })
+
+-- Select word under cursor or visual selection
+set('n', '<D-d>', '*N', { noremap = true, silent = true, desc = 'Select word under cursor' })
+set('x', '<D-d>', '<Plug>(visualstar-*)N', { noremap = true, silent = true, desc = 'Select word under cursor' })
+-- Change word under cursor or visual selection
+set('n', '<C-c>', '*Ncgn', { noremap = true, silent = true, desc = 'Change inner word (n/N/.-repeatable)' })
+set('x', '<C-c>', '<Plug>(visualstar-*)Ncgn', { noremap = true, silent = true, desc = 'Change inner word (n/N/.-repeatable)' })
+-- Repeat last change on next search match
+set('n', '<C-.>', 'n.', { noremap = true, silent = true, desc = 'Repeat last change on next search match' })
+-- set('n', '<C-l>', '*Ngcn', { noremap = true, silent = true, desc = 'Search for word under cursor' })
+
+-- Change all occurances of word under cursor (from Primeagen?) and visual selection
+set('n', 'gs', [[:%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left><Space><Bs>]], { noremap = true, silent = false, desc = 'Replace word under cursor' })
+set('x', 'gs', '"zy:%s/<C-r>z/<C-r>z/g<Left><Left><Space><BS>', { noremap = true, silent = false, desc = 'Replace selected text globally' })
 
 -- Remap J and K to move paragraphs
-set({ 'n', 'o' }, 'J', '}', { noremap = true, silent = true, desc = 'Move to next paragraph' })
-set({ 'n', 'o' }, 'K', '{', { noremap = true, silent = true, desc = 'Move to previous paragraph' })
+set({ 'n', 'o', 'v' }, 'J', '}', { noremap = true, silent = true, desc = 'Move to next paragraph' })
+set({ 'n', 'o', 'v' }, 'K', '{', { noremap = true, silent = true, desc = 'Move to previous paragraph' })
 
--- Keymaps for quickly moving up and down within a buffer (add smooth scrolling with cinnamon)
+-- Keymaps for quickly moving up and down within a buffer
 set({ 'n', 'v' }, '<C-j>', function()
   vim.cmd 'normal! 6j'
 end, { silent = true })
@@ -41,7 +55,7 @@ local function switch_to_next_window()
   -- Switch to the next window and, for REPL or Copilot windows, enter insert mode
   vim.cmd 'wincmd w'
   local filetype = vim.bo.filetype
-  if filetype == 'iron' or filetype == 'copilot-chat' then
+  if filetype == 'iron' or filetype == 'copilot-chat' or filetype == 'toggleterm' or filetype == 'avante' then
     vim.cmd 'startinsert!'
   end
 end

@@ -1,7 +1,6 @@
--- conform: autoformatter
-
 return {
-  { -- Autoformat
+  {
+    -- Conform: Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
@@ -44,4 +43,3 @@ return {
     },
   },
 }
--- vim: ts=2 sts=2 sw=2 et

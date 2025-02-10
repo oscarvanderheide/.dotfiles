@@ -1,13 +1,3 @@
---╔════════════════════════════════════════════════════════════════════════════╗
---║                               Telescope Plugins                            ║
---╠════════════════════════════════════════════════════════════════════════════╣
---║   - telescope (base plugin)                                                ║
---║   - telescope-fzf-native                                                   ║
---║   - telescope-ui-select                                                    ║
---║   - telescope-cmdline                                                      ║
---║   - telescope-smart-open                                                   ║
---╚════════════════════════════════════════════════════════════════════════════╝
-
 return {
   {
     -- Fuzzy Finder (files, lsp, etc)
@@ -108,8 +98,8 @@ return {
     end,
   },
 
-  -- Smart open: frecency-based file opener
   {
+    -- Smart open: frecency-based file opener
     'danielfalk/smart-open.nvim',
     branch = '0.2.x',
     config = function()
@@ -124,4 +114,3 @@ return {
     },
   },
 }
--- vim: ts=2 sts=2 sw=2 et

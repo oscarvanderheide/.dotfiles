@@ -1,7 +1,7 @@
 return {
 
-  -- Toggleterm: Quickly open and manage terminals
   {
+    -- Toggleterm: Quickly open and manage terminals
     'akinsho/toggleterm.nvim',
     version = '*',
     config = function()
