@@ -25,8 +25,7 @@ return {
 
   {
     -- Treewalker: Move in and out of nodes and between neighbours
-    -- 'oscarvanderheide/treewalker.nvim',
-    dir = '/Users/oscar/tmp/treewalker.nvim',
+    'aaronik/treewalker.nvim',
     opts = {
       branch = 'oscar/select_node',
       highlight = true, -- default is false
