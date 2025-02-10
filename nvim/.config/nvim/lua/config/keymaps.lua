@@ -6,11 +6,13 @@ local set = vim.keymap.set
 set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' })
 
 -- Toggle search higlighting
-set('n', '<esc>', '<cmd>noh<CR>', { noremap = true, silent = true, desc = 'Toggle search highlighting' })
+set('n', '<Esc>', '<cmd>noh<CR>', { noremap = true, silent = true, desc = 'Toggle search highlighting' })
 
 -- Select word under cursor or visual selection
 set('n', '<D-d>', '*N', { noremap = true, silent = true, desc = 'Select word under cursor' })
 set('x', '<D-d>', '<Plug>(visualstar-*)N', { noremap = true, silent = true, desc = 'Select word under cursor' })
+set('n', '<C-f>', '*N', { noremap = true, silent = true, desc = 'Select word under cursor' })
+set('x', '<C-f>', '<Plug>(visualstar-*)N', { noremap = true, silent = true, desc = 'Select word under cursor' })
 -- Change word under cursor or visual selection
 set('n', '<C-c>', '*Ncgn', { noremap = true, silent = true, desc = 'Change inner word (n/N/.-repeatable)' })
 set('x', '<C-c>', '<Plug>(visualstar-*)Ncgn', { noremap = true, silent = true, desc = 'Change inner word (n/N/.-repeatable)' })
@@ -50,12 +52,25 @@ set('n', 'U', '<C-r>', { noremap = true, silent = true, desc = 'Undo' })
 -- Exit terminal mode with double Esc
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- Function to close the avante window
+local function close_avante_window()
+  if vim.bo.filetype == 'avante' then
+    vim.cmd 'q'
+  end
+end
+
 -- Use <C-h> to move to REPL/Copilot window and directly start typing, or move to editor
 local function switch_to_next_window()
   -- Switch to the next window and, for REPL or Copilot windows, enter insert mode
   vim.cmd 'wincmd w'
   local filetype = vim.bo.filetype
-  if filetype == 'iron' or filetype == 'copilot-chat' or filetype == 'toggleterm' or filetype == 'avante' then
+
+  if filetype == 'Avante' then
+    -- Avante has a bunch of buffers stacked vertically, the Ask buffer is the bottom
+    -- one. But doing avante focus twice will bring the focus to that ask buffer.
+    vim.cmd 'normal! <leader>af'
+    vim.cmd 'normal! <leader>af'
+  elseif filetype == 'iron' or filetype == 'copilot-chat' or filetype == 'toggleterm' then
     vim.cmd 'startinsert!'
   end
 end
@@ -81,6 +96,9 @@ set('n', 'd', '"_d', { noremap = true, silent = true, desc = 'Delete without yan
 set('n', '<leader>d', 'd', { noremap = true, silent = true, desc = 'Delete with yanking' })
 set('n', 'D', '"_D', { noremap = true, silent = true, desc = 'Delete without yanking' })
 set('x', 'd', '"_d', { noremap = true, silent = true, desc = 'Delete without yanking' })
+
+-- Close avante window with q or Esc in normal mode
+set('n', 'q', close_avante_window, { noremap = true, silent = true, desc = 'Close avante window' })
 
 -- Use arrows to move between windows
 set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
