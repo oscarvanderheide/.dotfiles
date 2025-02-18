@@ -44,6 +44,7 @@ return {
         hint = 'Treewalker Hydra:\n'
           .. '- _j_/_k_: Next/Previous node\n'
           .. '- _h_/_l_: In/Out node \n'
+          .. '- _J_/_K_/_H_/_L_: Swap nodes\n'
           .. '- _v_: Select node\n'
           .. '- _y_: Yank node\n'
           .. '- _d_: Delete node\n'
@@ -59,11 +60,17 @@ return {
           },
         },
         heads = {
+
           -- Jump between nodes
           { 'j', tw.move_down, { desc = 'Move down', nowait = true } },
           { 'k', tw.move_up, { desc = 'Move up', nowait = true } },
           { 'l', tw.move_in, { desc = 'Move in', nowait = true } },
           { 'h', tw.move_out, { desc = 'Move out', nowait = true } },
+          -- Swap nodes
+          { 'J', tw.swap_down, { desc = 'Swap down', nowait = true } },
+          { 'K', tw.swap_up, { desc = 'Swap up', nowait = true } },
+          { 'L', tw.swap_right, { desc = 'Swap right', nowait = true } },
+          { 'H', tw.swap_left, { desc = 'Swap left', nowait = true } },
           -- Actions on nodes
           {
             'v',

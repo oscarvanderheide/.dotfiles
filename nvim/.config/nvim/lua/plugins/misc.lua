@@ -55,6 +55,16 @@ return {
   },
 
   {
+    -- Multi-cursor with <C-n> or <C-{Up,Down}>, loving it
+    'mg979/vim-visual-multi',
+  },
+
+  {
+    -- Search with * for visual selection
+    'thinca/vim-visualstar',
+  },
+
+  {
     -- Better-escape: escape from insert mode something like jj without the usual delay
     'max397574/better-escape.nvim',
     opts = {

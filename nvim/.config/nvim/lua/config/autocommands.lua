@@ -1,11 +1,11 @@
 -- Highlight when yanking (copying) text
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- vim.api.nvim_create_autocmd('TextYankPost', {
+--   desc = 'Highlight when yanking (copying) text',
+--   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+-- })
 
 -- Turn off line numbers and relative numbers for terminal buffers
 vim.api.nvim_create_autocmd('TermOpen', {
@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
   callback = function()
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = 'no'
   end,
 })
 
@@ -46,6 +47,19 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- View docstring of a function in a floating window
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local buf = args.buf
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = buf, silent = true })
+  end,
+})
+
+-- It happens quite often that filetype is not detected, maybe this will fix it
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.py',
+  command = 'set filetype=python',
+})
 -- vim.api.nvim_create_autocmd('FileType', {
 -- -- Set python specific options and keymaps
 --   pattern = 'python', -- Only apply to Python files

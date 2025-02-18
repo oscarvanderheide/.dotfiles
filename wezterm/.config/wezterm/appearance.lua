@@ -28,7 +28,7 @@ return function(config)
 		-- 	width = "100%",
 		-- 	height = "100%",
 		-- },
-		{ source = { Color = "#282c35" }, width = "100%", height = "100%", opacity = 0.93 },
+		{ source = { Color = "#282c35" }, width = "100%", height = "100%" }, -- opacity = 0.93
 	}
 	-- Monospace tab bar font
 	config.use_fancy_tab_bar = false

@@ -1,10 +1,11 @@
 return {
   {
-    -- Colortheme: Nord
+    --## Colortheme: Nord
     'gbprod/nord.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       vim.cmd.colorscheme 'nord'
+
       -- Change background color to something darker, same as wezterm background
       vim.cmd 'highlight Normal guibg=#282C35'
 
@@ -12,6 +13,9 @@ return {
       -- The default nord ones are too bright for my taste
       vim.api.nvim_set_hl(0, 'Search', { bg = '#555500', fg = 'white' })
       vim.api.nvim_set_hl(0, 'IncSearch', { bg = '#777700', fg = 'white' })
+
+      -- Set border color between splits
+      vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#434C5E', bg = 'NONE' })
     end,
   },
 
@@ -73,7 +77,7 @@ return {
         rm = nord.light_gray,
         ['r?'] = nord.light_gray,
         ['!'] = nord.red,
-        t = nord.glacier,
+        t = nord.yellow,
       }
 
       local theme = {
@@ -145,11 +149,11 @@ return {
         },
 
         sections = {
-          lualine_a = { modes },
-          lualine_b = { space },
-          lualine_c = { filename },
-          lualine_x = { space },
-          lualine_y = { space },
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = { modes, space },
+          lualine_y = { filename },
           lualine_z = { diff, space, branch },
         },
         inactive_sections = {
@@ -184,7 +188,7 @@ return {
       local utils = require 'notebook-navigator.utils'
 
       -- My own custom highlight group for code cells using Nord's yellow color
-      vim.api.nvim_set_hl(0, 'NotebookCellHighlight', { fg = '#EBCB8B', bold = false })
+      vim.api.nvim_set_hl(0, 'NotebookCellHighlight', { fg = '#b48da7', bold = false })
 
       local opts = {
         highlighters = {
@@ -214,8 +218,9 @@ return {
           },
         },
       }
-      -- Apply the configuration only for Python and Julia files
-      if vim.bo.filetype == 'python' or vim.bo.filetype == 'julia' then
+      -- Apply the configuration only if a cell delimiter is defined in the Notebook Navigator config
+      local cell_marker = utils.get_cell_marker(0, nn.config.cell_markers)
+      if cell_marker then
         return opts
       else
         return {}
@@ -245,9 +250,4 @@ return {
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
     },
   },
-
-  -- {
-  --   -- Vim-Cool: Remove highlighting  after searching and readd it when searching again
-  --   'romainl/vim-cool',
-  -- },
 }

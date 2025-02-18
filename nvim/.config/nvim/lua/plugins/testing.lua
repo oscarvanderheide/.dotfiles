@@ -1,6 +1,168 @@
 return {
-  'thinca/vim-visualstar',
-  -- return {
+
+  -- {
+  --   'luiscassih/AniKakoune',
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     require('AniMotion').setup {
+  --       mode = 'animotion', -- "nvim" or "helix"
+  --       word_keys = {
+  --         [1] = 'w',
+  --         [2] = 'e',
+  --         [3] = 'b',
+  --         [4] = 'W',
+  --         [5] = 'E',
+  --         [6] = 'B',
+  --       }, -- you can get the targets by local Utils = require("Animotion.Utils")
+  --       edit_keys = { 'c', 'd', 'r', 'y', 'p' }, -- you can add "p" if you want.
+  --       clear_keys = { '<Esc>' }, -- used when you want to deselect/exit from SEL mode.
+  --       marks = { 'y', 'z' }, -- Is a mark used internally in this plugin, when we do a visual select when changing or deleting the highlighted word.
+  --       map_visual = true, -- When true, we capture "v" and pressing it will enter visual mode with the plugin selection as part of the visual selection. When false, pressing "v" will exit SEL mode and the selection will be lost. You want to set to false if you have trouble with other mappings associated to "v". I recommend to try in true first.
+  --       color = { bg = '#673AB7' }, -- put color = "Visual" to use the default visual mode color. You can also customize via vim.api.nvim_set_hl(0, "@AniMotion", hl_color)
+  --     }
+  --   end,
+  -- },
+  -- {
+  --   -- Tiny-glimmer: fading highlights for yank/undo/redo - BUT CANT GET IT TO WORK FOR THE LIFE OF M
+  --   'rachartier/tiny-glimmer.nvim',
+  --   event = 'VeryLazy',
+  --   keys = {
+  --     {
+  --       'u',
+  --       function()
+  --         require('tiny-glimmer').undo()
+  --       end,
+  --       { noremap = true, silent = true },
+  --     },
+  --   },
+  --   opts = {},
+  --
+  --   config = function()
+  --     require('tiny-glimmer').setup {
+  --       enabled = true,
+  --
+  --       -- Disable this if you wants to debug highlighting issues
+  --       disable_warnings = false,
+  --       overwrite = {
+  --         auto_map = false,
+  --         search = {
+  --           enabled = true,
+  --           -- default_animation = 'pulse',
+  --           -- Keys to navigate to the next match
+  --           -- next_mapping = 'nzzzv',
+  --           -- Keys to navigate to the previous match
+  --           -- prev_mapping = 'Nzzzv',
+  --         },
+  --         undo = {
+  --           enabled = true,
+  --           undo_mapping = 'u',
+  --           -- default_animation = 'pulse',
+  --           -- Keys to navigate to the next match
+  --           -- next_mapping = 'nzzzv',
+  --           -- Keys to navigate to the previous match
+  --           -- prev_mapping = 'Nzzzv',
+  --         },
+  --       },
+  --     }
+  --   end,
+  --   -- config = function()
+  --   --   require('tiny-glimmer').setup {
+  --   --   -- your configuration
+  --   --   overwrite = {
+  --   --     auto_map = false,
+  --   --     undo = {
+  --   --       enabled = true,
+  --   --       -- default_animation = 'pulse',
+  --   --
+  --   --       -- Keys to navigate to the next match
+  --   --       -- next_mapping = 'nzzzv',
+  --   --
+  --   --       -- Keys to navigate to the previous match
+  --   --       -- prev_mapping = 'Nzzzv',
+  --   --     },
+  --   --   },
+  --   --   }
+  --   --   end
+  --   -- },
+  -- },
+  {
+    -- Namu: A symbol picker for LSP symbols
+    'bassamsdata/namu.nvim',
+    config = function()
+      require('namu').setup {
+        -- Enable the modules you want
+        namu_symbols = {
+          enable = true,
+          options = { -- here you can configure namu
+            movement = {
+              next = { '<C-j>', '<DOWN>' }, -- Support multiple keys
+              previous = { '<C-k>', '<UP>' }, -- Support multiple keys
+              close = { '<ESC>' }, -- close mapping
+              select = { '<CR>' }, -- select mapping
+              delete_word = {}, -- delete word mapping
+              clear_line = {}, -- clear line mapping
+            }, -- add any options here
+          },
+        },
+        -- Optional: Enable other modules if needed
+        colorscheme = {
+          enable = false,
+          options = {
+            persist = true, -- very efficient mechanism to Remember selected colorscheme
+            write_shada = false, -- If you open multiple nvim instances, then probably you need to enable this
+          },
+        },
+        ui_select = { enable = false }, -- vim.ui.select() wrapper
+      }
+      -- === Suggested Keymaps: ===
+      local namu = require 'namu.namu_symbols'
+      local colorscheme = require 'namu.colorscheme'
+      vim.keymap.set('n', '<leader>f', namu.show, {
+        desc = 'Jump to LSP symbol',
+        silent = true,
+      })
+      vim.keymap.set('n', '<leader>th', colorscheme.show, {
+        desc = 'Colorscheme Picker',
+        silent = true,
+      })
+    end,
+  }, -- return {
+  -- lazy.nvim
+  {
+    -- Noice: Popup window for messages
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      'MunifTanjim/nui.nvim',
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      'rcarriga/nvim-notify',
+    },
+    config = function()
+      require('noice').setup {
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+            ['vim.lsp.util.stylize_markdown'] = true,
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
+      }
+    end,
+  },
   --   'tanvirtin/vgit.nvim',
   --   branch = 'v1.0.x',
   --   -- or               , tag = 'v1.0.2',

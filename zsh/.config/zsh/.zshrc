@@ -51,5 +51,15 @@ unset GIT_CONFIG
 # Use TAB to cycle rather than select the first option
 # bindkey '^I' menu-complete
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/oscar/.lmstudio/bin"
+autoload -U add-zsh-hook
+
+activate_venv() {
+    if [ -f "./.venv/bin/activate" ]; then
+        source "./.venv/bin/activate"
+    elif [ -f "./venv/bin/activate" ]; then
+        source "./venv/bin/activate"
+    fi
+}
+
+add-zsh-hook chpwd activate_venv
+activate_venv 

@@ -24,7 +24,7 @@ vim.opt.incsearch = true -- Incremental search
 vim.opt.cursorline = false -- Highlight current line
 vim.opt.scrolloff = 16 -- Keep lines above and below the cursor
 vim.opt.termguicolors = true -- Enable more colors
-vim.opt.cmdheight = 0 -- Hide the command line
+vim.opt.cmdheight = 1 -- Hide the command line
 vim.opt.swapfile = false -- Disable swap files (I'll save myself)
 -- vim.opt.clipboard = 'unnamedplus' -- Sync with system clipboard
 vim.schedule(function()
@@ -35,3 +35,6 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
 -- vim.opt.colorcolumn = '80,120'
+
+-- Disable gutter for now
+vim.opt.signcolumn = 'no'

@@ -110,7 +110,6 @@ return {
         --   },
         -- },
       },
-
       -- Incrementally select the outer/inner nodes of a syntax tree
       incremental_selection = {
         enable = true,
@@ -118,7 +117,7 @@ return {
           init_selection = '<C-m>',
           scope_incremental = false,
           node_incremental = '<C-m>',
-          node_decremental = '<C-n>',
+          node_decremental = false,
         },
       },
       -- Automatically at "end" statements for things like functions, loops, etc.
