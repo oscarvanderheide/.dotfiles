@@ -17,7 +17,7 @@ alias zz='nvim ~/.zshrc; exec zsh'
 alias vv='nvim ~/.config/nvim/'
 
 # Replace ls with eza
-alias ls='eza --group-directories-first --icons -l --git --color=always --no-user --no-permissions --time=modified --time-style=relative --tree --level=1'
+alias ls='eza --group-directories-first --icons -l --color=always --no-user --no-permissions --time=modified --time-style=relative --tree --level=1'
 alias lt='ls --tree --level=2'
 alias lt2='ls --tree --level=2'
 alias lt3='ls --tree --level=3'
