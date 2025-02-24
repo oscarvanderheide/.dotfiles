@@ -92,7 +92,7 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
 
       -- Shortcut for smart open
-      vim.keymap.set('n', '<leader><leader>', function()
+      vim.keymap.set('n', '<D-p>', function()
         require('telescope').extensions.smart_open.smart_open { cwd_only = true }
       end, { noremap = true, silent = true, desc = 'Smart Open' })
     end,

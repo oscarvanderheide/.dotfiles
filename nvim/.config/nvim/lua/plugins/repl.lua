@@ -93,6 +93,14 @@ return {
         config = {
           scratch_repl = true,
           -- See docs: repl_open_cmd can be a table
+          -- set the file type of the newly created repl to ft
+          -- bufnr is the buffer id of the REPL and ft is the filetype of the
+          -- language being used for the REPL.
+          repl_filetype = function(bufnr, ft)
+            -- return ft
+            -- or return a string name such as the following
+            return 'iron'
+          end,
           repl_open_cmd = {
             view.split.vertical.botright(0.45),
             view.split.rightbelow '%40',
@@ -217,7 +225,7 @@ return {
 
   {
     -- Notebook Navigator: Quickly jump between and execute code cells
-    'GCBallesteros/NotebookNavigator.nvim',
+    'oscarvanderheide/NotebookNavigator.nvim',
     dependencies = {
       'echasnovski/mini.comment',
       'hkupty/iron.nvim', -- REPL provider, can also use molten or toggleterm
@@ -235,7 +243,7 @@ return {
         activate_hydra_keys = '<leader>n',
         cell_markers = {
           julia = '##', -- Set the code cell marker for Julia
-          python = '##', -- Set the code cell markers for Python
+          python = '# %%', -- Set the code cell markers for Python
           lua = '--##', -- Set the code cell markers for Lua
         },
         repl_provider = 'iron',

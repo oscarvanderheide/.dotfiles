@@ -47,7 +47,6 @@ return {
         auto_trigger = true,
         accept = false, -- disable built-in keymapping
       },
-      -- filetypes = {},
     },
     keys = {
       { '<leader>cc', ':CopilotChat<CR>', mode = { 'n', 'v' }, noremap = true, silent = true },
@@ -65,6 +64,9 @@ return {
       -- for example
       provider = 'copilot',
       copilot = {},
+      windows = {
+        ask = { floating = true },
+      },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = 'make',

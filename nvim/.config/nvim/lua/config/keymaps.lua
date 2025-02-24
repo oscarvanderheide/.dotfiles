@@ -2,6 +2,10 @@
 local set = vim.keymap.set
 local functions = require 'config.functions'
 
+-- Keymaps for quickly moving up and down within a buffer
+set({ 'n', 'v' }, '<C-j>', '6j', { silent = true })
+set({ 'n', 'v' }, '<C-k>', '6k', { silent = true })
+
 -- Quit neovim
 set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' })
 
@@ -11,20 +15,12 @@ set('n', '<Esc>', '<cmd>noh<CR>', { noremap = true, silent = true, desc = 'Toggl
 -- Change word under cursos and highlight all matches (and use <C-.> to repeat on next match)
 set('n', '<C-c>', functions.change_word_under_cursor, { noremap = true, silent = true, desc = 'Change word under cursor' })
 
--- Repeat last change on next  match
+-- Repeat last change on next match
 set('n', '<C-.>', 'n.', { noremap = true, silent = true, desc = 'Repeat last change on next search match' })
 
 -- Change all occurances of word under cursor (from Primeagen?) and visual selection
 set('n', 'gs', [[:%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left><Space><Bs>]], { noremap = true, silent = false, desc = 'Replace word under cursor' })
 set('x', 'gs', '"zy:%s/<C-r>z/<C-r>z/g<Left><Left><Space><BS>', { noremap = true, silent = false, desc = 'Replace selected text globally' })
-
--- Remap J and K to move paragraphs
-set({ 'n', 'o', 'v' }, 'J', '}', { noremap = true, silent = true, desc = 'Move to next paragraph' })
-set({ 'n', 'o', 'v' }, 'K', '{', { noremap = true, silent = true, desc = 'Move to previous paragraph' })
-
--- Keymaps for quickly moving up and down within a buffer
-set({ 'n', 'v' }, '<C-j>', '6j', { silent = true })
-set({ 'n', 'v' }, '<C-k>', '6k', { silent = true })
 
 -- Save file like in VSCode
 set('i', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
@@ -33,21 +29,19 @@ set('n', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save f
 -- Select entire buffer like in VSCode
 set('n', '<D-a>', 'ggVG', { noremap = true, silent = true, desc = 'Select entire file' })
 
-set('n', '<C-f>', function()
-  vim.notify 'Searching'
-  require('tiny-glimmer').search_next()
-end, { noremap = true, silent = true, desc = 'Search next' })
--- require('tiny-glimmer').search_next()
--- U to redo
+-- Yank stuff around brackets (useful for lua tables)
+set('n', '<C-y>', 'vabVy', { noremap = true, silent = true, desc = 'Yank entire buffer' })
+
+-- U to redo instead of Ctrl-r
 set('n', 'U', '<C-r>', { noremap = true, silent = true, desc = 'Undo' })
 
 -- Exit terminal mode with double Esc
 set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Switch between editor buffers and terminal/REPL/Copilot buffers more easily
-set('n', '<Tab>', functions.switch_to_next_window, { noremap = false, silent = true, desc = 'Move to REPL/Copilot' })
-set('i', '<Tab>', functions.from_repl_to_next_window, { noremap = true, silent = true, desc = 'Move to next window' })
-set('t', '<Tab>', '<C-\\><C-n><C-w>w', { noremap = true, silent = true, desc = 'Move back to editor' })
+set('n', '<C-l>', functions.switch_to_next_window, { noremap = false, silent = true, desc = 'Move to REPL/Copilot' })
+set('i', '<C-l>', functions.from_repl_to_next_window, { noremap = true, silent = true, desc = 'Move to next window' })
+set('t', '<C-l>', '<C-\\><C-n>:lua require("config.functions").from_repl_to_next_window()<CR>', { noremap = true, silent = true, desc = 'Move back to editor' })
 
 -- Yank/paste using system clipboard
 set('n', '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })

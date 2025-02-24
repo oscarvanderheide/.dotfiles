@@ -7,8 +7,7 @@ return {
       vim.cmd.colorscheme 'nord'
 
       -- Change background color to something darker, same as wezterm background
-      vim.cmd 'highlight Normal guibg=#282C35'
-
+      vim.cmd 'highlight Normal guibg=#1e2128'
       -- Set custom colors for search and incsearch
       -- The default nord ones are too bright for my taste
       vim.api.nvim_set_hl(0, 'Search', { bg = '#555500', fg = 'white' })

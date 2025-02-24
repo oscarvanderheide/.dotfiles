@@ -96,7 +96,7 @@ return {
           options = { -- here you can configure namu
             movement = {
               next = { '<C-j>', '<DOWN>' }, -- Support multiple keys
-              previous = { '<C-k>', '<UP>' }, -- Support multiple keys
+              previous = { '<C-n>', '<UP>' }, -- Support multiple keys
               close = { '<ESC>' }, -- close mapping
               select = { '<CR>' }, -- select mapping
               delete_word = {}, -- delete word mapping

@@ -91,13 +91,22 @@ function M.switch_to_next_window()
     vim.cmd 'startinsert!'
   elseif filetype == 'iron' or filetype == 'copilot-chat' or filetype == 'toggleterm' or filetype == 'AvanteInput' then
     vim.cmd 'startinsert!'
+  elseif filetype == 'notify' then
+    -- recurse
+    M.switch_to_next_window()
   end
 end
 
 -- Exit insert mode when moving from REPL/Copilot to normal buffer
 function M.from_repl_to_next_window()
   vim.cmd 'stopinsert'
-  vim.cmd 'wincmd h'
+  vim.cmd 'wincmd w'
+
+  local filetype = vim.bo.filetype
+  if filetype == 'notify' then
+    -- recurse
+    M.from_repl_to_next_window()
+  end
 end
 
 -- Close Avante more easily
