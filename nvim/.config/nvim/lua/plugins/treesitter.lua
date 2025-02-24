@@ -114,10 +114,10 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<C-m>',
-          scope_incremental = false,
+          init_selection = '<C-m>', -- set to `false` to disable one of the mappings
           node_incremental = '<C-m>',
-          node_decremental = false,
+          scope_incremental = 'grc',
+          node_decremental = '<BS>',
         },
       },
       -- Automatically at "end" statements for things like functions, loops, etc.

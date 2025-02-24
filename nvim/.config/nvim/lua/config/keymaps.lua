@@ -13,8 +13,16 @@ set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' }
 set('n', '<Esc>', '<cmd>noh<CR>', { noremap = true, silent = true, desc = 'Toggle search highlighting' })
 
 -- Change word under cursos and highlight all matches (and use <C-.> to repeat on next match)
-set('n', '<C-c>', functions.change_word_under_cursor, { noremap = true, silent = true, desc = 'Change word under cursor' })
+-- set('n', '<C-f>', functions.search_word_under_cursor, { noremap = true, silent = true, desc = 'Change word under cursor' })
+-- set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change word under cursor' })
+-- Define a new function to combine the search and change actions
+local function search_and_change()
+  functions.search_word_under_cursor()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('ciw', true, false, true), 'n', true)
+end
 
+-- Map <C-c> to the new function
+set('n', '<C-c>', search_and_change, { noremap = true, silent = true, desc = 'Search and change word under cursor' })
 -- Repeat last change on next match
 set('n', '<C-.>', 'n.', { noremap = true, silent = true, desc = 'Repeat last change on next search match' })
 
@@ -91,7 +99,7 @@ set('n', ',', '<C-^>', { noremap = true, silent = true, desc = 'Alternate two bu
 set('v', '<', '<gv', { desc = 'Indent left' })
 set('v', '>', '>gv', { desc = 'Indent right' })
 
--- Incremental rename of current word
+-- Incremental nename of current word
 set('n', '<leader>rn', function()
   return ':IncRename ' .. vim.fn.expand '<cword>'
 end, { expr = true, desc = 'Re[N]ame Incremental' })

@@ -15,6 +15,13 @@ return {
   },
 
   {
+    -- Mini.surround: Surround text with quotes, brackets, etc.
+    'echasnovski/mini.surround',
+    version = false,
+    opts = {},
+  },
+
+  {
     -- Auto-session: Remember the state of your neovim session
     'rmagatti/auto-session',
     lazy = false,
@@ -60,7 +67,7 @@ return {
   },
 
   {
-    -- Search with * for visual selection
+    -- nearch with * for visual selection
     'thinca/vim-visualstar',
   },
 

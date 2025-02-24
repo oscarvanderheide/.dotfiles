@@ -46,24 +46,3 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.api.nvim_buf_set_keymap(0, 'n', 'zM', 'zMzr', { noremap = true, silent = true })
   end,
 })
-
--- vim.api.nvim_create_autocmd('FileType', {
--- -- Set python specific options and keymaps
---   pattern = 'python', -- Only apply to Python files
---   callback = SET_PYTHON_KEYMAPS,
--- })
-
--- -- Set julia specific options and keymaps
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = 'julia',
---   callback = SET_JULIA_KEYMAPS,
--- })
-
--- Open Telescope file finder when opening a directory
--- vim.api.nvim_create_autocmd('VimEnter', {
---   callback = function()
---     if vim.fn.argv(0) == '' then
---       require('telescope.builtin').find_files()
---     end
---   end,
--- })
