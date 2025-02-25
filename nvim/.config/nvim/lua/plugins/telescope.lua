@@ -91,7 +91,11 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
 
-      -- Shortcut for smart open
+      -- Shortcut for smart open to mimic VSCode's {Ctrl,Cmd}+p
+      vim.keymap.set('n', '<C-p>', function()
+        require('telescope').extensions.smart_open.smart_open { cwd_only = true }
+      end, { noremap = true, silent = true, desc = 'Smart Open' })
+
       vim.keymap.set('n', '<D-p>', function()
         require('telescope').extensions.smart_open.smart_open { cwd_only = true }
       end, { noremap = true, silent = true, desc = 'Smart Open' })
