@@ -15,10 +15,22 @@ return {
   },
 
   {
-    -- Mini.surround: Surround text with quotes, brackets, etc.
+    -- Mini.surround: Surround text with brackets, quotes, etc.
     'echasnovski/mini.surround',
     version = false,
     opts = {},
+    config = function(_, opts)
+      require('mini.surround').setup(opts)
+
+      -- Map brackets in visual mode to surround selected text
+      vim.keymap.set('x', '(', '<Esc>`>a)<Esc>`<i(<Esc>', { silent = true })
+      -- vim.keymap.set('x', '(', ":<C-u>lua MiniSurround.add('visual', '(')<CR>", { silent = true })
+      -- vim.keymap.set('x', '[', ":<C-u>lua MiniSurround.add('visual', '[')<CR>", { silent = true })
+      -- vim.keymap.set('x', '{', ":<C-u>lua MiniSurround.add('visual', '{')<CR>", { silent = true })
+      -- vim.keymap.set('x', "'", ":<C-u>lua MiniSurround.add('visual', \"'\")<CR>", { silent = true })
+      -- vim.keymap.set('x', '"', ":<C-u>lua MiniSurround.add('visual', '\"')<CR>", { silent = true })
+      -- vim.keymap.set('x', '`', ":<C-u>lua MiniSurround.add('visual', '`')<CR>", { silent = true })
+    end,
   },
 
   {

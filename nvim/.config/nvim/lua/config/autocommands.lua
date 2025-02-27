@@ -46,3 +46,12 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.api.nvim_buf_set_keymap(0, 'n', 'zM', 'zMzr', { noremap = true, silent = true })
   end,
 })
+
+-- Dump the output of a command at the cursor position (e.g. :Dump messages or :Dump !ls)
+-- (Isnt this the same as :r! ?)
+vim.api.nvim_create_user_command('Dump', function(x)
+  vim.cmd(string.format("put =execute('%s')", x.args))
+end, {
+  nargs = '+',
+  desc = 'Dump the output of a command at the cursor position',
+})

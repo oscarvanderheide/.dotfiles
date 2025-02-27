@@ -8,6 +8,16 @@ return function(config)
 
 	-- if is_macos then
 	config.keys = {
+		-- {
+		-- 	key = "Delete",
+		-- 	mods = "NONE",
+		-- 	action = wezterm.action.SendString("\x1b[3~"),
+		-- },
+		-- {
+		-- 	key = "Escape",
+		-- 	mods = "NONE",
+		-- 	action = wezterm.action.SendString("\x1b[27u"),
+		-- },
 		-- Shortcut for starting a new workspace
 		{
 			key = "T",

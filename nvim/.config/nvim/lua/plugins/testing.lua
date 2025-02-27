@@ -85,59 +85,93 @@ return {
   --   --   end
   --   -- },
   -- },
-  {
-    -- Namu: A symbol picker for LSP symbols
-    'bassamsdata/namu.nvim',
-    config = function()
-      require('namu').setup {
-        -- Enable the modules you want
-        namu_symbols = {
-          enable = true,
-          options = { -- here you can configure namu
-            movement = {
-              next = { '<C-j>', '<DOWN>' }, -- Support multiple keys
-              previous = { '<C-n>', '<UP>' }, -- Support multiple keys
-              close = { '<ESC>' }, -- close mapping
-              select = { '<CR>' }, -- select mapping
-              delete_word = {}, -- delete word mapping
-              clear_line = {}, -- clear line mapping
-            }, -- add any options here
-          },
-        },
-        -- Optional: Enable other modules if needed
-        colorscheme = {
-          enable = false,
-          options = {
-            persist = true, -- very efficient mechanism to Remember selected colorscheme
-            write_shada = false, -- If you open multiple nvim instances, then probably you need to enable this
-          },
-        },
-        ui_select = { enable = false }, -- vim.ui.select() wrapper
-      }
-      -- === Suggested Keymaps: ===
-      local namu = require 'namu.namu_symbols'
-      local colorscheme = require 'namu.colorscheme'
-      vim.keymap.set('n', '<leader>f', namu.show, {
-        desc = 'Jump to LSP symbol',
-        silent = true,
-      })
-      vim.keymap.set('n', '<leader>th', colorscheme.show, {
-        desc = 'Colorscheme Picker',
-        silent = true,
-      })
-    end,
-  }, -- return {
-  -- lazy.nvim
-  --   'tanvirtin/vgit.nvim',
-  --   branch = 'v1.0.x',
-  --   -- or               , tag = 'v1.0.2',
-  --   dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' },
-  --   -- Lazy loading on 'VimEnter' event is necessary.
-  --   event = 'VimEnter',
+  -- {
+  --   -- Namu: A symbol picker for LSP symbols
+  --   'bassamsdata/namu.nvim',
   --   config = function()
-  --     require('vgit').setup()
+  --     require('namu').setup {
+  --       -- Enable the modules you want
+  --       namu_symbols = {
+  --         enable = true,
+  --         options = { -- here you can configure namu
+  --           movement = {
+  --             next = { '<C-j>', '<DOWN>' }, -- Support multiple keys
+  --             previous = { '<C-n>', '<UP>' }, -- Support multiple keys
+  --             close = { '<ESC>' }, -- close mapping
+  --             select = { '<CR>' }, -- select mapping
+  --             delete_word = {}, -- delete word mapping
+  --             clear_line = {}, -- clear line mapping
+  --           }, -- add any options here
+  --         },
+  --       },
+  --       -- Optional: Enable other modules if needed
+  --       colorscheme = {
+  --         enable = false,
+  --         options = {
+  --           persist = true, -- very efficient mechanism to Remember selected colorscheme
+  --           write_shada = false, -- If you open multiple nvim instances, then probably you need to enable this
+  --         },
+  --       },
+  --       ui_select = { enable = false }, -- vim.ui.select() wrapper
+  --     }
+  --     -- === Suggested Keymaps: ===
+  --     local namu = require 'namu.namu_symbols'
+  --     local colorscheme = require 'namu.colorscheme'
+  --     vim.keymap.set('n', '<leader>f', namu.show, {
+  --       desc = 'Jump to LSP symbol',
+  --       silent = true,
+  --     })
+  --     vim.keymap.set('n', '<leader>th', colorscheme.show, {
+  --       desc = 'Colorscheme Picker',
+  --       silent = true,
+  --     })
   --   end,
-  -- }
+  -- },
+  {
+    'tanvirtin/vgit.nvim',
+    branch = 'v1.0.x',
+    -- or               , tag = 'v1.0.2',
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons' },
+    -- Lazy loading on 'VimEnter' event is necessary.
+    event = 'VimEnter',
+    config = function()
+      require('vgit').setup {
+        keymaps = {
+          ['n <C-k>'] = function()
+            require('vgit').hunk_up()
+          end,
+          ['n <C-j>'] = function()
+            require('vgit').hunk_down()
+          end,
+          ['n <leader>gs'] = function()
+            require('vgit').buffer_hunk_stage()
+          end,
+          ['n <leader>gr'] = function()
+            require('vgit').buffer_hunk_reset()
+          end,
+          ['n <leader>gp'] = function()
+            require('vgit').buffer_hunk_preview()
+          end,
+          ['n <leader>gb'] = 'buffer_blame_preview',
+          ['n <leader>gf'] = function()
+            require('vgit').buffer_diff_preview()
+          end,
+          ['n <leader>gh'] = function()
+            require('vgit').buffer_history_preview()
+          end,
+          ['n <leader>gu'] = function()
+            require('vgit').buffer_reset()
+          end,
+          ['n <leader>gd'] = function()
+            require('vgit').project_diff_preview()
+          end,
+          ['n <leader>gx'] = function()
+            require('vgit').toggle_diff_preference()
+          end,
+        },
+      }
+    end,
+  },
   -- Tabout: Move out of things like brackets with tab in insert mode
   -- {
   --   lazy = false,

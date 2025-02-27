@@ -5,14 +5,14 @@ return {
     'folke/flash.nvim',
     event = 'VeryLazy',
     ---@type Flash.Config
-    -- opts = {
-    --   modes = {
-    --     char = {
-    --       -- Improved character navigation (e.g. `f`, `t`, `F`, `T`)
-    --       enabled = true,
-    --     },
-    --   },
-    -- },
+    opts = {
+      --   modes = {
+      --     char = {
+      --       -- Improved character navigation (e.g. `f`, `t`, `F`, `T`)
+      --       enabled = true,
+      --     },
+      --   },
+    },
     -- stylua: ignore
     keys = {
       { "<CR>", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
