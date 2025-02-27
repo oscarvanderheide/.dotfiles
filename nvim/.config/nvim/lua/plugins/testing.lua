@@ -137,12 +137,12 @@ return {
     config = function()
       require('vgit').setup {
         keymaps = {
-          ['n <C-k>'] = function()
-            require('vgit').hunk_up()
-          end,
-          ['n <C-j>'] = function()
-            require('vgit').hunk_down()
-          end,
+          -- ['n <C-k>'] = function()
+          --   require('vgit').hunk_up()
+          -- end,
+          -- ['n <C-j>'] = function()
+          --   require('vgit').hunk_down()
+          -- end,
           ['n <leader>gs'] = function()
             require('vgit').buffer_hunk_stage()
           end,

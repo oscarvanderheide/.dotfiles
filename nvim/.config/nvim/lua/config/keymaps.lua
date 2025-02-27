@@ -114,9 +114,20 @@ end, { expr = true, desc = 'Re[N]ame Incremental' })
 -- end, { desc = 'Comment selection' })
 --
 
+-- Map brackets in visual mode to surround selected text
+set('x', '(', '<Esc>`>a)<Esc>`<i(<Esc>', { silent = true })
+set('x', ')', '<Esc>`>a)<Esc>`<i(<Esc>', { silent = true })
+set('x', '[', '<Esc>`>a]<Esc>`<i[<Esc>', { silent = true })
+set('x', ']', '<Esc>`>a]<Esc>`<i[<Esc>', { silent = true })
+set('x', '{', '<Esc>`>a}<Esc>`<i{<Esc>', { silent = true })
+set('x', '}', '<Esc>`>a}<Esc>`<i{<Esc>', { silent = true })
+set('x', "'", "<Esc>`>a'<Esc>`<i'<Esc>", { silent = true })
+set('x', '"', '<Esc>`>a"<Esc>`<i"<Esc>', { silent = true })
+set('x', '`', '<Esc>`>a`<Esc>`<i`<Esc>', { silent = true })
+
 -- -- Search for word under cursor or visual selection without moving to next match like * does
--- set('n', '<C-f>', functions.search_word_under_cursor, { silent = true })
--- set('x', '<C-f>', functions.search_visual_selection, { silent = true })
+set('n', '<C-f>', functions.search_word_under_cursor, { silent = true })
+set('x', '<C-f>', functions.search_visual_selection, { silent = true })
 --
 -- -- Also enable <D-d> to search for word/selection (to be able to do cmd+d on mac like in VSCode)
 -- set('n', '<D-d>', functions.search_word_under_cursor, { noremap = true, silent = true, desc = 'Select word under cursor' })
