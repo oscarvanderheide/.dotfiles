@@ -19,6 +19,8 @@ return function(config)
 		-- 	action = wezterm.action.SendString("\x1b[27u"),
 		-- },
 		-- Shortcut for starting a new workspace
+		-- Disable the default CMD+f action to allow CMD+f to be used in neovim for searching
+		{ key = "f", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
 		{
 			key = "T",
 			mods = "CMD|SHIFT",

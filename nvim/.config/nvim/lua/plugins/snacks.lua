@@ -6,19 +6,19 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true }, -- Open big files with less lag
-      picker = { enabled = false },
+      picker = { enabled = true },
       animate = { enabled = false },
       bufdelete = { enabled = false },
       dashboard = { enabled = false },
       debug = { enabled = false },
       dim = { enabled = false },
-      explorer = { enabled = false },
+      explorer = { enabled = true },
       git = { enabled = false },
       gitbrowse = { enabled = false },
-      indent = { enabled = false },
+      indent = { enabled = true, chunk = { enabled = true }, animate = { enabled = false } },
       input = { enabled = false },
       layout = { enabled = false },
-      lazygit = { enabled = false },
+      lazygit = { enabled = true },
       notifier = { enabled = false },
       notify = { enabled = false },
       profiler = { enabled = false },
@@ -28,64 +28,55 @@ return {
       scratch = { enabled = false },
       scroll = { enabled = false },
       statuscolumn = { enabled = false },
-      terminal = { enabled = false },
+      terminal = { enabled = true },
       toggle = { enabled = false },
       util = { enabled = false },
       win = { enabled = false },
       words = { enabled = false },
       zen = { enabled = false },
     },
-    -- keys = {
-    --   -- git
-    --   {
-    --     '<leader>gb',
-    --     function()
-    --       require('snacks').picker.git_branches()
-    --     end,
-    --     desc = 'Git Branches',
-    --   },
-    --   {
-    --     '<leader>gl',
-    --     function()
-    --       require('snacks').picker.git_log()
-    --     end,
-    --     desc = 'Git Log',
-    --   },
-    --   {
-    --     '<leader>gL',
-    --     function()
-    --       require('snacks').picker.git_log_line()
-    --     end,
-    --     desc = 'Git Log Line',
-    --   },
-    --   {
-    --     '<leader>gs',
-    --     function()
-    --       require('snacks').picker.git_status()
-    --     end,
-    --     desc = 'Git Status',
-    --   },
-    --   {
-    --     '<leader>gS',
-    --     function()
-    --       require('snacks').picker.git_stash()
-    --     end,
-    --     desc = 'Git Stash',
-    --   },
-    --   {
-    --     '<leader>gd',
-    --     function()
-    --       require('snacks').picker.git_diff()
-    --     end,
-    --     desc = 'Git Diff (Hunks)',
-    --   },
-    --   {
-    --     '<leader>gf',
-    --     function()
-    --       require('snacks').picker.git_log_file()
-    --     end,
-    --     desc = 'Git Log File',
-    --   },
-    -- },
+    keys = (function()
+      -- Helper function to make Snacks keymap
+      local function snacks_fn(mod, fn, desc)
+        return {
+          mod,
+          function()
+            require('snacks')[fn]()
+          end,
+          desc = desc,
+        }
+      end
+
+      -- Helper function for Snacks.picker keymaps
+      local function picker_fn(mod, fn, desc, opts)
+        return {
+          mod,
+          function()
+            require('snacks').picker[fn](opts or {})
+          end,
+          desc = desc,
+        }
+      end
+
+      -- Actual table with keymaps
+
+      return {
+        picker_fn('<leader>e', 'explorer', 'Picker Explorer', { layout = { preset = 'vscode' } }),
+        snacks_fn('<leader>gg', 'lazygit', 'Lazygit'),
+        picker_fn('<D-p>', 'smart', 'Smart Find Files', {
+          multi = { 'files' },
+          layout = { preset = 'vscode' },
+          formatters = { file = { filename_first = true } },
+        }),
+        picker_fn('<leader>fg', 'git_files', 'Find Git Files'),
+        picker_fn('<leader>gb', 'git_branches', 'Git Branches'),
+        picker_fn('<leader>gl', 'git_log', 'Git Log'),
+        picker_fn('<leader>gL', 'git_log_line', 'Git Log Line'),
+        picker_fn('<leader>gs', 'git_status', 'Git Status'),
+        picker_fn('<leader>gS', 'git_stash', 'Git Stash'),
+        picker_fn('<leader>gd', 'git_diff', 'Git Diff (Hunks)'),
+        picker_fn('<leader>gf', 'git_log_file', 'Git Log File'),
+      }
+    end)(),
   },
 }

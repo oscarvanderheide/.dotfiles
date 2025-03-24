@@ -12,17 +12,23 @@ set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' }
 -- Toggle search higlighting
 set('n', '<Esc>', '<cmd>noh<CR>', { noremap = true, silent = true, desc = 'Toggle search highlighting' })
 
--- Change word under cursos and highlight all matches (and use <C-.> to repeat on next match)
+-- Change word under cursor and highlight all matches (and use <C-.> to repeat on next match)
 -- set('n', '<C-f>', functions.search_word_under_cursor, { noremap = true, silent = true, desc = 'Change word under cursor' })
 -- set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change word under cursor' })
--- Define a new function to combine the search and change actions
+
+-- Combine search and change actions
 local function search_and_change()
   functions.search_word_under_cursor()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('yiw', true, false, true), 'n', true)
+
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('ciw', true, false, true), 'n', true)
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('viw<Esc>`>a', true, false, true), 'n', true)
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('Ea', true, false, true), 'n', true)
+  -- <Esc>`>a)<Esc>`<i(<Esc>
 end
 
--- Map <C-c> to the new function
-set('n', '<C-c>', search_and_change, { noremap = true, silent = true, desc = 'Search and change word under cursor' })
+set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change word under cursor' })
+
 -- Repeat last change on next match
 set('n', '<C-.>', 'n.', { noremap = true, silent = true, desc = 'Repeat last change on next search match' })
 
@@ -33,6 +39,9 @@ set('x', 'gs', '"zy:%s/<C-r>z/<C-r>z/g<Left><Left><Space><BS>', { noremap = true
 -- Save file like in VSCode
 set('i', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 set('n', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+
+-- Search with Cmd+f like in VSCode
+vim.keymap.set('n', '<D-f>', '/', { noremap = true, silent = false, desc = 'Search' })
 
 -- Select entire buffer like in VSCode
 set('n', '<D-a>', 'ggVG', { noremap = true, silent = true, desc = 'Select entire file' })
@@ -87,17 +96,17 @@ set('n', 'n', 'nzzzv', { desc = 'Center after going to next search item' })
 set('n', 'N', 'Nzzzv', { desc = 'Center after going to previous search item' })
 
 -- Move selected lines up or down like in VSCode
-set('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines down' })
-set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move current line up' })
-set('n', '<A-j>', "V:m '>+1<CR>gv=gv<Esc>", { desc = 'Select current line and move it down' })
-set('n', '<A-k>', "V:m '<-2<CR>gv=gv<Esc>", { desc = 'Move current line up' })
+-- set('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines down' })
+-- set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move current line up' })
+-- set('n', '<A-j>', "V:m '>+1<CR>gv=gv<Esc>", { desc = 'Select current line and move it down' })
+-- set('n', '<A-k>', "V:m '<-2<CR>gv=gv<Esc>", { desc = 'Move current line up' })
 
 -- Quickly alternate between two buffers
 set('n', ',', '<C-^>', { noremap = true, silent = true, desc = 'Alternate two buffers' })
 
--- Indent selected text
-set('v', '<', '<gv', { desc = 'Indent left' })
-set('v', '>', '>gv', { desc = 'Indent right' })
+-- Indent selected text (use Alt+{h,l} from mini.move instead)
+-- set('v', '<', '<gv', { desc = 'Indent left' })
+-- set('v', '>', '>gv', { desc = 'Indent right' })
 
 -- Incremental nename of current word
 set('n', '<leader>rn', function()

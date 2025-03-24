@@ -30,12 +30,12 @@ return {
       -- autoinstall languages that are not installed
       auto_install = true,
       highlight = {
-        disable = { 'julia' }, -- disable tree-sitter for julia
+        -- disable = { 'julia' }, -- disable tree-sitter for julia
         enable = true,
         -- some languages depend on vim's regex highlighting system (such as ruby) for indent rules.
         --  if you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
+        -- additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
       -- Options for treesitter textobjects
@@ -113,7 +113,7 @@ return {
       },
       -- Incrementally select the outer/inner nodes of a syntax tree
       incremental_selection = {
-        enable = true,
+        enable = false,
         keymaps = {
           init_selection = '<C-m>', -- set to `false` to disable one of the mappings
           node_incremental = '<C-m>',

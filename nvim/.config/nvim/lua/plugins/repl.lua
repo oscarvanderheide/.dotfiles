@@ -245,6 +245,7 @@ return {
           julia = '##', -- Set the code cell marker for Julia
           python = '# %%', -- Set the code cell markers for Python
           lua = '--##', -- Set the code cell markers for Lua
+          cpp = '/*##', -- Set the code cell markers for C++
         },
         repl_provider = 'iron',
         syntax_highlight = false, -- Set custom highlight group for code cells

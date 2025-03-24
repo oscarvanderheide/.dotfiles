@@ -1,6 +1,6 @@
 return {
   {
-    --## Colortheme: Nord
+    -- Colortheme: Nord
     'gbprod/nord.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
@@ -23,6 +23,7 @@ return {
     'dgox16/oldworld.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
   },
+
   {
     -- Noice: Popup window for messages
     'folke/noice.nvim',
@@ -49,7 +50,7 @@ return {
         },
         -- you can enable a preset for easier configuration
         presets = {
-          bottom_search = true, -- use a classic bottom cmdline for search
+          -- bottom_search = true, -- use a classic bottom cmdline for search
           command_palette = true, -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
@@ -202,65 +203,56 @@ return {
     end,
   },
 
-  {
-    -- Indent-Blankline: Visual indent lines
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    ---@module "ibl"
-    ---@type ibl.config
-    opts = {},
-  },
-
-  {
-    -- Mini.HiPatterns: Add line to cells in notebooks
-    'echasnovski/mini.hipatterns',
-    event = 'VeryLazy',
-    dependencies = { 'GCBallesteros/NotebookNavigator.nvim' },
-
-    opts = function()
-      local nn = require 'notebook-navigator'
-      local utils = require 'notebook-navigator.utils'
-
-      -- My own custom highlight group for code cells using Nord's yellow color
-      vim.api.nvim_set_hl(0, 'NotebookCellHighlight', { fg = '#b48da7', bold = false })
-
-      local opts = {
-        highlighters = {
-          cell_delimiter = {
-            -- Set the pattern to the cell marker as defined in NotebookNavigator plugin
-            pattern = function(buf_id)
-              local cell_marker = utils.get_cell_marker(buf_id, nn.config.cell_markers)
-              if cell_marker then
-                local regex_cell_marker = '^' .. cell_marker .. '%s*.*'
-                return regex_cell_marker
-              else
-                return nil
-              end
-            end,
-            -- Group name, doesn't really matter
-            group = 'MiniHipatternsCustom',
-            -- Calculate the length of the line to be added s.t. the total length is 80
-            extmark_opts = function(_, match, _)
-              local display_width = vim.fn.strdisplaywidth(match)
-              local horizontal_line = {
-                virt_text = { { string.rep('─', 80 - display_width), 'NotebookCellHighlight' } },
-                line_hl_group = 'NotebookCellHighlight',
-                hl_eol = true,
-              }
-              return horizontal_line
-            end,
-          },
-        },
-      }
-      -- Apply the configuration only if a cell delimiter is defined in the Notebook Navigator config
-      local cell_marker = utils.get_cell_marker(0, nn.config.cell_markers)
-      if cell_marker then
-        return opts
-      else
-        return {}
-      end
-    end,
-  },
+  -- {
+  --   -- Mini.HiPatterns: Add line to cells in notebooks
+  --   'echasnovski/mini.hipatterns',
+  --   event = 'VeryLazy',
+  --   dependencies = { 'GCBallesteros/NotebookNavigator.nvim' },
+  --
+  --   opts = function()
+  --     local nn = require 'notebook-navigator'
+  --     local utils = require 'notebook-navigator.utils'
+  --
+  --     -- My own custom highlight group for code cells using Nord's yellow color
+  --     vim.api.nvim_set_hl(0, 'NotebookCellHighlight', { fg = '#b48da7', bold = false })
+  --
+  --     local opts = {
+  --       highlighters = {
+  --         cell_delimiter = {
+  --           -- Set the pattern to the cell marker as defined in NotebookNavigator plugin
+  --           pattern = function(buf_id)
+  --             local cell_marker = utils.get_cell_marker(buf_id, nn.config.cell_markers)
+  --             if cell_marker then
+  --               local regex_cell_marker = '^' .. cell_marker .. '%s*.*'
+  --               return regex_cell_marker
+  --             else
+  --               return nil
+  --             end
+  --           end,
+  --           -- Group name, doesn't really matter
+  --           group = 'MiniHipatternsCustom',
+  --           -- Calculate the length of the line to be added s.t. the total length is 80
+  --           extmark_opts = function(_, match, _)
+  --             local display_width = vim.fn.strdisplaywidth(match)
+  --             local horizontal_line = {
+  --               virt_text = { { string.rep('─', 80 - display_width), 'NotebookCellHighlight' } },
+  --               line_hl_group = 'NotebookCellHighlight',
+  --               hl_eol = true,
+  --             }
+  --             return horizontal_line
+  --           end,
+  --         },
+  --       },
+  --     }
+  --     -- Apply the configuration only if a cell delimiter is defined in the Notebook Navigator config
+  --     local cell_marker = utils.get_cell_marker(0, nn.config.cell_markers)
+  --     if cell_marker then
+  --       return opts
+  --     else
+  --       return {}
+  --     end
+  --   end,
+  -- },
 
   {
     -- Which-Key: Keymap hints
@@ -284,4 +276,6 @@ return {
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
     },
   },
+
+  -- End of plugins
 }

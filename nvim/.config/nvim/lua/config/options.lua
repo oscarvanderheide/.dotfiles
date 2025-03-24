@@ -26,10 +26,7 @@ vim.opt.scrolloff = 16 -- Keep lines above and below the cursor
 vim.opt.termguicolors = true -- Enable more colors
 vim.opt.cmdheight = 1 -- Hide the command line
 vim.opt.swapfile = false -- Disable swap files (I'll save myself)
--- vim.opt.clipboard = 'unnamedplus' -- Sync with system clipboard
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus' -- Use the system clipboard
-end)
+vim.opt.clipboard = 'unnamedplus' -- Use the system clipboard
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2

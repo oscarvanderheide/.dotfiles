@@ -7,16 +7,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Turn off line numbers and relative numbers for terminal buffers
-vim.api.nvim_create_autocmd('TermOpen', {
-  pattern = '*',
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.signcolumn = 'no'
-  end,
-})
-
+-- -- Turn off line numbers and relative numbers for terminal buffers
+-- vim.api.nvim_create_autocmd('TermOpen', {
+--   pattern = '*',
+--   callback = function()
+--     vim.opt_local.number = false
+--     vim.opt_local.relativenumber = false
+--     vim.opt_local.signcolumn = 'no'
+--   end,
+-- })
+--
 -- Prevent automatically commenting lines after starting a new line in insert mode
 vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
@@ -33,20 +33,20 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Folding setup for lua files
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'lua',
-  callback = function()
-    -- My config files are nested tables so fold based on indent works fine
-    vim.opt_local.foldmethod = 'indent'
-    vim.opt_local.foldlevelstart = 99
-    vim.opt.foldcolumn = '0'
-    vim.opt.foldtext = ''
-    -- Remap zM to fold all levels but then do zr once to get a nice overview of the file
-    vim.api.nvim_buf_set_keymap(0, 'n', 'zM', 'zMzr', { noremap = true, silent = true })
-  end,
-})
-
+-- -- Folding setup for lua files
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'lua',
+--   callback = function()
+--     -- My config files are nested tables so fold based on indent works fine
+--     vim.opt_local.foldmethod = 'indent'
+--     vim.opt_local.foldlevelstart = 99
+--     vim.opt.foldcolumn = '0'
+--     vim.opt.foldtext = ''
+--     -- Remap zM to fold all levels but then do zr once to get a nice overview of the file
+--     vim.api.nvim_buf_set_keymap(0, 'n', 'zM', 'zMzr', { noremap = true, silent = true })
+--   end,
+-- })
+--
 -- Dump the output of a command at the cursor position (e.g. :Dump messages or :Dump !ls)
 -- (Isnt this the same as :r! ?)
 vim.api.nvim_create_user_command('Dump', function(x)

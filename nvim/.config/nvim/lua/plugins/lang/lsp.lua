@@ -155,11 +155,11 @@ return {
           filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
           -- Optional: Add any specific clangd settings here
           capabilities = { offsetEncoding = { 'utf-16' } },
-          -- init_options = {
-          --   usePlaceholders = true,
-          --   completeUnimported = true,
-          --   clangdFileStatus = true,
-          -- },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+          },
         },
 
         -- gopls = {},
