@@ -35,13 +35,13 @@ git config --global diff.colorMoved zebra
 git config --global core.excludesfile ~/.config/git/.gitignore_global
 
 # Use stow to symlink dotfiles
-stow -v -t ~ fish
-stow -v -t ~ git
-stow -v -t ~ wezterm
-stow -v -t ~ tmux
-stow -v -t ~ bat
-stow -v -t ~ nvim
-stow -v -t ~ zsh
+# stow -v -t ~ fish
+# stow -v -t ~ git
+# stow -v -t ~ wezterm
+# stow -v -t ~ tmux
+# stow -v -t ~ bat
+# stow -v -t ~ nvim
+# stow -v -t ~ zsh
 
 
 # Manually install the following tools
