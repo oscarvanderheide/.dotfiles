@@ -5,12 +5,13 @@ echo "Setting up your Mac..."
 # Check for Homebrew and install if we don't have it
 if test ! $(which brew); then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # Add to path
+  echo >> /Users/$USER/.zprofile
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USER/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Add to path
-echo >> /Users/$USER/.zprofile
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USER/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
+
 
 # Update Homebrew recipes
 brew update
