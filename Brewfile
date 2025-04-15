@@ -1,37 +1,39 @@
 # Taps
-tap 'homebrew/bundle'
 
 # Binaries
-brew 'bash' # Latest Bash version
+
+## Update preinstalled stuff
+brew 'grep' 
+brew 'git' 
+
+## New tools
 brew 'bat' # Better cat
 brew 'coreutils' # Those that come with macOS are outdated
-brew 'git' 
-brew 'grep' 
 brew 'mas' # Mac App Store manager
 brew 'zsh' # 
 brew 'zoxide' # Better cd
 brew 'fzf' # Fuzzy search
 brew 'eza' # Better ls
 brew 'stow' # Symlink farm manager
-brew 'forgot' # fzf based git ui
-brew 'zsh-autosuggestions'
-brew 'zsh-autocomplete'
-brew 'zsh-syntax-highlighting'
-brew 'lf' # Terminal file manager
+brew 'forgit' # fzf based git ui
+brew 'juliaup' # manage julia installations
+
 brew 'tealdeer' # tldr in rust (easier man pages)
 brew 'ripgrep' # Better grep
 brew 'cheat' # Cheatsheets for terminal utilities
-brew 'yazi' 
+brew 'yazi' # terminal file manager
 brew 'ffmpegthumbnailer' 
-brew 'sevenzip' 
-brew 'jq' 
-brew 'poppler' 
-brew 'fd' 
-brew 'font-symbols-only-nerd-font'
-brew 'luarocks'
+brew 'sevenzip' # archiver
+brew 'jq' # deal with json files
+brew 'poppler' # pdf 
+brew 'fd' # better find
+brew 'starship' # custom prompts
+brew 'vivid' # something for colorschemes
 
-# Not sure I need this: don't install for now
-# brew 'mackup' # mac backup thing
+## zsh plugins
+brew 'zsh-autosuggestions'
+brew 'zsh-autocomplete'
+brew 'zsh-syntax-highlighting'
 
 # Apps
 cask 'alfred'
@@ -40,7 +42,7 @@ cask 'discord'
 cask 'dropbox'
 cask 'flux'
 cask 'google-chrome'
-cask 'juliaup'
+cask 'firefox'
 cask 'spotify'
 cask 'the-unarchiver'
 cask 'transmission'
@@ -51,6 +53,7 @@ cask 'wezterm'
 # Fonts
 cask 'font-lato'
 # Not sure which other fonts I actually use or need for powerlevel10k
+cask 'font-symbols-only-nerd-font'
 cask 'font-open-sans'
 cask 'font-roboto'
 cask 'font-roboto-condensed'
