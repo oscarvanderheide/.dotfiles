@@ -240,7 +240,7 @@ return {
       local utils = require 'notebook-navigator.utils'
 
       nn.setup {
-        activate_hydra_keys = '<leader>n',
+        -- activate_hydra_keys = '<leader>n',
         cell_markers = {
           julia = '##', -- Set the code cell marker for Julia
           python = '# %%', -- Set the code cell markers for Python
