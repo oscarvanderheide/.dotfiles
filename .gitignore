@@ -1,3 +1,4 @@
 # Ignore Zsh dump files
 .zcompdump
 .zcompcache
+.DS_Store

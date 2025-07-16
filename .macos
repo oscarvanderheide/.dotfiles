@@ -63,8 +63,8 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0.02
-defaults write NSGlobalDomain InitialKeyRepeat -int 12
+defaults write NSGlobalDomain KeyRepeat -int 6
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 ##########
 # SCREEN #
@@ -189,8 +189,7 @@ defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 
-# Remove the auto-hiding Dock delay
-defaults write com.apple.dock autohide-delay -float 0
+
 
 # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-time-modifier -float 0.5; killall Dock
@@ -201,11 +200,108 @@ defaults write com.apple.dock autohide -bool true
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
 
+
+
+#####################
+# TRACKPAD SETTINGS #
+#####################
+
+# Swipe between pages with three fingers
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 1
+
+# Swipe between full-screen applications with four fingers
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+
+# Enable Notification Centre gesture (two fingers from right edge)
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3
+
+# Disable Mission Control gesture
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 0
+
+# Disable App Exposé gesture
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
+
+# Disable Launchpad pinch gesture
+defaults write com.apple.dock showLaunchpadGestureEnabled -bool false
+
+# Disable Show Desktop spread gesture
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFiveFingerPinchGesture -int 1
+
+# Apply changes
+killall Dock
+killall SystemUIServer
+
+
+
+
+
+#################
+# DOCK SETTINGS #
+#################
+
 # Don’t show recent applications in Dock
-defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock "show-recents" -bool "false"
+
+# Autohide dock
+defaults write com.apple.dock "autohide" -bool "true"
 
 # Move dock to the right
-defaults write com.apple.dock orientation right
+defaults write com.apple.dock "orientation" -string "right"
 
 # Reduce size of icons
-defaults write com.apple.dock tilesize -int 16
+defaults write com.apple.dock "tilesize" -int "16"
+
+# Only show active apps 
+defaults write com.apple.dock "static-only" -bool "true"
+
+# Remove the auto-hiding Dock delay
+defaults write com.apple.dock "autohide-delay" -float "0"
+
+#######################
+# SCREENSHOT SETTINGS #
+#######################
+
+# Disable shadows
+defaults write com.apple.screencapture "disable-shadow" -bool "false"
+
+###################
+# FINDER SETTINGS #
+###################
+
+# Show extensions
+defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true"
+
+# Default to list view
+defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv"
+
+# Keep folders on top
+defaults write com.apple.finder "_FXSortFoldersFirst" -bool "true"
+
+# Search in current folder instead of entire mac
+defaults write com.apple.finder "FXDefaultSearchScope" -string "SCcf"
+
+# Don't use iCloud as default directory when saving files
+defaults write NSGlobalDomain "NSDocumentSaveNewDocumentsToCloud"
+
+###################
+# DESKTOP SETTING #
+###################
+
+# Hide all icons
+defaults write com.apple.finder "CreateDesktop" -bool "false"
+
+# Hide hard disks
+defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool "false"
+
+# Hide external disks
+defaults write com.apple.finder "ShowExternalHardDrivesOnDesktop" -bool "false"
+
+#####################
+# TEXTEDIT SETTINGS #
+#####################
+
+# Plain text mode in TextEdit
+defaults write com.apple.TextEdit "RichText" -bool "false"
+
+# Disable smart quotes
+defaults write com.apple.TextEdit "SmartQuotes" -bool "false" 
