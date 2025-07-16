@@ -1,0 +1,14 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "b886025"
+hash = "a9d553bd19a3cd7f4eab3abaac5d67ff"
+
+[[flavor.deps]]
+use = "marcosvnmelo/kanagawa-dragon"
+rev = "4905527"
+hash = "5fd7aa0bf4e7d9753ad8a4660a6eb94f"
+
+[[flavor.deps]]
+use = "gosxrgxx/flexoki-light"
+rev = "45eb0a0"
+hash = "1ee212b0799497b54c7e60bac8931e4e"
