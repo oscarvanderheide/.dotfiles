@@ -16,10 +16,13 @@ brew 'fzf' # Fuzzy search
 brew 'eza' # Better ls
 brew 'stow' # Symlink farm manager
 brew 'forgit' # fzf based git ui
+brew 'git-absorb' # automatically do fixups 
 brew 'juliaup' # manage julia installations
-
+brew 'perl'
+brew 'sqlite' # Needed by telescope smart open (nvim)
 brew 'tealdeer' # tldr in rust (easier man pages)
 brew 'ripgrep' # Better grep
+brew 'ncdu'
 brew 'cheat' # Cheatsheets for terminal utilities
 brew 'yazi' # terminal file manager
 brew 'ffmpegthumbnailer' 
@@ -29,6 +32,7 @@ brew 'poppler' # pdf
 brew 'fd' # better find
 brew 'starship' # custom prompts
 brew 'vivid' # something for colorschemes
+brew 'node' # mason needs node to install pyright
 
 ## zsh plugins
 brew 'zsh-autosuggestions'

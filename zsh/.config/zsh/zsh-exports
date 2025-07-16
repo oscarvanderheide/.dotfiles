@@ -16,6 +16,9 @@ export GIT_CONFIG=$HOME/.config/git/.gitconfig
 # Add location with custom scripts to path
 export PATH="$HOME/.local/bin::$PATH"
 
+# Add location with docker CLI to path
+export PATH="$HOME/.docker/bin::$PATH"
+
 # Customize fzf
 export FZF_DEFAULT_OPTS='--layout=reverse --border'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

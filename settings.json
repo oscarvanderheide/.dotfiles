@@ -1,0 +1,71 @@
+{
+    // Editor appearance
+    "editor.fontFamily": "'JetBrains Mono','SF Mono', 'Courier New', Consolas, monospace",
+    "editor.minimap.enabled": false,
+    "editor.glyphMargin": false,
+    "editor.lineNumbers": "on",
+    "editor.showFoldingControls": "never",
+    "editor.scrollbar.verticalScrollbarSize": 10,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.fontLigatures": true,
+    // Editor behavior
+    // "editor.formatOnSave": true,
+    // Workbench settings
+    "workbench.colorTheme": "Nord Deep",
+    "workbench.activityBar.location": "top",
+    "workbench.sideBar.location": "right",
+    "workbench.iconTheme": "catppuccin-macchiato",
+    "workbench.editor.highlightModifiedTabs": true,
+    "window.menuBarVisibility": "toggle",
+    // Terminal settings
+    "terminal.integrated.fontFamily": "'FiraCode Nerd Font', monospace",
+    "terminal.integrated.commandsToSkipShell": [
+      "language-julia.interrupt",
+      "matlab.interrupt"
+    ],
+    // Julia settings
+    "julia.symbolCacheDownload": true,
+    "julia.enableTelemetry": false,
+    "julia.execution.codeInREPL": true,
+    "julia.workspace.showModules": false,
+    "julia.execution.inlineResultsForCellEvaluation": true,
+    "[julia]": {
+      "editor.defaultFormatter": "julialang.language-julia"
+    },
+    "julia-format.flag": "style=DefaultStyle(), indent=4, margin=256, format_docstrings=true, always_for_in=true, for_in_replacement=\"∈\", whitespace_typedefs=true, import_to_using=true, whitespace_in_kwargs=true, align_struct_field=true, align_assignment=true, align_conditional=true, align_pair_arrow=true, normalize_line_endings=\"unix\", align_matrix=true, join_lines_based_on_source=true, indent_submodule=true, surround_whereop_typeparameters=false, yas_style_nesting=true",
+    // Python settings
+    "[python]": {
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+      },
+      "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    // GitHub Copilot
+    "github.copilot.nextEditSuggestions.enabled": true,
+    // Security
+    "security.workspace.trust.untrustedFiles": "open",
+    // Zen mode
+    "zenMode.fullScreen": false,
+    // Macros
+    "macros": {
+      "runInTerminalAndMoveDown": [
+        {
+          "command": "workbench.action.terminal.runSelectedText"
+        }
+      ]
+    },
+    // Roo 
+    "roo-cline.allowedCommands": [
+      "npm test",
+      "npm install",
+      "tsc",
+      "git log",
+      "git diff",
+      "git show"
+    ],
+    "chat.agent.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+  }

@@ -1,5 +1,10 @@
 return {
-
+  {
+    'nvzone/floaterm',
+    dependencies = 'nvzone/volt',
+    opts = {},
+    cmd = 'FloatermToggle',
+  },
   -- {
   --   -- Toggleterm: Quickly open and manage terminals
   --   'akinsho/toggleterm.nvim',

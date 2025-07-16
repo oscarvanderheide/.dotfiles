@@ -55,15 +55,15 @@ return {
   --   end,
   -- },
   --
-  -- {
-  --   -- Auto-session: Remember the state of your neovim session
-  --   'rmagatti/auto-session',
-  --   lazy = false,
-  --   opts = {
-  --     suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-  --     -- log_level = 'debug',
-  --   },
-  -- },
+  {
+    -- Auto-session: Remember the state of your neovim session
+    'rmagatti/auto-session',
+    lazy = false,
+    opts = {
+      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      -- log_level = 'debug',
+    },
+  },
   --
   -- {
   --   -- Lastplace: Jump to where you left off when opening a file

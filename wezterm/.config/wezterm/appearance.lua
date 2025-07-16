@@ -17,7 +17,7 @@ return function(config)
 	config.font_size = 12
 
 	-- Set opacity and background blur
-	-- config.window_background_opacity = 0.999
+	-- config.window_background_opacity = 0.9
 	-- config.macos_window_background_blur = 25
 
 	-- Alternative: give wezterm itself a background image
@@ -46,8 +46,8 @@ return function(config)
 	config.window_padding = {
 		left = 2,
 		right = 2,
-		top = 0,
-		bottom = 10,
+		top = 10,
+		bottom = 0,
 	}
 
 	-- Increase fps

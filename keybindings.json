@@ -1,0 +1,153 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Julia keybindings to run commands in integrated REPL
+    {
+        "key": "alt+cmd+enter",
+        "command": "language-julia.executeCodeBlockOrSelection",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-language-julia.executeCodeBlockOrSelection",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    {
+        "key": "shift+enter",
+        "command": "language-julia.executeCellAndMove",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    {
+        "key": "shift+alt+enter",
+        "command": "-language-julia.executeCellAndMove",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    {
+        "key": "cmd+enter",
+        "command": "language-julia.executeCodeBlockOrSelectionAndMove",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    {
+        "key": "shift+enter",
+        "command": "-language-julia.executeCodeBlockOrSelectionAndMove",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    {
+        "key": "shift+alt+enter",
+        "command": "language-julia.executeCell",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    {
+        "key": "alt+enter",
+        "command": "-language-julia.executeCell",
+        "when": "editorTextFocus && activeEditor != 'workbench.editor.notebook' && editorLangId in 'julia.supportedLanguageIds'"
+    },
+    // Set cmd + shift + a to run selection (or current line when nothing is selected) in terminal and move down
+    {
+        "key": "shift+cmd+a",
+        "command": "language-julia.executeJuliaCodeInREPL"
+    },
+    // Set cmd + shift + g to open/close source control view
+    {
+        "key": "shift+cmd+g",
+        "command": "-editor.action.previousMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "shift+cmd+g",
+        "command": "-workbench.action.terminal.findPrevious",
+        "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+    },
+    {
+        "key": "shift+cmd+g",
+        "command": "-workbench.action.terminal.openDetectedLink",
+        "when": "accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal'"
+    },
+    {
+        "key": "shift+cmd+g",
+        "command": "workbench.view.scm",
+        "when": "workbench.scm.active"
+    },
+    {
+        "key": "ctrl+shift+g",
+        "command": "-workbench.view.scm",
+        "when": "workbench.scm.active"
+    },
+    {
+        "key": "shift+cmd+g",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "scmRepositoryVisible:scm0 && workbench.scm.active"
+    },
+    // Set cmd + shift + c to open/close Github Copilot chat
+    {
+        "key": "shift+cmd+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+cmd+b",
+        "command": "-workbench.action.toggleAuxiliaryBar"
+    },
+    {
+        "key": "shift+cmd+c",
+        "command": "workbench.action.chat.openInSidebar"
+    },
+    // {
+    //     "key": "shift+cmd+c",
+    //     "command": "workbench.action.toggleSidebarVisibility",
+    //     "when": "workbench.panel.chat.active"
+    // },
+    // Set cmd + shift + e to toggle visibility of explorer view
+    {   
+        
+        "key": "shift+cmd+e",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "explorerViewletVisible && workbench.explorer.fileView.active"
+    },
+    // Set cmd + shift + f to toggle visibility of search view
+    {
+        "key": "shift+cmd+f",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "searchViewletFocus && workbench.view.search.active"
+    },
+    // // Open terminal in editor tab 
+    // // {
+    // //     "key": "ctrl+`",
+    // //     "command": "workbench.action.terminal.moveToEditor",
+    // //     "when": "terminalIsOpen && terminalFocus && !terminalEditorActive"
+    // // },
+    // // {
+    // //     "key": "ctrl+`",
+    // //     "command": "workbench.action.terminal.moveToTerminalPanel",
+    // //     "when": "terminalEditorActive && terminalFocus"
+    // // }
+    // {
+    //     "key": "shift+cmd+j",
+    //     "command": "workbench.action.splitEditorRight",
+    //     "when": "editorTextFocus && activeEditorGroupIndex == 1"
+    // },
+    // // {
+    // //     "key": "shift+cmd+j",
+    // //     "command": "workbench.action.moveEditorToFirstGroup",
+    // //     "when": "editorTextFocus && activeEditorGroupIndex == 1"
+    // // },
+    // {
+    //     "key": "shift+cmd+j",
+    //     "command": "workbench.action.terminal.moveToEditor",
+    //     "when": "terminalIsOpen && !terminalEditorActive"
+    // },
+    // // {
+    // //     "key": "shift+cmd+j",
+    // //     "command": "workbench.action.terminal.moveToTerminalPanel",
+    // //     "when": "terminalEditorActive && terminalFocus && editorGroupCount == 2"
+    // // },
+    // // {
+    // //     "key": "shift+cmd+j",
+    // //     "command": "workbench.action.closeEditorsInGroup",
+    // //     "when": "editorTextFocus && activeEditorGroupIndex == 1 && editorGroupCount == 2"
+    // // }
+    // {
+    //     "key": "shift+cmd+j",
+    //     "command": "workbench.action.terminal.moveToTerminalPanel",
+    //     "when": "terminalEditorActive"
+    // }
+]
