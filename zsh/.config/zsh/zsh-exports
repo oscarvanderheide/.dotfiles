@@ -46,22 +46,15 @@ case "$(uname -s)" in
     export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
   ;;
   Linux)
-    # alias ls='ls --color=auto'
     # Set cache directory for uv
     export UV_CACHE_DIR="$HOME/local_scratch/.cache/uv"
     # Change .julia folder location
     export JULIA_DEPOT_PATH="$HOME/local_scratch/.julia"
     export JULIAUP_DEPOT_PATH="$HOME/local_scratch/.julia"
-    # Change pixi cache dir
-    export PIXI_CACHE_DIR="$HOME/local_scratch/.cache/pixi/cache"
-
-    # >>> juliaup initialize >>>
-
-    # !! Contents within this block are managed by juliaup !!
-
     path=('$HOME/local_scratch/.juliaup/bin' $path)
     export PATH
-
+    # Change pixi cache dir
+    export PIXI_CACHE_DIR="$HOME/local_scratch/.cache/pixi/cache"
   ;;
 esac
 
