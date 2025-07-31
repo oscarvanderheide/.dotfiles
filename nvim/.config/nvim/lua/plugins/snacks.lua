@@ -61,7 +61,14 @@ return {
       -- Actual table with keymaps
 
       return {
-        picker_fn('<leader>e', 'explorer', 'Picker Explorer', { layout = { preset = 'vscode' } }),
+        picker_fn('<leader>e', 'explorer', 'Picker Explorer', {
+          layout = { preset = 'vscode' },
+          sources = {
+            explorer = {
+              auto_close = true,
+            },
+          },
+        }),
         snacks_fn('<leader>gg', 'lazygit', 'Lazygit'),
         picker_fn('<D-p>', 'smart', 'Smart Find Files', {
           multi = { 'files' },
