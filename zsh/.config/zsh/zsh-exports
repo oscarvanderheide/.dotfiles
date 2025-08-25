@@ -55,6 +55,10 @@ case "$(uname -s)" in
     export PATH
     # Change pixi cache dir
     export PIXI_CACHE_DIR="$HOME/local_scratch/.cache/pixi/cache"
+
+    # Add .local/lib to library path
+    export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$PIXI_CACHE_DIR/pkgs/pugixml-1.15-h3f63f65_0/lib:$LD_LIBRARY_PATH
   ;;
 esac
 
