@@ -49,6 +49,26 @@ function M.search_visual_selection()
   -- vim.api.nvim_win_set_cursor(0, { start_pos[2], start_pos[3] - 1 })
 end
 
+function M.cmd_d()
+  local mode = vim.fn.mode()
+  local search_pat = vim.fn.getreg '/'
+
+  if search_pat == '' then
+    -- no active search
+    if mode:match '[vV]' then
+      M.search_visual_selection()
+    else
+      M.search_word_under_cursor()
+    end
+    -- visually select the match
+    vim.cmd 'normal! vgn'
+  else
+    -- search already active → jump to next match
+    vim.cmd 'normal! n'
+    -- reselect it
+    vim.cmd 'normal! vgn'
+  end
+end
 -- Change the word under cursor and make it 'n.'-repeatable
 function M.change_word_under_cursor()
   local word = vim.fn.expand '<cword>'
