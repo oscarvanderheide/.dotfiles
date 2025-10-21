@@ -10,6 +10,7 @@ require("technical")(config)
 require("keymaps")(config)
 require("tabline")(config)
 require("misc")(config)
+require("ssh")(config)
 
 -- config.status_update_interval = 100
 -- Update the workspace name based on the current directory
