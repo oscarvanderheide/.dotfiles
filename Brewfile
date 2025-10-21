@@ -53,6 +53,7 @@ cask 'transmission'
 cask 'vlc'
 cask 'visual-studio-code'
 cask 'wezterm'
+cask 'alt-tab'
 
 # Fonts
 cask 'font-lato'
