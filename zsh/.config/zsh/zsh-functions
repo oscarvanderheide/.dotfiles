@@ -1,14 +1,17 @@
+# Function: path
 # Print path with new line after each entry
 path() {
     echo $PATH | tr : '\n'
 }
 
-# Function to source files if they exist
+# Function: zsh_add_file
+# Source files if they exist
 function zsh_add_file() {
     [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
 }
 
-# Function to enable a plugin or download it if it doesn't exist
+# Function: zsh_add_plugin
+# To enable a plugin or download it if it doesn't exist
 function zsh_add_plugin() {
     PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
     if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then
@@ -24,6 +27,7 @@ function zsh_add_plugin() {
     fi
 }
 
+# Function: yazi_cd
 # Use yazi to switch directories
 function yazi_cd() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
