@@ -9,7 +9,19 @@ bindkey '^[[1;5D' backward-word
 bindkey '^[[3~' delete-char
 
 # Quick jump to most used directories (using zi)
-bindkey -s 'jj' 'zi\n' # Jump to most used directories
+# bindkey -s 'jj' 'zi\n ' # Jump to most used directories
+jj-widget() {
+  if [[ $LBUFFER == '' ]]; then
+    local dir
+    dir=$(zoxide query -i) || return
+    yazi_cd "$dir"
+    zle reset-prompt
+  else
+    LBUFFER+="jj"
+  fi
+}
+zle -N jj-widget
+bindkey -M emacs 'jj' jj-widget
 
 # Open yazi and change dir upon exit
 bindkey -s 'yy' 'yazi_cd\n' 
