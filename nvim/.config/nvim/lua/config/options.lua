@@ -32,6 +32,14 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
 -- vim.opt.colorcolumn = '80,120'
-
+vim.opt.textwidth = 80
+vim.opt.wrapmargin = 0
+vim.opt.linebreak = true
 -- Disable gutter for now
 vim.opt.signcolumn = 'no'
+vim.opt.number = true
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 0
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.columns = 80
