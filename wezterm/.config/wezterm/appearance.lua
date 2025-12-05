@@ -7,14 +7,14 @@ return function(config)
 	config.color_scheme = scheme
 
 	-- Disable the macOS traffic light but keep resizable border
-	config.window_decorations = "RESIZE"
-
+	config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+	-- config.window_decorations = "RESIZE"
 	-- Change default font
 	config.font = wezterm.font({
 		family = "JetBrains Mono",
 		weight = "DemiBold",
 	})
-	config.font_size = 12
+	config.font_size = 14
 
 	-- Set opacity and background blur
 	-- config.window_background_opacity = 0.9
@@ -28,12 +28,17 @@ return function(config)
 		-- 	width = "100%",
 		-- 	height = "100%",
 		-- },
-		{ source = { Color = "#1e2128" }, width = "100%", height = "100%" }, -- opacity = 0.93
+		{
+			source = { Color = "#1e2128" },
+			width = "100%",
+			height = "100%",
+			opacity = 0.9,
+		},
 	}
 	-- Monospace tab bar font
 	config.use_fancy_tab_bar = false
 	config.hide_tab_bar_if_only_one_tab = false
-
+	config.show_new_tab_button_in_tab_bar = false
 	-- Set initial columns and rows to large values
 	config.initial_cols = 128
 	config.initial_rows = 38
@@ -46,7 +51,7 @@ return function(config)
 	config.window_padding = {
 		left = 2,
 		right = 2,
-		top = 10,
+		top = 20,
 		bottom = 0,
 	}
 
