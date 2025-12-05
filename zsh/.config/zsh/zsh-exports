@@ -37,6 +37,9 @@ export FZF_CTRL_R_OPTS="
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'"
 
+# Customize zoxide
+export _ZO_FZF_OPTS="--no-wrap --keep-right" # abbreviate long paths 
+
 # Platform specific options:
 case "$(uname -s)" in
   Darwin) # == macOS
@@ -47,14 +50,14 @@ case "$(uname -s)" in
   ;;
   Linux)
     # Set cache directory for uv
-    export UV_CACHE_DIR="$HOME/local_scratch/.cache/uv"
+    export UV_CACHE_DIR="$HOME/localscratch/.cache/uv"
     # Change .julia folder location
-    export JULIA_DEPOT_PATH="$HOME/local_scratch/.julia"
-    export JULIAUP_DEPOT_PATH="$HOME/local_scratch/.julia"
-    path=('$HOME/local_scratch/.juliaup/bin' $path)
+    export JULIA_DEPOT_PATH="$HOME/localscratch/.julia"
+    export JULIAUP_DEPOT_PATH="$HOME/localscratch/.julia"
+    path=('$HOME/localscratch/.juliaup/bin' $path)
     export PATH
     # Change pixi cache dir
-    export PIXI_CACHE_DIR="$HOME/local_scratch/.cache/pixi/cache"
+    export PIXI_CACHE_DIR="$HOME/localscratch/.cache/pixi/cache"
 
     # Add .local/lib to library path
     export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
