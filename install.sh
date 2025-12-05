@@ -71,3 +71,13 @@ else
 fi
 # Manually install the following tools
 # Dropover
+
+# Add yazi plugins
+ya pkg add yazi-rs/plugins:git
+ya pkg add yazi-rs/plugins:full-border
+ya pkg add yazi-rs/plugins:smart-paste
+ya pkg add yazi-rs/plugins:jump-to-char
+ya pkg add yazi-rs/plugins:toggle-pane
+ya pkg add yazi-rs/plugins:no-status
+ya pkg add AnirudhG07/custom-shell
+ya pkg add yazi-rs/plugins:smart-enter
