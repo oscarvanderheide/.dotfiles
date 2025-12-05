@@ -33,3 +33,6 @@ alias cat='bat  --pager=never'
 # Replace grep with rg 
 alias grep='rg'
 alias rg='rg --hidden --smart-case'
+
+# Easy access to latest version of ArrayView
+alias av='uvx --from git+https://github.com/oscarvanderheide/arrayview arrayview'
