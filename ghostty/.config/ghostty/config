@@ -1,6 +1,6 @@
 window-padding-color = extend
-background-opacity = 
-background-blur-radius = 20
+background-opacity = 0.9
+background-blur-radius = 0
 adjust-underline-position = 8
 adjust-underline-thickness = 2
 auto-update-channel = tip
@@ -13,5 +13,10 @@ macos-option-as-alt = true
 mouse-hide-while-typing = true
 cursor-style = "bar"
 cursor-style-blink = false
-window-decoration = false 
-
+window-decoration = true 
+window-padding-balance = false
+macos-titlebar-style=transparent
+window-save-state = always
+macos-window-shadow = false
+macos-titlebar-style = tabs
+confirm-close-surface = false
