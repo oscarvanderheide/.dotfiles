@@ -12,7 +12,7 @@ return {
       dashboard = { enabled = false },
       debug = { enabled = false },
       dim = { enabled = false },
-      explorer = { enabled = true },
+      explorer = { enabled = false },
       git = { enabled = false },
       gitbrowse = { enabled = false },
       indent = { enabled = true, chunk = { enabled = true }, animate = { enabled = false } },
@@ -61,20 +61,25 @@ return {
       -- Actual table with keymaps
 
       return {
-        picker_fn('<leader>e', 'explorer', 'Picker Explorer', {
-          layout = { preset = 'vscode' },
-          sources = {
-            explorer = {
-              auto_close = true,
-            },
-          },
-        }),
+        -- picker_fn('<leader>e', 'explorer', 'Picker Explorer', {
+        --   layout = { preset = 'vscode' },
+        --   sources = {
+        --     explorer = {
+        --       auto_close = true,
+        --     },
+        --   },
+        -- }),
         snacks_fn('<leader>gg', 'lazygit', 'Lazygit'),
-        picker_fn('<D-p>', 'smart', 'Smart Find Files', {
-          multi = { 'files' },
-          layout = { preset = 'vscode' },
-          formatters = { file = { filename_first = true } },
-        }),
+        -- picker_fn('<M-p>', 'smart', 'Smart Find Files', {
+        --   multi = { 'files' },
+        --   layout = { preset = 'vscode' },
+        --   formatters = { file = { filename_first = true } },
+        -- }),
+        -- picker_fn('<D-p>', 'smart', 'Smart Find Files', {
+        --   multi = { 'files' },
+        --   layout = { preset = 'vscode' },
+        --   formatters = { file = { filename_first = true } },
+        -- }),
         picker_fn('<leader>fg', 'git_files', 'Find Git Files'),
         picker_fn('<leader>gb', 'git_branches', 'Git Branches'),
         picker_fn('<leader>gl', 'git_log', 'Git Log'),

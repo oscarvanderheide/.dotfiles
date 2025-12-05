@@ -69,6 +69,7 @@ function M.cmd_d()
     vim.cmd 'normal! vgn'
   end
 end
+
 -- Change the word under cursor and make it 'n.'-repeatable
 function M.change_word_under_cursor()
   local word = vim.fn.expand '<cword>'

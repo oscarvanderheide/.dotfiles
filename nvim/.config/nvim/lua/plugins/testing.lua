@@ -52,68 +52,69 @@ return {
   -- --   end,
   -- -- },
   -- -- {
-  -- --   -- Tiny-glimmer: fading highlights for yank/undo/redo - BUT CANT GET IT TO WORK FOR THE LIFE OF M
-  -- --   'rachartier/tiny-glimmer.nvim',
-  -- --   event = 'VeryLazy',
-  -- --   keys = {
-  -- --     {
-  -- --       'u',
-  -- --       function()
-  -- --         require('tiny-glimmer').undo()
-  -- --       end,
-  -- --       { noremap = true, silent = true },
-  -- --     },
-  -- --   },
-  -- --   opts = {},
-  -- --
-  -- --   config = function()
-  -- --     require('tiny-glimmer').setup {
-  -- --       enabled = true,
-  -- --
-  -- --       -- Disable this if you wants to debug highlighting issues
-  -- --       disable_warnings = false,
-  -- --       overwrite = {
-  -- --         auto_map = false,
-  -- --         search = {
-  -- --           enabled = true,
-  -- --           -- default_animation = 'pulse',
-  -- --           -- Keys to navigate to the next match
-  -- --           -- next_mapping = 'nzzzv',
-  -- --           -- Keys to navigate to the previous match
-  -- --           -- prev_mapping = 'Nzzzv',
-  -- --         },
-  -- --         undo = {
-  -- --           enabled = true,
-  -- --           undo_mapping = 'u',
-  -- --           -- default_animation = 'pulse',
-  -- --           -- Keys to navigate to the next match
-  -- --           -- next_mapping = 'nzzzv',
-  -- --           -- Keys to navigate to the previous match
-  -- --           -- prev_mapping = 'Nzzzv',
-  -- --         },
-  -- --       },
-  -- --     }
-  -- --   end,
-  -- --   -- config = function()
-  -- --   --   require('tiny-glimmer').setup {
-  -- --   --   -- your configuration
-  -- --   --   overwrite = {
-  -- --   --     auto_map = false,
-  -- --   --     undo = {
-  -- --   --       enabled = true,
-  -- --   --       -- default_animation = 'pulse',
-  -- --   --
-  -- --   --       -- Keys to navigate to the next match
-  -- --   --       -- next_mapping = 'nzzzv',
-  -- --   --
-  -- --   --       -- Keys to navigate to the previous match
-  -- --   --       -- prev_mapping = 'Nzzzv',
-  -- --   --     },
-  -- --   --   },
-  -- --   --   }
-  -- --   --   end
-  -- --   -- },
-  -- -- },
+
+  --   -- Tiny-glimmer: fading highlights for yank/undo/redo - BUT CANT GET IT TO WORK FOR THE LIFE OF M
+  --   'rachartier/tiny-glimmer.nvim',
+  --   event = 'VeryLazy',
+  --   keys = {
+  --     {
+  --       'u',
+  --       function()
+  --         require('tiny-glimmer').undo()
+  --       end,
+  --       { noremap = true, silent = true },
+  --     },
+  --   },
+  --   opts = {},
+  --
+  --   config = function()
+  --     require('tiny-glimmer').setup {
+  --       enabled = true,
+  --
+  --       -- Disable this if you wants to debug highlighting issues
+  --       disable_warnings = false,
+  --       overwrite = {
+  --         auto_map = false,
+  --         search = {
+  --           enabled = true,
+  --           -- default_animation = 'pulse',
+  --           -- Keys to navigate to the next match
+  --           -- next_mapping = 'nzzzv',
+  --           -- Keys to navigate to the previous match
+  --           -- prev_mapping = 'Nzzzv',
+  --         },
+  --         undo = {
+  --           enabled = true,
+  --           undo_mapping = 'u',
+  --           -- default_animation = 'pulse',
+  --           -- Keys to navigate to the next match
+  --           -- next_mapping = 'nzzzv',
+  --           -- Keys to navigate to the previous match
+  --           -- prev_mapping = 'Nzzzv',
+  --         },
+  --       },
+  --     }
+  --   end,
+  --   -- config = function()
+  --   --   require('tiny-glimmer').setup {
+  --   --   -- your configuration
+  --   --   overwrite = {
+  --   --     auto_map = false,
+  --   --     undo = {
+  --   --       enabled = true,
+  --   --       -- default_animation = 'pulse',
+  --   --
+  --   --       -- Keys to navigate to the next match
+  --   --       -- next_mapping = 'nzzzv',
+  --   --
+  --   --       -- Keys to navigate to the previous match
+  --   --       -- prev_mapping = 'Nzzzv',
+  --   --     },
+  --   --   },
+  --   --   }
+  --   --   end
+  --   -- },
+  -- },
   -- -- {
   -- --   -- Namu: A symbol picker for LSP symbols
   -- --   'bassamsdata/namu.nvim',

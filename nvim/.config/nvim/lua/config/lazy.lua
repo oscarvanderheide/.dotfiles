@@ -15,7 +15,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup lazy.nvim
+-- Setup lazy.nvim: it automatically adds plugins defined in files with the lua/plugins folder
+-- and the lua/plugins/lang folder. Each file must return a table.
 require('lazy').setup {
   { import = 'plugins.lang' },
   { import = 'plugins' },

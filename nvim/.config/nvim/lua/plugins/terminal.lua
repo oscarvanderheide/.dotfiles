@@ -8,6 +8,7 @@ return {
   -- {
   --   -- Toggleterm: Quickly open and manage terminals
   --   'akinsho/toggleterm.nvim',
+
   --   version = '*',
   --   config = function()
   --     -- A lot of stuff to get a floating terminal that can be toggled with <C-\>

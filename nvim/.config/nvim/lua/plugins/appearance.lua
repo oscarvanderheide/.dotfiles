@@ -8,6 +8,29 @@ return {
 
       -- Change background color to something darker, same as wezterm background
       vim.cmd 'highlight Normal guibg=#1e2128'
+
+      -- emulate "transparent = true"
+      local transparent = true
+      if transparent then
+        local groups = {
+          'Normal',
+          'NormalNC',
+          'NormalFloat',
+          'SignColumn',
+          'MsgArea',
+          'TelescopeNormal',
+          'TelescopeBorder',
+          'FloatBorder',
+          'Pmenu',
+          'WinSeparator',
+          'StatusLine',
+          'StatusLineNC',
+        }
+        for _, group in ipairs(groups) do
+          vim.api.nvim_set_hl(0, group, { bg = 'none' })
+        end
+      end
+
       -- Set custom colors for search and incsearch
       -- The default nord ones are too bright for my taste
       vim.api.nvim_set_hl(0, 'Search', { bg = '#555500', fg = 'white' })
@@ -56,152 +79,158 @@ return {
           inc_rename = false, -- enables an input dialog for inc-rename.nvim
           lsp_doc_border = false, -- add a border to hover docs and signature help
         },
-      }
-    end,
-  },
-
-  {
-    -- Lualine: Customize statusline
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      -- I like nord
-      local nord = {
-        --16 colors
-        black = '#2E3440', -- nord0 in palette
-        dark_gray = '#3B4252', -- nord1 in palette
-        gray = '#434C5E', -- nord2 in palette
-        light_gray = '#4C566A', -- nord3 in palette
-        light_gray_bright = '#616E88', -- out of palette
-        darkest_white = '#D8DEE9', -- nord4 in palette
-        darker_white = '#E5E9F0', -- nord5 in palette
-        white = '#ECEFF4', -- nord6 in palette
-        teal = '#8FBCBB', -- nord7 in palette
-        off_blue = '#88C0D0', -- nord8 in palette
-        glacier = '#81A1C1', -- nord9 in palette
-        blue = '#5E81AC', -- nord10 in palette
-        red = '#BF616A', -- nord11 in palette
-        orange = '#D08770', -- nord12 in palette
-        yellow = '#EBCB8B', -- nord13 in palette
-        green = '#A3BE8C', -- nord14 in palette
-        purple = '#B48EAD', -- nord15 in palette
-        none = 'NONE',
-        -- my own additions
-        pink = '#b48da7', -- my own	addition
-        bg = '#2E3440', -- A bit darker than nord's default background
-      }
-
-      -- Set colors for different vim modes
-      local modecolor = {
-        n = nord.glacier,
-        i = nord.yellow,
-        v = nord.purple,
-        [''] = nord.purple,
-        V = nord.red,
-        c = nord.yellow,
-        no = nord.red,
-        s = nord.yellow,
-        S = nord.yellow,
-        [''] = nord.yellow,
-        ic = nord.yellow,
-        R = nord.green,
-        Rv = nord.purple,
-        cv = nord.red,
-        ce = nord.red,
-        r = nord.light_gray,
-        rm = nord.light_gray,
-        ['r?'] = nord.light_gray,
-        ['!'] = nord.red,
-        t = nord.yellow,
-      }
-
-      local theme = {
-        normal = {
-          a = { fg = nord.bg, bg = nord.blue },
-          b = { fg = nord.blue, bg = nord.white },
-          c = { fg = nord.white, bg = nord.bg },
-          z = { fg = nord.white, bg = nord.bg },
-        },
-        insert = { a = { fg = nord.bg, bg = nord.orange } },
-        visual = { a = { fg = nord.bg, bg = nord.green } },
-        replace = { a = { fg = nord.bg, bg = nord.green } },
-      }
-
-      local space = {
-        function()
-          return ' '
-        end,
-        color = { bg = nord.bg },
-      }
-
-      local filename = {
-        'filename',
-        color = { bg = nord.blue, fg = nord.bg },
-        separator = { left = '', right = '' },
-      }
-
-      local branch = {
-        'branch',
-        icon = '',
-        color = { bg = nord.green, fg = nord.bg },
-        separator = { left = '', right = '' },
-      }
-
-      local diff = {
-        'diff',
-        color = { bg = nord.bg, fg = nord.bg },
-        separator = { left = '', right = '' },
-        symbols = { added = ' ', modified = ' ', removed = ' ' },
-
-        diff_color = {
-          added = { fg = nord.green },
-          modified = { fg = nord.yellow },
-          removed = { fg = nord.pink },
-        },
-      }
-
-      local modes = {
-        'mode',
-        color = function()
-          local mode_color = modecolor
-          return { bg = mode_color[vim.fn.mode()], fg = nord.bg }
-        end,
-        separator = { left = '', right = '' },
-      }
-
-      require('lualine').setup {
-        options = {
-          --
-          --     -- globalstatus = vim.o.laststatus == 3,
-          disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'ministarter', 'snacks_dashboard' } },
-          icons_enabled = true,
-          theme = theme,
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
-          ignore_focus = {},
-          always_divide_middle = true,
-          globalstatus = true,
-        },
-
-        sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {},
-          lualine_x = { modes, space },
-          lualine_y = { filename },
-          lualine_z = { diff, space, branch },
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = { 'filename' },
-          lualine_x = { 'location' },
-          lualine_y = {},
-          lualine_z = {},
+        routes = {
+          {
+            filter = { event = 'msg_show', find = 'Activated virtual environment' },
+            opts = { skip = true },
+          },
         },
       }
     end,
   },
+
+  -- {
+  --   -- Lualine: Customize statusline
+  --   'nvim-lualine/lualine.nvim',
+  --   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  --   config = function()
+  --     -- I like nord
+  --     local nord = {
+  --       --16 colors
+  --       black = '#2E3440', -- nord0 in palette
+  --       dark_gray = '#3B4252', -- nord1 in palette
+  --       gray = '#434C5E', -- nord2 in palette
+  --       light_gray = '#4C566A', -- nord3 in palette
+  --       light_gray_bright = '#616E88', -- out of palette
+  --       darkest_white = '#D8DEE9', -- nord4 in palette
+  --       darker_white = '#E5E9F0', -- nord5 in palette
+  --       white = '#ECEFF4', -- nord6 in palette
+  --       teal = '#8FBCBB', -- nord7 in palette
+  --       off_blue = '#88C0D0', -- nord8 in palette
+  --       glacier = '#81A1C1', -- nord9 in palette
+  --       blue = '#5E81AC', -- nord10 in palette
+  --       red = '#BF616A', -- nord11 in palette
+  --       orange = '#D08770', -- nord12 in palette
+  --       yellow = '#EBCB8B', -- nord13 in palette
+  --       green = '#A3BE8C', -- nord14 in palette
+  --       purple = '#B48EAD', -- nord15 in palette
+  --       none = 'NONE',
+  --       -- my own additions
+  --       pink = '#b48da7', -- my own	addition
+  --       bg = '#2E3440', -- A bit darker than nord's default background
+  --     }
+
+  --     -- Set colors for different vim modes
+  --     local modecolor = {
+  --       n = nord.glacier,
+  --       i = nord.yellow,
+  --       v = nord.purple,
+  --       [''] = nord.purple,
+  --       V = nord.red,
+  --       c = nord.yellow,
+  --       no = nord.red,
+  --       s = nord.yellow,
+  --       S = nord.yellow,
+  --       [''] = nord.yellow,
+  --       ic = nord.yellow,
+  --       R = nord.green,
+  --       Rv = nord.purple,
+  --       cv = nord.red,
+  --       ce = nord.red,
+  --       r = nord.light_gray,
+  --       rm = nord.light_gray,
+  --       ['r?'] = nord.light_gray,
+  --       ['!'] = nord.red,
+  --       t = nord.yellow,
+  --     }
+
+  --     local theme = {
+  --       normal = {
+  --         a = { fg = nord.bg, bg = nord.blue },
+  --         b = { fg = nord.blue, bg = nord.white },
+  --         c = { fg = nord.white, bg = nord.bg },
+  --         z = { fg = nord.white, bg = nord.bg },
+  --       },
+  --       insert = { a = { fg = nord.bg, bg = nord.orange } },
+  --       visual = { a = { fg = nord.bg, bg = nord.green } },
+  --       replace = { a = { fg = nord.bg, bg = nord.green } },
+  --     }
+
+  --     local space = {
+  --       function()
+  --         return ' '
+  --       end,
+  --       color = { bg = nord.bg },
+  --     }
+
+  --     local filename = {
+  --       'filename',
+  --       color = { bg = nord.blue, fg = nord.bg },
+  --       separator = { left = '', right = '' },
+  --     }
+
+  --     local branch = {
+  --       'branch',
+  --       icon = '',
+  --       color = { bg = nord.green, fg = nord.bg },
+  --       separator = { left = '', right = '' },
+  --     }
+
+  --     local diff = {
+  --       'diff',
+  --       color = { bg = nord.bg, fg = nord.bg },
+  --       separator = { left = '', right = '' },
+  --       symbols = { added = ' ', modified = ' ', removed = ' ' },
+
+  --       diff_color = {
+  --         added = { fg = nord.green },
+  --         modified = { fg = nord.yellow },
+  --         removed = { fg = nord.pink },
+  --       },
+  --     }
+
+  --     local modes = {
+  --       'mode',
+  --       color = function()
+  --         local mode_color = modecolor
+  --         return { bg = mode_color[vim.fn.mode()], fg = nord.bg }
+  --       end,
+  --       separator = { left = '', right = '' },
+  --     }
+
+  --     require('lualine').setup {
+  --       options = {
+  --         --
+  --         --     -- globalstatus = vim.o.laststatus == 3,
+  --         disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'ministarter', 'snacks_dashboard' } },
+  --         icons_enabled = true,
+  --         theme = theme,
+  --         component_separators = { left = '', right = '' },
+  --         section_separators = { left = '', right = '' },
+  --         ignore_focus = {},
+  --         always_divide_middle = true,
+  --         globalstatus = true,
+  --       },
+
+  --       sections = {
+  --         lualine_a = {},
+  --         lualine_b = {},
+  --         lualine_c = {},
+  --         lualine_x = { modes, space },
+  --         lualine_y = { filename },
+  --         lualine_z = { diff, space, branch },
+  --       },
+  --       inactive_sections = {
+  --         lualine_a = {},
+  --         lualine_b = {},
+  --         lualine_c = { 'filename' },
+  --         lualine_x = { 'location' },
+  --         lualine_y = {},
+  --         lualine_z = {},
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- {
   --   -- Mini.HiPatterns: Add line to cells in notebooks
@@ -276,6 +305,15 @@ return {
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
     },
   },
-
+  {
+    -- Tiny-inline-diagnostic: Inline diagnostic messages
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'VeryLazy',
+    priority = 1000,
+    config = function()
+      require('tiny-inline-diagnostic').setup()
+      vim.diagnostic.config { virtual_text = false } -- Disable Neovim's default virtual text diagnostics
+    end,
+  },
   -- End of plugins
 }

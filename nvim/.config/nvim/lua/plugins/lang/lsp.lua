@@ -32,6 +32,33 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local lspconfig = require 'lspconfig'
 
+      -- -- Disable LSP hover floats globally (presentation mode)
+      -- -- This overrides the hover handler so `vim.lsp.buf.hover()` no-ops.
+      -- vim.lsp.handlers["textDocument/hover"] = function() end
+      -- -- Disable signature help (parameter hints) globally
+      -- vim.lsp.handlers["textDocument/signatureHelp"] = function() end
+
+      -- -- Ensure inlay hints are disabled when a client attaches (if supported)
+      -- vim.api.nvim_create_autocmd('LspAttach', {
+      --   group = vim.api.nvim_create_augroup('disable_lsp_hover_inlay', { clear = true }),
+      --   callback = function(event)
+      --     local client = vim.lsp.get_client_by_id(event.data.client_id)
+      --     if client then
+      --       -- Disable server-provided hover capability (best-effort)
+      --       client.server_capabilities.hoverProvider = false
+      --       -- Disable server-provided signature help (parameter hints)
+      --       client.server_capabilities.signatureHelpProvider = nil
+
+      --       -- Disable inlay hints for the buffer if the API is available
+      --       if vim.lsp.inlay_hint and vim.lsp.inlay_hint.disable then
+      --         pcall(function()
+      --           vim.lsp.inlay_hint.disable { bufnr = event.buf }
+      --         end)
+      --       end
+      --     end
+      --   end,
+      -- })
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -165,11 +192,11 @@ return {
         -- gopls = {},
         -- PYTHON STUFF
         -- pyright = {},
-        pyright = { settings = {
-          pyright = { disableOrganizeImports = true },
-          python = { analysis = { ignore = { '*' } } },
-        } },
-        ruff = {}, -- python linter
+        -- pyright = { settings = {
+        --   pyright = { disableOrganizeImports = true },
+        --   python = { analysis = { ignore = { '*' } } },
+        -- } },
+        -- ruff = {}, -- python linter
         -- mypy = {}, -- python type checker
         -- black = {}, -- python formatter
         -- isort = {}, -- python import organize

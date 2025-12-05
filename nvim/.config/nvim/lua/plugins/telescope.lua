@@ -96,6 +96,9 @@ return {
         require('telescope').extensions.smart_open.smart_open { cwd_only = true }
       end, { noremap = true, silent = true, desc = 'Smart Open' })
 
+      vim.keymap.set('n', '<M-p>', function()
+        require('telescope').extensions.smart_open.smart_open { cwd_only = true }
+      end, { noremap = true, silent = true, desc = 'Smart Open' })
       vim.keymap.set('n', '<D-p>', function()
         require('telescope').extensions.smart_open.smart_open { cwd_only = true }
       end, { noremap = true, silent = true, desc = 'Smart Open' })

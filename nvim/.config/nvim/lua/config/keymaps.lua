@@ -14,6 +14,7 @@ set('n', '<Esc>', '<cmd>noh<CR>', { noremap = true, silent = true, desc = 'Toggl
 
 -- Change word under cursor and highlight all matches (and use <C-.> to repeat on next match)
 -- set('n', '<C-f>', functions.search_word_under_cursor, { noremap = true, silent = true, desc = 'Change word under cursor' })
+-- set('n', '<D-f>', functions.search_word_under_cursor, { noremap = true, silent = true, desc = 'Change word under cursor' })
 -- set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change word under cursor' })
 
 -- Combine search and change actions
@@ -37,13 +38,17 @@ set('n', 'gs', [[:%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left><Space><Bs>]], { noremap
 set('x', 'gs', '"zy:%s/<C-r>z/<C-r>z/g<Left><Left><Space><BS>', { noremap = true, silent = false, desc = 'Replace selected text globally' })
 
 -- Save file like in VSCode
+set('i', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+set('n', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 set('i', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 set('n', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 
 -- Search with Cmd+f like in VSCode
 vim.keymap.set('n', '<D-f>', '/', { noremap = true, silent = false, desc = 'Search' })
+-- vim.keymap.set('n', '<M-f>', '/', { noremap = true, silent = false, desc = 'Search' })
 
 -- Select entire buffer like in VSCode
+set('n', '<C-a>', 'ggVG', { noremap = true, silent = true, desc = 'Select entire file' })
 set('n', '<D-a>', 'ggVG', { noremap = true, silent = true, desc = 'Select entire file' })
 
 -- Yank stuff around brackets (useful for lua tables)
@@ -95,7 +100,7 @@ set('n', '<C-u>', '<C-u>zz', { desc = 'Half page up and center' })
 set('n', 'n', 'nzzzv', { desc = 'Center after going to next search item' })
 set('n', 'N', 'Nzzzv', { desc = 'Center after going to previous search item' })
 
--- Move selected lines up or down like in VSCode
+-- Move selected lines up or down like in VSCode: using some plugin instead I think
 -- set('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selected lines down' })
 -- set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move current line up' })
 -- set('n', '<A-j>', "V:m '>+1<CR>gv=gv<Esc>", { desc = 'Select current line and move it down' })
@@ -108,7 +113,7 @@ set('n', ',', '<C-^>', { noremap = true, silent = true, desc = 'Alternate two bu
 -- set('v', '<', '<gv', { desc = 'Indent left' })
 -- set('v', '>', '>gv', { desc = 'Indent right' })
 
--- Incremental nename of current word
+-- Incremental rename of current word
 set('n', '<leader>rn', function()
   return ':IncRename ' .. vim.fn.expand '<cword>'
 end, { expr = true, desc = 'Re[N]ame Incremental' })
@@ -137,6 +142,7 @@ set('x', '`', '<Esc>`>a`<Esc>`<i`<Esc>', { silent = true })
 -- -- Search for word under cursor or visual selection without moving to next match like * does
 set('n', '<C-f>', functions.search_word_under_cursor, { silent = true })
 set('x', '<C-f>', functions.search_visual_selection, { silent = true })
+
 --
 -- -- Also enable <D-d> to search for word/selection (to be able to do cmd+d on mac like in VSCode)
 -- set('n', '<D-d>', functions.search_word_under_cursor, { noremap = true, silent = true, desc = 'Select word under cursor' })
