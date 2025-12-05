@@ -1,6 +1,11 @@
 # Set location of .zshrc (note that I create an alias in ~ to this file to make it easier to edit)
 export ZDOTDIR=$HOME/.config/zsh
 
+# Needed for new tmux tabs through cmd + t
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # Settings for command history
 HISTFILE=$HOME/.zsh_history
 SAVEHIST=10000
@@ -89,4 +94,5 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
 
