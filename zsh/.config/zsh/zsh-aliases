@@ -6,9 +6,10 @@ alias rm='rm -i'
 # Replace cd with z
 alias cd='z'
 
-# Replace vim with nvim
-alias vim='nvim'
-alias v='nvim'
+# Replace nvim and vim with uv run nvim
+alias nvim='uv run nvim'
+alias vim='uv run nvim'
+alias v='uv run nvim'
 
 # Quickly open nvim and zsh config files in nvim
 alias zz='nvim ~/.zshrc; exec zsh'
