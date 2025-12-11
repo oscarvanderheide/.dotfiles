@@ -1,11 +1,17 @@
 return {
 
-  {
-    'benomahony/uv.nvim',
-    config = function()
-      require('uv').setup()
-    end,
-  },
+  -- {
+  --   'benomahony/uv.nvim',
+  --   opts = {
+  --     picker_integration = true,
+  --   },
+  --   config = function()
+  --     require('uv').setup {
+  --       -- Disable annoying message at startup
+  --       notify_activate_venv = false,
+  --     }
+  --   end,
+  -- },
   -- -- Move selection/lines with Alt-j/k/h/l
   -- {
   --   'echasnovski/mini.move',
