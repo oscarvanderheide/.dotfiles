@@ -113,12 +113,12 @@ return {
       },
       -- Incrementally select the outer/inner nodes of a syntax tree
       incremental_selection = {
-        enable = false,
+        enable = true,
         keymaps = {
           init_selection = '<C-m>', -- set to `false` to disable one of the mappings
           node_incremental = '<C-m>',
           scope_incremental = 'grc',
-          node_decremental = '<BS>',
+          node_decremental = '<C-n>',
         },
       },
       -- Automatically at "end" statements for things like functions, loops, etc.
