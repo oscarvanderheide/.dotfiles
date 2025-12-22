@@ -10,9 +10,12 @@ return function(config)
 	config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 	-- config.window_decorations = "RESIZE"
 	-- Change default font
-	config.font = wezterm.font({
-		family = "JetBrains Mono",
-		weight = "DemiBold",
+	config.font = wezterm.font_with_fallback({
+		{
+			family = "JetBrains Mono",
+			weight = "DemiBold",
+		},
+		{ family = "Cambria Math", scale = 1.0 },
 	})
 	config.font_size = 14
 
