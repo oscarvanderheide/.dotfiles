@@ -49,21 +49,31 @@ case "$(uname -s)" in
     export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
   ;;
   Linux)
+    # Determine cache base directory based on hostname
+    HOSTNAME_SHORT=$(hostname -s)
+    case "$HOSTNAME_SHORT" in
+      RTRSPLA06|RTRSPLA02|RTRSPLE01)
+        # Use /local_scratch on cluster machines
+        CACHE_BASE="/local_scratch/oheide"
+        ;;
+      *)
+        # Use home directory on other machines (like roodnoot)
+        CACHE_BASE="$HOME/localscratch"
+        ;;
+    esac
+
     # Set cache directory for uv
-    export UV_CACHE_DIR="$HOME/localscratch/.cache/uv"
+    export UV_CACHE_DIR="$CACHE_BASE/.cache/uv"
     # Change .julia folder location
-    export JULIA_DEPOT_PATH="$HOME/localscratch/.julia"
-    export JULIAUP_DEPOT_PATH="$HOME/localscratch/.julia"
-    path=('$HOME/localscratch/.juliaup/bin' $path)
+    export JULIA_DEPOT_PATH="$CACHE_BASE/.julia"
+    export JULIAUP_DEPOT_PATH="$CACHE_BASE/.julia"
+    path=("$CACHE_BASE/.juliaup/bin" $path)
     export PATH
     # Change pixi cache dir
-    export PIXI_CACHE_DIR="$HOME/localscratch/.cache/pixi/cache"
+    export PIXI_CACHE_DIR="$CACHE_BASE/.cache/pixi/cache"
 
     # Add .local/lib to library path
     export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=$PIXI_CACHE_DIR/pkgs/pugixml-1.15-h3f63f65_0/lib:$LD_LIBRARY_PATH
   ;;
 esac
-
-
-
