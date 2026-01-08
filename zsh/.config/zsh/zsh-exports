@@ -23,8 +23,8 @@ export PATH="$HOME/.docker/bin::$PATH"
 export PATH="$HOME/.local/share/bob/nvim-bin::$PATH"
 
 # Customize fzf
-export FZF_DEFAULT_OPTS='--layout=reverse --border --height 33% --ansi'
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS='--layout=reverse --border'
+export FZF_DEFAULT_COMMAND='rg --files "." --no-ignore --hidden --follow --glob "!.git/*"'
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
@@ -41,7 +41,20 @@ export FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 
 # Customize zoxide
-export _ZO_FZF_OPTS="--no-wrap --keep-right --border --height 33% --ansi" # abbreviate long paths 
+# export _ZO_FZF_OPTS="--no-wrap --keep-right" # abbreviate long paths 
+
+export _ZO_FZF_OPTS='
+  --height 30%
+  --no-wrap
+  --keep-right
+  --layout=reverse
+  --border
+  --info=inline
+  --prompt="❯  "
+  --pointer="▶"
+  --marker="✓"
+  --ansi
+'
 
 # Platform specific options:
 case "$(uname -s)" in
