@@ -1,15 +1,24 @@
-return {
-  {
-    'MagicDuck/grug-far.nvim',
-    -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
-    -- additional lazy config to defer loading is not really needed...
-    config = function()
-      -- optional setup call to override plugin options
-      -- alternatively you can set options with vim.g.grug_far = { ... }
-      require('grug-far').setup {
-        -- options, see Configuration section below
-        -- there are no required options atm
-      }
-    end,
+-- grug-far.nvim (search and replace) plugin configuration
+vim.pack.add({
+  "https://github.com/MagicDuck/grug-far.nvim",
+})
+
+require("grug-far").setup({
+  headerMaxWidth = 80,
+  keymaps = {
+    -- Also allow tab and shift-tab in insert mode to move between inputs
+    nextInput = { n = '<tab>', i = '<tab>' },
+    prevInput = { n = '<s-tab>', i = '<s-tab>' },
   },
-}
+})
+
+vim.keymap.set({ "n", "v", "x" }, "<C-S-f>", function()
+  local grug = require("grug-far")
+  local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+  grug.open({
+    transient = true,
+    prefills = {
+      filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+    },
+  })
+end, { desc = "Search and Replace" })

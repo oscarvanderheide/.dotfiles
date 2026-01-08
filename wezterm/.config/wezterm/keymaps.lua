@@ -84,15 +84,20 @@ return function(config)
 		-- 	action = wezterm.action.SendString("\x1bs"),
 		-- },
 		-- {
-		-- 	key = "p",
-		-- 	mods = "CMD",
-		-- 	action = wezterm.action.SendString("\x1bp"),
+		--   key = "p",
+		--   mods = "CMD",
+		--   action = wezterm.action.SendString("\x1bp"),
 		-- },
+		{
+			key = "f",
+			mods = "CMD",
+			action = wezterm.action.SendString("\x1bf"),
+		},
 		-- {
-		-- 	key = "f",
-		-- 	mods = "CMD",
-		-- 	action = wezterm.action.SendString("\x1bf"),
-		-- },
+		--   key = "F",
+		--   mods = "CMD",
+		--   action = wezterm.action.SendString("\x1bF"),
+		-- }
 
 		-- -- Map Cmd+t to create a new tmux window
 		-- -- Rule 1: Explicitly disable the default action. This is processed first.

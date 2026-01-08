@@ -1,130 +1,132 @@
-return {
-  {
-    -- Treesitter: highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSupdate',
-    main = 'nvim-treesitter.configs', -- sets main module to use for opts
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      -- 'nvim-treesitter/nvim-treesitter-context', -- Shows e.g. function name on top for functions that extend beyond the screen
-      'RRethy/nvim-treesitter-textsubjects',
-      'RRethy/nvim-treesitter-endwise',
-    },
-    opts = {
-      ensure_installed = {
-        'bash',
-        'c',
-        'cpp',
-        'diff',
-        'html',
-        'julia',
-        'lua',
-        'luadoc',
-        'markdown',
-        'markdown_inline',
-        'python',
-        'query',
-        'vim',
-        'vimdoc',
-      },
-      -- autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        -- disable = { 'julia' }, -- disable tree-sitter for julia
-        enable = true,
-        -- some languages depend on vim's regex highlighting system (such as ruby) for indent rules.
-        --  if you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        -- additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-      -- Options for treesitter textobjects
-      textobjects = { -- Place textobjects here
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
-            ['al'] = '@loop.outer',
-            ['il'] = '@loop.inner',
-            ['a='] = '@assignment.outer',
-            ['i='] = '@assignment.inner',
-            ['l='] = '@assignment.lhs',
-            ['r='] = '@assignment.rhs',
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          -- goto_next_start = {
-          -- [']m'] = '@function.outer',
-          -- [']]'] = { query = '@class.outer', desc = 'Next class start' },
-          -- --
-          -- -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queries.
-          -- [']o'] = '@loop.*',
-          -- -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
-          -- --
-          -- -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-          -- -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-          -- [']s'] = { query = '@local.scope', query_group = 'locals', desc = 'Next scope' },
-          -- [']z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
-          --
-          -- [']c'] = '@cell.boundary',
-          -- },
-          goto_next_end = {
-            [']M'] = '@function.outer',
-            [']['] = '@class.outer',
-          },
-          -- goto_previous_start = {
-          --   ['[m'] = '@function.outer',
-          --   ['[['] = '@class.outer',
-          --
-          --   ['[c'] = '@cell.boundary',
-          -- },
-          goto_previous_end = {
-            ['[M'] = '@function.outer',
-            ['[]'] = '@class.outer',
-          },
-          -- Below will go to either the start or the end, whichever is closer.
-          -- Use if you want more granular movements
-          -- Make it even more gradual by adding multiple queries and regex.
-          goto_next = {
-            [']d'] = { query = { '@function.outer', '@class.outer' } },
-            -- [']d'] = '@conditional.outer',
-          },
-          goto_previous = {
-            ['[d'] = { query = { '@function.outer', '@class.outer' } },
-          },
-          -- Move between code cells
-        },
-        -- Additional textobject features (like move, swap) can go here
-        -- swap = {
-        --   enable = true,
-        --   swap_next = {
-        --     ['<leader>a'] = '@parameter.inner',
-        --   },
-        --   swap_previous = {
-        --     ['<leader>A'] = '@parameter.inner',
-        --   },
-        -- },
-      },
-      -- Incrementally select the outer/inner nodes of a syntax tree
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = '<C-m>', -- set to `false` to disable one of the mappings
-          node_incremental = '<C-m>',
-          scope_incremental = 'grc',
-          node_decremental = '<C-n>',
-        },
-      },
-      -- Automatically at "end" statements for things like functions, loops, etc.
-      endwise = {
-        enable = true,
-      },
-    },
-  },
-}
+-- Treesitter
+vim.pack.add({
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter",
+	},
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+	},
+	{
+		-- Needed since incremental selection was removed from nvim-treesitter itself
+		src = "https://github.com/MeanderingProgrammer/treesitter-modules.nvim",
+	},
+})
+
+require("nvim-treesitter").setup({})
+
+require("nvim-treesitter-textobjects").setup({
+	select = {
+		enable = true,
+		lookahead = true,
+		selection_modes = {
+			["@parameter.outer"] = "v", -- charwise
+			["@function.outer"] = "V", -- linewise
+			["@class.outer"] = "<C-v>", -- blockwise
+		},
+		include_surrounding_whitespace = false,
+	},
+	move = {
+		enable = true,
+		set_jumps = true,
+	},
+})
+
+-- SELECT keymaps
+local sel = require("nvim-treesitter-textobjects.select")
+for _, map in ipairs({
+	{ { "x", "o" }, "af", "@function.outer" },
+	{ { "x", "o" }, "if", "@function.inner" },
+	{ { "x", "o" }, "ac", "@class.outer" },
+	{ { "x", "o" }, "ic", "@class.inner" },
+	{ { "x", "o" }, "aa", "@parameter.outer" },
+	{ { "x", "o" }, "ia", "@parameter.inner" },
+	{ { "x", "o" }, "ad", "@comment.outer" },
+	{ { "x", "o" }, "as", "@statement.outer" },
+}) do
+	vim.keymap.set(map[1], map[2], function()
+		sel.select_textobject(map[3], "textobjects")
+	end, { desc = "Select " .. map[3] })
+end
+
+-- MOVE keymaps
+local mv = require("nvim-treesitter-textobjects.move")
+for _, map in ipairs({
+	{ { "n", "x", "o" }, "]m", mv.goto_next_start, "@function.outer" },
+	{ { "n", "x", "o" }, "[m", mv.goto_previous_start, "@function.outer" },
+	{ { "n", "x", "o" }, "]]", mv.goto_next_start, "@class.outer" },
+	{ { "n", "x", "o" }, "[[", mv.goto_previous_start, "@class.outer" },
+	{ { "n", "x", "o" }, "]M", mv.goto_next_end, "@function.outer" },
+	{ { "n", "x", "o" }, "[M", mv.goto_previous_end, "@function.outer" },
+	{ { "n", "x", "o" }, "]o", mv.goto_next_start, { "@loop.inner", "@loop.outer" } },
+	{ { "n", "x", "o" }, "[o", mv.goto_previous_start, { "@loop.inner", "@loop.outer" } },
+}) do
+	local modes, lhs, fn, query = map[1], map[2], map[3], map[4]
+	-- build a human-readable desc
+	local qstr = (type(query) == "table") and table.concat(query, ",") or query
+	vim.keymap.set(modes, lhs, function()
+		fn(query, "textobjects")
+	end, { desc = "Move to " .. qstr })
+end
+
+vim.api.nvim_create_autocmd("PackChanged", {
+	desc = "Handle nvim-treesitter updates",
+	group = vim.api.nvim_create_augroup("nvim-treesitter-pack-changed-update-handler", { clear = true }),
+	callback = function(event)
+		if event.data.kind == "update" then
+			local ok = pcall(vim.cmd, "TSUpdate")
+			if ok then
+				vim.notify("TSUpdate completed successfully!", vim.log.levels.INFO)
+			else
+				vim.notify("TSUpdate command not available yet, skipping", vim.log.levels.WARN)
+			end
+		end
+	end,
+})
+
+-- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "*" },
+	callback = function()
+		local filetype = vim.bo.filetype
+		if filetype and filetype ~= "" then
+			local success = pcall(function()
+				vim.treesitter.start()
+			end)
+			if not success then
+				return
+			end
+		end
+	end,
+})
+
+-- vim.pack.add({ "https://github.com/RRethy/nvim-treesitter-textsubjects" })
+
+-- require("nvim-treesitter-textsubjects").configure({
+-- 	prev_selection = ",",
+-- 	keymaps = {
+-- 		["."] = "textsubjects-smart",
+-- 		[";"] = "textsubjects-container-outer",
+-- 		["i;"] = "textsubjects-container-inner",
+-- 	},
+-- })
+-- -- Incremental selection was removed from treesitter. It can be added with flash, but then
+-- -- I don't like the labels. With treesitter-modules the original version from treesitter
+-- -- can be re-enabled
+vim.pack.add({ "https://github.com/MeanderingProgrammer/treesitter-modules.nvim" })
+--
+require("treesitter-modules").setup({
+	ensure_installed = { "vim", "cmake", "c", "python", "lua" },
+	incremental_selection = {
+		enable = true,
+		-- disable = false,
+		-- set value to `false` to disable individual mapping
+		keymaps = {
+			init_selection = "<C-m>",
+			node_incremental = "<C-m>",
+			scope_incremental = false,
+			node_decremental = "<C-n>",
+		},
+	},
+})
