@@ -81,3 +81,7 @@ ya pkg add yazi-rs/plugins:toggle-pane
 ya pkg add yazi-rs/plugins:no-status
 ya pkg add AnirudhG07/custom-shell
 ya pkg add yazi-rs/plugins:smart-enter
+
+
+# Set nvim to nightly with bob
+bob use nightly

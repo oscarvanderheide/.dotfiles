@@ -33,6 +33,8 @@ brew 'fd' # better find
 brew 'starship' # custom prompts
 brew 'vivid' # something for colorschemes
 brew 'node' # mason needs node to install pyright
+brew 'bob' # neovim manager
+
 
 ## zsh plugins
 brew 'zsh-autosuggestions'
