@@ -27,8 +27,8 @@ zle -N zoxide-to-nvim
 bindkey -M emacs 'vv' zoxide-to-nvim
 
 # Quick jump to most used directories (using zi)
-# bindkey -s 'jj' 'zi\n ' # Jump to most used directories
-jj-widget() {
+# and open with yazi
+zoxide-to-yazi() {
   if [[ $LBUFFER == '' ]]; then
     local dir
     dir=$(zoxide query -i) || return
@@ -38,8 +38,8 @@ jj-widget() {
     LBUFFER+="jj"
   fi
 }
-zle -N jj-widget
-bindkey -M emacs 'jj' jj-widget
+zle -N zoxide-to-yazi
+bindkey -M emacs 'jj' zoxide-to-yazi
 
 # Open yazi and change dir upon exit
 bindkey -s 'yy' 'yazi_cd\n' 
