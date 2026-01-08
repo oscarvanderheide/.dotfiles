@@ -50,6 +50,8 @@ case "$(uname -s)" in
     export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
     # Node.js (needed for Github Copilot in nvim)
     export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+    # julia/bin
+    export PATH="$HOME/.julia/bin:$PATH"
   ;;
   Linux)
     # Determine cache base directory based on hostname
