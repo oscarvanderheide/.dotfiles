@@ -8,6 +8,24 @@ bindkey '^[[1;5D' backward-word
 # Enable delete key
 bindkey '^[[3~' delete-char
 
+# Quick jump to directory and open with nvim
+zoxide-to-nvim() {
+  if [[ $LBUFFER == '' ]]; then
+    local dir
+    dir=$(zoxide query -i) || return
+    
+    # Write the command to the prompt (using (q) to quote spaces safely)
+    BUFFER="cd ${(q)dir} && nvim"
+    
+    # Simulate pressing "Enter"
+    zle accept-line
+  else
+    LBUFFER+="vv"
+  fi
+}
+zle -N zoxide-to-nvim
+bindkey -M emacs 'vv' zoxide-to-nvim
+
 # Quick jump to most used directories (using zi)
 # bindkey -s 'jj' 'zi\n ' # Jump to most used directories
 jj-widget() {
