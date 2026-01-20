@@ -6,67 +6,61 @@ vim.pack.add({
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 	},
-	{
-		-- Needed since incremental selection was removed from nvim-treesitter itself
-		src = "https://github.com/MeanderingProgrammer/treesitter-modules.nvim",
-	},
 })
 
-require("nvim-treesitter").setup({})
-
-require("nvim-treesitter-textobjects").setup({
-	select = {
+require("nvim-treesitter.configs").setup({
+	incremental_selection = {
 		enable = true,
-		lookahead = true,
-		selection_modes = {
-			["@parameter.outer"] = "v", -- charwise
-			["@function.outer"] = "V", -- linewise
-			["@class.outer"] = "<C-v>", -- blockwise
+		keymaps = {
+			init_selection = "<C-m>",
+			node_incremental = "<C-m>",
+			scope_incremental = false,
+			node_decremental = "<C-n>",
 		},
-		include_surrounding_whitespace = false,
 	},
-	move = {
-		enable = true,
-		set_jumps = true,
+	textobjects = {
+		select = {
+			enable = true,
+			lookahead = true,
+			keymaps = {
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+				["aa"] = "@parameter.outer",
+				["ia"] = "@parameter.inner",
+				["ad"] = "@comment.outer",
+				["as"] = "@statement.outer",
+			},
+			selection_modes = {
+				["@parameter.outer"] = "v", -- charwise
+				["@function.outer"] = "V", -- linewise
+				["@class.outer"] = "<C-v>", -- blockwise
+			},
+			include_surrounding_whitespace = false,
+		},
+		move = {
+			enable = true,
+			set_jumps = true,
+			goto_next_start = {
+				["]m"] = "@function.outer",
+				["]]"] = "@class.outer",
+				["]o"] = { "@loop.inner", "@loop.outer" },
+			},
+			goto_next_end = {
+				["]M"] = "@function.outer",
+			},
+			goto_previous_start = {
+				["[m"] = "@function.outer",
+				["[["] = "@class.outer",
+				["[o"] = { "@loop.inner", "@loop.outer" },
+			},
+			goto_previous_end = {
+				["[M"] = "@function.outer",
+			},
+		},
 	},
 })
-
--- SELECT keymaps
-local sel = require("nvim-treesitter-textobjects.select")
-for _, map in ipairs({
-	{ { "x", "o" }, "af", "@function.outer" },
-	{ { "x", "o" }, "if", "@function.inner" },
-	{ { "x", "o" }, "ac", "@class.outer" },
-	{ { "x", "o" }, "ic", "@class.inner" },
-	{ { "x", "o" }, "aa", "@parameter.outer" },
-	{ { "x", "o" }, "ia", "@parameter.inner" },
-	{ { "x", "o" }, "ad", "@comment.outer" },
-	{ { "x", "o" }, "as", "@statement.outer" },
-}) do
-	vim.keymap.set(map[1], map[2], function()
-		sel.select_textobject(map[3], "textobjects")
-	end, { desc = "Select " .. map[3] })
-end
-
--- MOVE keymaps
-local mv = require("nvim-treesitter-textobjects.move")
-for _, map in ipairs({
-	{ { "n", "x", "o" }, "]m", mv.goto_next_start, "@function.outer" },
-	{ { "n", "x", "o" }, "[m", mv.goto_previous_start, "@function.outer" },
-	{ { "n", "x", "o" }, "]]", mv.goto_next_start, "@class.outer" },
-	{ { "n", "x", "o" }, "[[", mv.goto_previous_start, "@class.outer" },
-	{ { "n", "x", "o" }, "]M", mv.goto_next_end, "@function.outer" },
-	{ { "n", "x", "o" }, "[M", mv.goto_previous_end, "@function.outer" },
-	{ { "n", "x", "o" }, "]o", mv.goto_next_start, { "@loop.inner", "@loop.outer" } },
-	{ { "n", "x", "o" }, "[o", mv.goto_previous_start, { "@loop.inner", "@loop.outer" } },
-}) do
-	local modes, lhs, fn, query = map[1], map[2], map[3], map[4]
-	-- build a human-readable desc
-	local qstr = (type(query) == "table") and table.concat(query, ",") or query
-	vim.keymap.set(modes, lhs, function()
-		fn(query, "textobjects")
-	end, { desc = "Move to " .. qstr })
-end
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	desc = "Handle nvim-treesitter updates",
@@ -83,9 +77,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	end,
 })
 
--- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
--- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "*" },
 	callback = function()
@@ -99,34 +90,4 @@ vim.api.nvim_create_autocmd("FileType", {
 			end
 		end
 	end,
-})
-
--- vim.pack.add({ "https://github.com/RRethy/nvim-treesitter-textsubjects" })
-
--- require("nvim-treesitter-textsubjects").configure({
--- 	prev_selection = ",",
--- 	keymaps = {
--- 		["."] = "textsubjects-smart",
--- 		[";"] = "textsubjects-container-outer",
--- 		["i;"] = "textsubjects-container-inner",
--- 	},
--- })
--- -- Incremental selection was removed from treesitter. It can be added with flash, but then
--- -- I don't like the labels. With treesitter-modules the original version from treesitter
--- -- can be re-enabled
-vim.pack.add({ "https://github.com/MeanderingProgrammer/treesitter-modules.nvim" })
---
-require("treesitter-modules").setup({
-	ensure_installed = { "vim", "cmake", "c", "python", "lua" },
-	incremental_selection = {
-		enable = true,
-		-- disable = false,
-		-- set value to `false` to disable individual mapping
-		keymaps = {
-			init_selection = "<C-m>",
-			node_incremental = "<C-m>",
-			scope_incremental = false,
-			node_decremental = "<C-n>",
-		},
-	},
 })

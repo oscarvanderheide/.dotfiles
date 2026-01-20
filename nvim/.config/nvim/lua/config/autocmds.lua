@@ -87,3 +87,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
+
+-- Set indent to 4 spaces for julia files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "julia",
+	callback = function()
+		vim.opt_local.tabstop = 4
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.softtabstop = 4
+		vim.opt_local.expandtab = true
+	end,
+})

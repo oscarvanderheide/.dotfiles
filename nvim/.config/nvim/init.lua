@@ -3,9 +3,7 @@ require("config.keymaps")
 require("config.autocmds")
 require("config.lsp")
 
--- require("plugins")
-
--- In your main init.lua, after vim.pack.add calls
+-- Load plugins from individual files stored in lua/plugins directory
 local plugins_dir = vim.fn.stdpath("config") .. "/lua/plugins"
 for _, file in ipairs(vim.fn.glob(plugins_dir .. "/*.lua", true, true)) do
 	local name = file:match("([^/]+)%.lua$")

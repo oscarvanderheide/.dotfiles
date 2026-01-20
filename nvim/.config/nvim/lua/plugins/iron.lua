@@ -96,7 +96,7 @@ iron.setup({
 local map = vim.keymap.set
 
 -- CONFIGURATION CONSTANTS
-local HIDE_DELAY = 5000
+local HIDE_DELAY = 60000
 local hide_timer = nil
 local exec_namespace = vim.api.nvim_create_namespace("iron_execution")
 

@@ -210,3 +210,6 @@ set("n", "zk", "zckzOzz", { desc = "Close current fold when open. Always open pr
 
 -- Toggle line wrapping
 set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle Wrap", silent = true })
+
+-- Show LSP code actions
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Actions" })

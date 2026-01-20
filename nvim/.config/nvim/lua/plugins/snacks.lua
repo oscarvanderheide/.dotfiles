@@ -203,7 +203,25 @@ local keymaps = {
 	{
 		"<leader>sb",
 		function()
-			Snacks.picker.lines()
+			Snacks.picker.lines({
+				finder = "lines",
+				format = "lines",
+				layout = {
+					preview = "main",
+					preset = "vertical",
+				},
+				jump = { match = true },
+				-- allow any window to be used as the main window
+				main = { current = true },
+				---@param picker snacks.Picker
+				on_show = function(picker)
+					local cursor = vim.api.nvim_win_get_cursor(picker.main)
+					local info = vim.api.nvim_win_call(picker.main, vim.fn.winsaveview)
+					picker.list:view(cursor[1], info.topline)
+					picker:show_preview()
+				end,
+				sort = { fields = { "score:desc", "idx" } },
+			})
 		end,
 		desc = "Buffer Lines",
 	},

@@ -17,9 +17,9 @@ require("mason-tool-installer").setup({
 		"bashls", -- Bash/shell scripts
 		"html", -- HTML
 		"jsonls", -- JSON
-		"julials", -- Julia
+		-- "julials", -- Julia
 		"lua_ls", -- Lua (Neovim config)
-		-- "basedpyright", -- Python type checking (fork of pyright with better inlay hints)
+		"basedpyright", -- Python type checking (fork of pyright with better inlay hints)
 		"yamlls", -- YAML
 		"ruff", -- Python linting/formatting
 	},
@@ -47,7 +47,7 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
--- -- Julia specific stuff
+-- Julia specific stuff
 -- First do:
 -- 'julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")''
 vim.lsp.config("julials", {
@@ -101,3 +101,44 @@ vim.lsp.config("julials", {
 -- })
 --
 -- vim.lsp.enable("jetls")
+-- need pyright for symbols until ruff can do that
+vim.lsp.config.basedpyright = {
+	settings = {
+		basedpyright = {
+			disableOrganizeImports = true, -- ruff organizes imports
+			-- analysis = { ignore = { '*' } }, -- ruff does linting
+			analysis = {
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				diagnosticMode = "openFilesOnly",
+				typeCheckingMode = "basic",
+				diagnosticSeverityOverrides = {
+					reportOptionalMemberAccess = false, -- "warning"
+				},
+			},
+		},
+	},
+}
+
+vim.lsp.config.ruff = {
+	init_options = {
+		settings = {
+			lint = {
+				-- enable = false, -- use basedpyright for linting, ruff for formatting
+				-- Tell the Ruff engine not to fix unused imports
+				-- unfixable = { "F401" },
+			},
+		},
+	},
+}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("cool-lsp-attach", { clear = true }),
+	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if client.name == "ruff" then
+			-- Disable hover in favor of Pyright
+			client.server_capabilities.hoverProvider = false
+		end
+	end,
+})
