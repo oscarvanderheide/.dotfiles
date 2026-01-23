@@ -82,16 +82,22 @@ case "$(uname -s)" in
 
     # Set cache directory for uv
     export UV_CACHE_DIR="$CACHE_BASE/.cache/uv"
+    
     # Change .julia folder location
     export JULIA_DEPOT_PATH="$CACHE_BASE/.julia"
     export JULIAUP_DEPOT_PATH="$CACHE_BASE/.julia"
     path=("$CACHE_BASE/.juliaup/bin" $path)
     export PATH
+
     # Change pixi cache dir
     export PIXI_CACHE_DIR="$CACHE_BASE/.cache/pixi/cache"
 
     # Add .local/lib to library path
     export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=$PIXI_CACHE_DIR/pkgs/pugixml-1.15-h3f63f65_0/lib:$LD_LIBRARY_PATH
+
+    # CUDA paths for custom installation
+    export PATH="${HOME}/.local/opt/cuda-12.2/bin:${PATH}"
+    export LD_LIBRARY_PATH="${HOME}/.local/opt/cuda-12.2/lib64:${LD_LIBRARY_PATH}"
   ;;
 esac
