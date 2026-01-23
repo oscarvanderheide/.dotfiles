@@ -8,3 +8,6 @@ zsh/.config/zsh/plugins/
 
 # Ignore yazi plugins, they should be installed via ya
 yazi/.config/yazi/plugins
+
+# Ignore tmux plugins
+tmux/.config/tmux/plugins
