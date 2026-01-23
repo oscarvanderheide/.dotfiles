@@ -1,0 +1,24 @@
+See https://github.com/driesvints/dotfiles for a detailed overview of setting up and working with dotfiles.
+
+
+## My own notes on initializing a new macOS machine
+
+- Download Xcode Command Line Tools from https://developer.apple.com/download/ and install. No need to install Xcode (using App Store) itself.
+- Generate ssh key-pair following instructions on Github (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- Log into Github and add new ssh key.
+- Clone .dotfiles to ~/.dotfiles
+- Review files:
+	- Brewfile (which software to install)
+	- .macos (macOS system settings)
+	- Install.sh (the actual script that gets executed)
+- Run install.sh
+
+- Install ublock origin for Firefox
+- In case forgit gives weird warnings: remove the warning lines from ~/.config/zsh/plugins/forgit/forgit.plugin.zsh
+	
+- Install kmonad by carefully following instructions on the github page (use dext)
+- Copy the plist file `kmonad/.config/kmonad` to `/Library/LaunchDaemons`. Apply `sudo chown root:wheel` and `sudo chmod 644` to it. 
+Then do `sudo launchctl load -w /Library/LaunchDaemons/local.kmonad.plist`
+Also add plit for karabiner driver. Need to move file
+Also add terminal to settings > privacy secrutiry > input monitoring.
+- 

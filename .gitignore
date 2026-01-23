@@ -1,0 +1,7 @@
+# Ignore Zsh dump files
+.zcompdump
+.zcompcache
+.DS_Store
+
+# Ignore yazi plugins, they should be installed via ya
+yazi/.config/yazi/plugins

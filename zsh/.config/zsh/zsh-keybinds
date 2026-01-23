@@ -1,0 +1,49 @@
+# Set emacs keybindings
+bindkey -e
+
+# Enable Ctrl + Left/Right Arrow for word movement
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Enable delete key
+bindkey '^[[3~' delete-char
+
+# Quick jump to directory and open with nvim
+zoxide-to-nvim() {
+  if [[ $LBUFFER == '' ]]; then
+    local dir
+    dir=$(zoxide query -i) || return
+    
+    # Write the command to the prompt (using (q) to quote spaces safely)
+    BUFFER="cd ${(q)dir} && nvim"
+    
+    # Simulate pressing "Enter"
+    zle accept-line
+  else
+    LBUFFER+="vv"
+  fi
+}
+zle -N zoxide-to-nvim
+bindkey -M emacs 'vv' zoxide-to-nvim
+
+# Quick jump to most used directories (using zi)
+# and open with yazi
+zoxide-to-yazi() {
+  if [[ $LBUFFER == '' ]]; then
+    local dir
+    dir=$(zoxide query -i) || return
+    yazi_cd "$dir"
+    zle reset-prompt
+  else
+    LBUFFER+="jj"
+  fi
+}
+zle -N zoxide-to-yazi
+bindkey -M emacs 'jj' zoxide-to-yazi
+
+# Open yazi and change dir upon exit
+bindkey -s 'yy' 'yazi_cd\n' 
+
+# Shift + Tab to accept autosuggestions
+bindkey '^[[Z' autosuggest-accept  
+

@@ -1,0 +1,97 @@
+# Set bat theme
+export BAT_THEME="Nord"
+
+# Use ripgrep config file
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/config
+
+# Set colors for ls (LS_COLORS)
+export LS_COLORS="$(vivid generate iceberg-dark)"
+
+# Set nvim as default editor
+export EDITOR=nvim
+
+# Custom location for .gitconfig
+export GIT_CONFIG=$HOME/.config/git/.gitconfig 
+
+# Add location with custom scripts to path
+export PATH="$HOME/.local/bin::$PATH"
+
+# Add location with docker CLI to path
+export PATH="$HOME/.docker/bin::$PATH"
+
+# Add bob-managed nvim binary to path
+export PATH="$HOME/.local/share/bob/nvim-bin::$PATH"
+
+# Customize fzf
+export FZF_DEFAULT_OPTS='--layout=reverse --border'
+export FZF_DEFAULT_COMMAND='rg --files "." --no-ignore --hidden --follow --glob "!.git/*"'
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Customize zoxide
+# export _ZO_FZF_OPTS="--no-wrap --keep-right" # abbreviate long paths 
+
+export _ZO_FZF_OPTS='
+  --height 30%
+  --no-wrap
+  --keep-right
+  --layout=reverse
+  --border
+  --info=inline
+  --prompt="❯  "
+  --pointer="▶"
+  --marker="✓"
+  --ansi
+'
+
+# Platform specific options:
+case "$(uname -s)" in
+  Darwin) # == macOS
+    # Use python installed with homebrew
+    export PATH="/opt/homebrew/opt/python@3.10/libexec/bin:$PATH"
+    # Node.js (needed for Github Copilot in nvim)
+    export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+    # julia/bin
+    export PATH="$HOME/.julia/bin:$PATH"
+  ;;
+  Linux)
+    # Determine cache base directory based on hostname
+    HOSTNAME_SHORT=$(hostname -s)
+    case "$HOSTNAME_SHORT" in
+      RTRSPLA06|RTRSPLA02|RTRSPLE01)
+        # Use /local_scratch on cluster machines
+        CACHE_BASE="/local_scratch/oheide"
+        ;;
+      *)
+        # Use home directory on other machines (like roodnoot)
+        CACHE_BASE="$HOME/localscratch"
+        ;;
+    esac
+
+    # Set cache directory for uv
+    export UV_CACHE_DIR="$CACHE_BASE/.cache/uv"
+    # Change .julia folder location
+    export JULIA_DEPOT_PATH="$CACHE_BASE/.julia"
+    export JULIAUP_DEPOT_PATH="$CACHE_BASE/.julia"
+    path=("$CACHE_BASE/.juliaup/bin" $path)
+    export PATH
+    # Change pixi cache dir
+    export PIXI_CACHE_DIR="$CACHE_BASE/.cache/pixi/cache"
+
+    # Add .local/lib to library path
+    export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$PIXI_CACHE_DIR/pkgs/pugixml-1.15-h3f63f65_0/lib:$LD_LIBRARY_PATH
+  ;;
+esac

@@ -1,0 +1,22 @@
+autoload -U compinit; compinit
+
+# enable colored completions
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# case-insensitive, partial matching
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=*'
+
+# show a menu when multiple matches
+zstyle ':completion:*' menu select
+
+# group results by type
+zstyle ':completion:*' group-name ''
+
+# add descriptions (e.g., "file", "directory") to completions
+zstyle ':completion:*' format '%F{green}Completing %d%f'
+
+# enable auto-expand ~ and variables like $HOME
+zstyle ':completion:*' expand prefix
+
+# auto-insert the longest unambiguous prefix
+zstyle ':completion:*' insert-unambiguous true
