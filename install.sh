@@ -53,11 +53,11 @@ ln -s /Users/$USER/.config/zsh/.zshrc .zshrc
 
 # Clone zsh plugins
 echo "Installing zsh plugins..."
-mkdir -p /Users/$USER/.config/zsh/plugins
-git clone https://github.com/wfxr/forgit.git /Users/$USER/.config/zsh/plugins/forgit
-git clone https://github.com/Aloxaf/fzf-tab.git /Users/$USER/.config/zsh/plugins/fzf-tab
-git clone https://github.com/zsh-users/zsh-autosuggestions.git /Users/$USER/.config/zsh/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /Users/$USER/.config/zsh/plugins/zsh-syntax-highlighting
+mkdir -p $HOME/.config/zsh/plugins
+git clone https://github.com/wfxr/forgit.git $HOME/.config/zsh/plugins/forgit
+git clone https://github.com/Aloxaf/fzf-tab.git $HOME/.config/zsh/plugins/fzf-tab
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.config/zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.config/zsh/plugins/zsh-syntax-highlighting
 
 # Make symbolic links for vscode settings and keybindings
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
