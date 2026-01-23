@@ -51,8 +51,13 @@ stow -v -t ~ zsh
 # Make symbolic link in home to the .zshrc file 
 ln -s /Users/$USER/.config/zsh/.zshrc .zshrc 
 
-# Remove the (empty) zsh plugin folder:
-rm -rf /Users/$USER/.config/zsh/plugins
+# Clone zsh plugins
+echo "Installing zsh plugins..."
+mkdir -p /Users/$USER/.config/zsh/plugins
+git clone https://github.com/wfxr/forgit.git /Users/$USER/.config/zsh/plugins/forgit
+git clone https://github.com/Aloxaf/fzf-tab.git /Users/$USER/.config/zsh/plugins/fzf-tab
+git clone https://github.com/zsh-users/zsh-autosuggestions.git /Users/$USER/.config/zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /Users/$USER/.config/zsh/plugins/zsh-syntax-highlighting
 
 # Make symbolic links for vscode settings and keybindings
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then

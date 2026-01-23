@@ -3,5 +3,8 @@
 .zcompcache
 .DS_Store
 
+# Ignore zsh plugins, they should be cloned via install.sh
+zsh/.config/zsh/plugins/
+
 # Ignore yazi plugins, they should be installed via ya
 yazi/.config/yazi/plugins
