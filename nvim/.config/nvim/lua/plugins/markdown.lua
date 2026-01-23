@@ -206,7 +206,7 @@ local renderOpts = {
 
 require("render-markdown").setup(renderOpts)
 
-vim.keymap.set("n", "<leader>um", function()
+vim.keymap.set("n", "<leader>tm", function()
 	local rm = require("render-markdown")
 	local enabled = require("render-markdown.state").enabled
 	if enabled then

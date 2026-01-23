@@ -104,7 +104,7 @@ vim.keymap.set("n", "<leader>Dh", "<cmd>DiffviewFileHistory %<cr>", { desc = "Di
 vim.keymap.set("n", "<leader>DH", "<cmd>DiffviewFileHistory<cr>", { desc = "Diffview: Repo history" })
 
 -- toggles
-vim.keymap.set("n", "<leader>uG", function()
+vim.keymap.set("n", "<leader>tg", function()
 	local gs = require("gitsigns")
 	local cfg = require("gitsigns.config").config
 	local current = cfg.signcolumn
