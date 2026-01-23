@@ -95,4 +95,3 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' switch-group '<' '>'
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
-
