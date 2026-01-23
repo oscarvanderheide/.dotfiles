@@ -8,6 +8,9 @@ bindkey '^[[1;5D' backward-word
 # Enable delete key
 bindkey '^[[3~' delete-char
 
+# Open zoxide with jj
+bindkey -s 'jj' 'zi\n'
+
 # Quick jump to directory and open with nvim
 zoxide-to-nvim() {
   if [[ $LBUFFER == '' ]]; then
@@ -39,7 +42,7 @@ zoxide-to-yazi() {
   fi
 }
 zle -N zoxide-to-yazi
-bindkey -M emacs 'jj' zoxide-to-yazi
+bindkey -M emacs 'JJ' zoxide-to-yazi
 
 # Open yazi and change dir upon exit
 bindkey -s 'yy' 'yazi_cd\n' 
