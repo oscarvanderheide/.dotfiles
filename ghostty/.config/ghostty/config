@@ -45,3 +45,17 @@ keybind = cmd+shift+]=text:\x1bn
 # Next tmux session
 keybind = cmd+shift+n=text:\x1bN
 
+# --- Splits ---
+# Map Cmd+\ to Alt+\ (Escape + \)
+# keybind = cmd+\=text:\x1b\\
+keybind = cmd+\=text:\x1b\|
+
+# Map Cmd+- to Alt+- (Escape + -)
+keybind = cmd+-=text:\x1b_
+
+# --- Navigation ---
+# Map Cmd+[ to Alt+Shift+H (Arbitrary safe signal for "Previous")
+keybind = cmd+[=text:\x1bH
+
+# Map Cmd+] to Alt+Shift+L (Arbitrary safe signal for "Next")
+keybind = cmd+]=text:\x1bL
