@@ -73,21 +73,21 @@ return function(config)
 		-- },
 
 		-- -- Enable using Cmd + {a,s,f,p} with tmux
-		-- {
-		-- 	key = "a",
-		-- 	mods = "CMD",
-		-- 	action = wezterm.action.SendString("\x1ba"),
-		-- },
-		-- {
-		-- 	key = "s",
-		-- 	mods = "CMD",
-		-- 	action = wezterm.action.SendString("\x1bs"),
-		-- },
-		-- {
-		--   key = "p",
-		--   mods = "CMD",
-		--   action = wezterm.action.SendString("\x1bp"),
-		-- },
+		{
+			key = "a",
+			mods = "CMD",
+			action = wezterm.action.SendString("\x1ba"),
+		},
+		{
+			key = "s",
+			mods = "CMD",
+			action = wezterm.action.SendString("\x1bs"),
+		},
+		{
+			key = "p",
+			mods = "CMD",
+			action = wezterm.action.SendString("\x1bp"),
+		},
 		{
 			key = "f",
 			mods = "CMD",

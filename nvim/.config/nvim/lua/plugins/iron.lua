@@ -246,3 +246,165 @@ map("n", "<space>rR", function()
 	vim.api.nvim_buf_clear_namespace(0, exec_namespace, 0, -1)
 	vim.cmd("IronRestart")
 end, { desc = "Restart REPL and Clear Signs" })
+
+local function move_smart_block_down()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local node = vim.treesitter.get_node()
+	local start_row, end_row
+
+	-- A. Structural Container Detection (Treesitter)
+	local root_types = {
+		class_definition = true,
+		function_definition = true,
+		decorated_definition = true,
+		for_statement = true,
+		while_statement = true,
+		if_statement = true,
+		with_statement = true,
+	}
+
+	local target = nil
+	local curr = node
+	while curr do
+		if root_types[curr:type()] then
+			target = curr
+		end
+		curr = curr:parent()
+	end
+
+	if target then
+		start_row, _, end_row, _ = target:range()
+	else
+		-- Fallback: Paragraph detection
+		local cursor_row = vim.api.nvim_win_get_cursor(0)[1] - 1
+		start_row = cursor_row
+		while start_row > 0 do
+			local line = vim.api.nvim_buf_get_lines(bufnr, start_row - 1, start_row, false)[1]
+			if not line or line:match("^%s*$") then
+				break
+			end
+			start_row = start_row - 1
+		end
+		end_row = cursor_row
+		while end_row < vim.api.nvim_buf_line_count(bufnr) - 1 do
+			local line = vim.api.nvim_buf_get_lines(bufnr, end_row + 1, end_row + 2, false)[1]
+			if not line or line:match("^%s*$") then
+				break
+			end
+			end_row = end_row + 1
+		end
+	end
+
+	-- E. Visual Flash
+	local ns = vim.api.nvim_create_namespace("iron_flash")
+	vim.hl.range(bufnr, ns, "IncSearch", { start_row, 0 }, { end_row, 999 }, { priority = 100 })
+	vim.defer_fn(function()
+		if vim.api.nvim_buf_is_valid(bufnr) then
+			vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+		end
+	end, 200)
+
+	-- F. FOLLOW MODE: Timer handling
+	if hide_timer then
+		hide_timer:stop()
+	end
+	hide_timer = vim.defer_fn(function()
+		hide_repl_window()
+	end, HIDE_DELAY)
+
+	-- G. Jump to Next Block
+	local next_line = end_row + 1
+	local total_lines = vim.api.nvim_buf_line_count(bufnr)
+	while next_line < total_lines do
+		local content = vim.api.nvim_buf_get_lines(bufnr, next_line, next_line + 1, false)[1]
+		if content and content:match("%S") then
+			break
+		end
+		next_line = next_line + 1
+	end
+	if next_line < total_lines then
+		vim.api.nvim_win_set_cursor(0, { next_line + 1, 0 })
+	end
+end
+
+local function move_smart_block_up()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local node = vim.treesitter.get_node()
+	local start_row, end_row
+
+	-- A. Structural Container Detection (Treesitter)
+	local root_types = {
+		class_definition = true,
+		function_definition = true,
+		decorated_definition = true,
+		for_statement = true,
+		while_statement = true,
+		if_statement = true,
+		with_statement = true,
+	}
+
+	local target = nil
+	local curr = node
+	while curr do
+		if root_types[curr:type()] then
+			target = curr
+		end
+		curr = curr:parent()
+	end
+
+	if target then
+		start_row, _, end_row, _ = target:range()
+	else
+		-- Fallback: Paragraph detection
+		local cursor_row = vim.api.nvim_win_get_cursor(0)[1] - 1
+		start_row = cursor_row
+		while start_row > 0 do
+			local line = vim.api.nvim_buf_get_lines(bufnr, start_row - 1, start_row, false)[1]
+			if not line or line:match("^%s*$") then
+				break
+			end
+			start_row = start_row - 1
+		end
+		end_row = cursor_row
+		while end_row < vim.api.nvim_buf_line_count(bufnr) - 1 do
+			local line = vim.api.nvim_buf_get_lines(bufnr, end_row + 1, end_row + 2, false)[1]
+			if not line or line:match("^%s*$") then
+				break
+			end
+			end_row = end_row + 1
+		end
+	end
+
+	-- E. Visual Flash
+	local ns = vim.api.nvim_create_namespace("iron_flash")
+	vim.hl.range(bufnr, ns, "IncSearch", { start_row, 0 }, { end_row, 999 }, { priority = 100 })
+	vim.defer_fn(function()
+		if vim.api.nvim_buf_is_valid(bufnr) then
+			vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+		end
+	end, 200)
+
+	-- F. FOLLOW MODE: Timer handling
+	if hide_timer then
+		hide_timer:stop()
+	end
+	hide_timer = vim.defer_fn(function()
+		hide_repl_window()
+	end, HIDE_DELAY)
+
+	-- G. Jump to Previous Block
+	local prev_line = start_row - 1
+	while prev_line >= 0 do
+		local content = vim.api.nvim_buf_get_lines(bufnr, prev_line, prev_line + 1, false)[1]
+		if content and content:match("%S") then
+			break
+		end
+		prev_line = prev_line - 1
+	end
+	if prev_line >= 0 then
+		vim.api.nvim_win_set_cursor(0, { prev_line + 1, 0 })
+	end
+end
+
+map("n", "<C-j>", move_smart_block_down, { desc = "󱠤 Move down smart" })
+map("n", "<C-k>", move_smart_block_up, { desc = "󱠤 Move up smart" })

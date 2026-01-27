@@ -7,8 +7,8 @@ local opts = { noremap = true, silent = true }
 -- Keymaps for quickly moving up and down within a buffer
 -- I tried stuff in the past based on treesitter to quickly move to next functions/classes/etc
 -- but it was always too language specific. Somehow this approach works well for me.
-set({ "n", "v" }, "<C-j>", "6j", { silent = true })
-set({ "n", "v" }, "<C-k>", "6k", { silent = true })
+-- set({ "n", "v" }, "<C-j>", "6j", { silent = true })
+-- set({ "n", "v" }, "<C-k>", "6k", { silent = true })
 
 -- Quit/restart neovim
 set("n", "<leader>qq", ":q<CR>", { noremap = true, silent = true, desc = "Quit" })
@@ -68,7 +68,14 @@ vim.keymap.set("n", "<M-f>", "/", { noremap = true, silent = false, desc = "Sear
 set("n", "<C-a>", "ggVG", { noremap = true, silent = true, desc = "Select entire file" })
 set("n", "<D-a>", "ggVG", { noremap = true, silent = true, desc = "Select entire file" })
 
+-- Bridge the signals from Ghostty to <D-...>
+-- We use 'remap = true' so they trigger your actual bindings
+vim.keymap.set({ "n", "i", "v" }, "<M-a>", "<D-a>", { remap = true })
+vim.keymap.set({ "n", "i", "v" }, "<M-p>", "<D-p>", { remap = true })
+vim.keymap.set({ "n", "i", "v" }, "<M-f>", "<D-f>", { remap = true })
+vim.keymap.set({ "n", "i", "v" }, "<M-s>", "<D-s>", { remap = true })
 -- Yank stuff around brackets (useful for lua tables)
+
 set("n", "<C-y>", "vabVy", { noremap = true, silent = true, desc = "Yank entire buffer" })
 
 -- U to redo instead of Ctrl-r
