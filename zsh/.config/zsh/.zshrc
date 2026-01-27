@@ -6,6 +6,11 @@ if [ -x /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Auto-start tmux in the "main" session if not already in tmux
+if [ -z "$TMUX" ]; then
+    tmux new-session -A -s main
+fi
+
 # Settings for command history
 HISTFILE=$HOME/.zsh_history
 SAVEHIST=10000
