@@ -1,61 +1,80 @@
-window-padding-color = extend
+# ============================================================================
+# APPEARANCE
+# ============================================================================
+
+# Font
+font-size = 14
+
+# Window appearance
 background-opacity = 0.9
 background-blur-radius = 0
+window-padding-color = extend
+window-decoration = false
+window-padding-balance = false
+
+# Cursor
+cursor-style = "bar"
+cursor-style-blink = true
+
+# Text rendering tweaks for better readability
 adjust-underline-position = 8
 adjust-underline-thickness = 2
-auto-update-channel = tip
-font-size = 14
+
+# macOS window styling
+macos-titlebar-style = tabs
+macos-window-shadow = false
+window-save-state = always
+
+# Custom app icon colors
 macos-icon = "custom-style"
 macos-icon-frame = "aluminum"
 macos-icon-ghost-color = "86e1fc"
 macos-icon-screen-color = "222436"
-macos-option-as-alt = true
-mouse-hide-while-typing = true
-cursor-style = "bar"
-cursor-style-blink = false
-window-decoration = false
-window-padding-balance = false
-macos-titlebar-style=transparent
-window-save-state = always
-macos-window-shadow = false
-macos-titlebar-style = tabs
-confirm-close-surface = false
-# keybind = super+a=text:\x1b[97;9u
 
-# Allow CMD + {a,p,f,s} in tmux/nvim
+# ============================================================================
+# BEHAVIOR
+# ============================================================================
+
+# Better UX
+mouse-hide-while-typing = true
+confirm-close-surface = false
+
+# Get bleeding edge updates
+auto-update-channel = tip
+
+# ============================================================================
+# TERMINAL COMPATIBILITY
+# ============================================================================
+
+# Treat Option key as Alt for unix-style keybinds in terminal apps
+macos-option-as-alt = true
+
+# ============================================================================
+# KEYBINDS
+# ============================================================================
+
+# Pass CMD+{a,p,f,s} through to tmux/nvim as Alt+{a,p,f,s}
+# Allows these keys to be used for custom bindings inside, for example,
+# nvim to mimic vscode bindings (cmd + s to save, cmd + f to find, etc).
 keybind = cmd+a=text:\x1ba
 keybind = cmd+p=text:\x1bp
 keybind = cmd+f=text:\x1bf
 keybind = cmd+s=text:\x1bs
 
+# Tmux session/project management
+keybind = cmd+shift+j=text:\x1bJ  # Tmux session switcher sesh
+keybind = cmd+shift+n=text:\x1bL  # Switch to last tmux session
 
-# Allow CMD + J to start tmux-sessionizer
-keybind = cmd+shift+j=text:\x1bJ
+# Tmux window management
+keybind = cmd+t=text:\x1bt         # New tmux window
+keybind = cmd+w=text:\x1bw         # Close tmux window/pane
+keybind = cmd+shift+[=text:\x1b<   # Previous tmux window
+keybind = cmd+shift+]=text:\x1b>   # Next tmux window
 
-# Open new tmux tabs with CMD + t
-keybind = cmd+t=text:\x1bt
+# Tmux pane splits
+keybind = cmd+\=text:\x1b\|        # Vertical split
+keybind = cmd+-=text:\x1b_         # Horizontal split
 
-# Close tmux tabs with CMD + w
-keybind = cmd+w=text:\x1bw
-
-# Previous/next tmux window
-keybind = cmd+shift+[=text:\x1b<
-keybind = cmd+shift+]=text:\x1b>
-
-# Next tmux session
-keybind = cmd+shift+n=text:\x1bN
-
-# --- Splits ---
-# Map Cmd+\ to Alt+\ (Escape + \)
-# keybind = cmd+\=text:\x1b\\
-keybind = cmd+\=text:\x1b\|
-
-# Map Cmd+- to Alt+- (Escape + -)
-keybind = cmd+-=text:\x1b_
-
-# --- Navigation ---
-# Map Cmd+[ to Alt+Shift+H (Arbitrary safe signal for "Previous")
-keybind = cmd+[=text:\x1bH
-
-# Map Cmd+] to Alt+Shift+L (Arbitrary safe signal for "Next")
-keybind = cmd+]=text:\x1bL
+# Tmux pane navigation
+keybind = cmd+[=text:\x1bH         # Previous pane
+keybind = cmd+]=text:\x1bL         # Next pane
