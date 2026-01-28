@@ -61,20 +61,22 @@ keybind = cmd+p=text:\x1bp
 keybind = cmd+f=text:\x1bf
 keybind = cmd+s=text:\x1bs
 
-# Tmux session/project management
-keybind = cmd+shift+j=text:\x1bJ  # Tmux session switcher sesh
-keybind = cmd+shift+n=text:\x1bL  # Switch to last tmux session
+# Tmux pane splitting using cmd + | or -
+keybind = cmd+shift+\=text:\x1b|
+keybind = cmd+shift+-=text:\x1b_
 
-# Tmux window management
-keybind = cmd+t=text:\x1bt         # New tmux window
-keybind = cmd+w=text:\x1bw         # Close tmux window/pane
-keybind = cmd+shift+[=text:\x1b<   # Previous tmux window
-keybind = cmd+shift+]=text:\x1b>   # Next tmux window
+# Tmux session switcher using sesh (cmd+J), go to last with cmd+L
+keybind = cmd+shift+j=text:\x1bJ
 
-# Tmux pane splits
-keybind = cmd+\=text:\x1b\|        # Vertical split
-keybind = cmd+-=text:\x1b_         # Horizontal split
+# Switch to last tmux session
+keybind = cmd+shift+l=text:\x1bS
 
-# Tmux pane navigation
-keybind = cmd+[=text:\x1bH         # Previous pane
-keybind = cmd+]=text:\x1bL         # Next pane
+# Tmux window management: cmd + t/w to open/close, cmd + shift + [ or ] to navigate
+keybind = cmd+t=text:\x1bt
+keybind = cmd+w=text:\x1bw
+keybind = cmd+shift+[=text:\x1b<
+keybind = cmd+shift+]=text:\x1b>
+
+# Tmux pane navigation with cmd + [ or ]
+keybind = cmd+[=text:\x1b[
+keybind = cmd+]=text:\x1b]
