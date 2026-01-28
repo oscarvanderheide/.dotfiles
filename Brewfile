@@ -34,7 +34,7 @@ brew 'starship' # custom prompts
 brew 'vivid' # something for colorschemes
 brew 'node' # mason needs node to install pyright
 brew 'bob' # neovim manager
-
+brew 'sesh' # tmux session manager
 
 ## zsh plugins
 brew 'zsh-autosuggestions'
