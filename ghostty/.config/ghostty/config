@@ -39,8 +39,8 @@ keybind = cmd+t=text:\x1bt
 keybind = cmd+w=text:\x1bw
 
 # Previous/next tmux window
-keybind = cmd+shift+[=text:\x1bp
-keybind = cmd+shift+]=text:\x1bn
+keybind = cmd+shift+[=text:\x1b<
+keybind = cmd+shift+]=text:\x1b>
 
 # Next tmux session
 keybind = cmd+shift+n=text:\x1bN
