@@ -35,23 +35,23 @@ end
 
 set("n", "<C-c>", search_and_change_word, { noremap = true, silent = true, desc = "Change word under cursor" })
 
--- Repeat last change on next match
+-- Repeat last change on next match, nice to combine with previous <C-c> keymap
 set("n", "<C-.>", "n.", { noremap = true, silent = true, desc = "Repeat last change on next search match" })
 
--- Change all occurances of word under cursor (from Primeagen?) and visual selection
-set(
-	"n",
-	"<C-f>",
-	[[:%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left><Space><Bs>]],
-	{ noremap = true, silent = false, desc = "Replace word under cursor" }
-)
-set(
-	"x",
-	"<C-f>",
-	'"zy:%s/<C-r>z/<C-r>z/g<Left><Left><Space><BS>',
-	{ noremap = true, silent = false, desc = "Replace selected text globally" }
-)
-
+-- -- Change all occurances of word under cursor (from Primeagen?) and visual selection
+-- set(
+-- 	"n",
+-- 	"<C-f>",
+-- 	[[:%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left><Space><Bs>]],
+-- 	{ noremap = true, silent = false, desc = "Replace word under cursor" }
+-- )
+-- set(
+-- 	"x",
+-- 	"<C-f>",
+-- 	'"zy:%s/<C-r>z/<C-r>z/g<Left><Left><Space><BS>',
+-- 	{ noremap = true, silent = false, desc = "Replace selected text globally" }
+-- )
+--
 -- Save file like in VSCode
 set("i", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true, desc = "Save file" })
 set("n", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true, desc = "Save file" })
@@ -59,10 +59,10 @@ set("i", "<D-s>", "<Esc>:w<CR>", { noremap = true, silent = true, desc = "Save f
 set("n", "<D-s>", "<Esc>:w<CR>", { noremap = true, silent = true, desc = "Save file" })
 
 -- Search with Cmd+f like in VSCode
-vim.keymap.set("n", "<M-f>", "/", { noremap = true, silent = false, desc = "Search" })
+vim.keymap.set("n", "<D-f>", "/", { noremap = true, silent = false, desc = "Search" })
 -- vim.keymap.set("n", "<C-f>", "/", { noremap = true, silent = false, desc = "Search" })
 -- vim.keymap.set('n', '<leader>f', '/')
--- vim.keymap.set('n', '<M-f>', '/', { noremap = true, silent = false, desc = 'Search' })
+-- vim.keymap.set("n", "<M-f>", "/", { noremap = true, silent = false, desc = "Search" })
 
 -- Select entire buffer like in VSCode
 set("n", "<C-a>", "ggVG", { noremap = true, silent = true, desc = "Select entire file" })
