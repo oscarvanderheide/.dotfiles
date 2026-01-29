@@ -201,14 +201,15 @@ local keymaps = {
 	--   { "<leader>gf", function() Snacks.picker.git_log_file() end,                            desc = "Git Log File" },
 	--   -- Grep
 	{
-		"<leader>sb",
+		"<D-f>", -- "<leader>sb",
 		function()
 			Snacks.picker.lines({
 				finder = "lines",
 				format = "lines",
+				matcher = { fuzzy = false },
 				layout = {
 					preview = "main",
-					preset = "vertical",
+					preset = "right",
 				},
 				jump = { match = true },
 				-- allow any window to be used as the main window
