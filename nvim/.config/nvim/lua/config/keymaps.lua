@@ -58,8 +58,8 @@ set("n", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true, desc = "Save f
 set("i", "<D-s>", "<Esc>:w<CR>", { noremap = true, silent = true, desc = "Save file" })
 set("n", "<D-s>", "<Esc>:w<CR>", { noremap = true, silent = true, desc = "Save file" })
 
--- Search with Cmd+f like in VSCode
-vim.keymap.set("n", "<D-f>", "/", { noremap = true, silent = false, desc = "Search" })
+-- Search with Cmd+f - using Snacks picker (configured in snacks.lua)
+-- vim.keymap.set("n", "<D-f>", "/", { noremap = true, silent = false, desc = "Search" })
 -- vim.keymap.set("n", "<C-f>", "/", { noremap = true, silent = false, desc = "Search" })
 -- vim.keymap.set('n', '<leader>f', '/')
 -- vim.keymap.set("n", "<M-f>", "/", { noremap = true, silent = false, desc = "Search" })

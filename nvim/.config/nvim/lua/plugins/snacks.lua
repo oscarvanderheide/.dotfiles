@@ -201,29 +201,55 @@ local keymaps = {
 	--   { "<leader>gf", function() Snacks.picker.git_log_file() end,                            desc = "Git Log File" },
 	--   -- Grep
 	{
-		"<D-f>", -- "<leader>sb",
+		"<D-f>",
 		function()
-			Snacks.picker.lines({
+			local search_term = ""
+			local mode = vim.fn.mode()
+
+			-- Get visual selection if in visual mode
+			if mode == "v" or mode == "V" or mode == "\22" then
+				-- Save current register
+				local save_reg = vim.fn.getreg('"')
+				local save_regtype = vim.fn.getregtype('"')
+				
+				-- Yank visual selection
+				vim.cmd('normal! y')
+				search_term = vim.fn.getreg('"')
+				
+				-- Restore register
+				vim.fn.setreg('"', save_reg, save_regtype)
+			end
+
+			local picker = Snacks.picker.lines({
 				finder = "lines",
 				format = "lines",
 				matcher = { fuzzy = false },
 				layout = {
-					preview = "main",
 					preset = "right",
 				},
 				jump = { match = true },
-				-- allow any window to be used as the main window
 				main = { current = true },
 				---@param picker snacks.Picker
-				on_show = function(picker)
-					local cursor = vim.api.nvim_win_get_cursor(picker.main)
-					local info = vim.api.nvim_win_call(picker.main, vim.fn.winsaveview)
-					picker.list:view(cursor[1], info.topline)
-					picker:show_preview()
+				on_close = function(picker)
+					local query = picker.input:get()
+					if query and query ~= "" then
+						vim.fn.setreg("/", query)
+						vim.o.hlsearch = true
+					end
 				end,
 				sort = { fields = { "score:desc", "idx" } },
 			})
+
+			-- Pre-fill with visual selection if any
+			if search_term ~= "" then
+				vim.schedule(function()
+					if picker and picker.input then
+						picker.input:set(search_term)
+					end
+				end)
+			end
 		end,
+		mode = { "n", "v" },
 		desc = "Buffer Lines",
 	},
 	--   { "<leader>sB", function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
