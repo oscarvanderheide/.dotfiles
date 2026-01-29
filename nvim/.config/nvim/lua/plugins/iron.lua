@@ -406,5 +406,5 @@ local function move_smart_block_up()
 	end
 end
 
-map("n", "<C-j>", move_smart_block_down, { desc = "󱠤 Move down smart" })
-map("n", "<C-k>", move_smart_block_up, { desc = "󱠤 Move up smart" })
+-- map("n", "<C-j>", move_smart_block_down, { desc = "󱠤 Move down smart" })
+-- map("n", "<C-k>", move_smart_block_up, { desc = "󱠤 Move up smart" })

@@ -7,8 +7,8 @@ local opts = { noremap = true, silent = true }
 -- Keymaps for quickly moving up and down within a buffer
 -- I tried stuff in the past based on treesitter to quickly move to next functions/classes/etc
 -- but it was always too language specific. Somehow this approach works well for me.
--- set({ "n", "v" }, "<C-j>", "6j", { silent = true })
--- set({ "n", "v" }, "<C-k>", "6k", { silent = true })
+set({ "n", "v" }, "<C-j>", "6j", { silent = true })
+set({ "n", "v" }, "<C-k>", "6k", { silent = true })
 
 -- Quit/restart neovim
 set("n", "<leader>qq", ":q<CR>", { noremap = true, silent = true, desc = "Quit" })
