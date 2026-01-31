@@ -117,7 +117,7 @@ opt.jumpoptions = "view"
 opt.laststatus = 3 -- global statusline
 opt.list = false
 opt.linebreak = true -- Wrap lines at convenient points
-opt.list = true -- Show some invisible characters (tabs...
+opt.list = false -- Don't show invisible characters (tabs...)
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
@@ -126,5 +126,3 @@ vim.o.laststatus = 0 -- Disable status
 
 -- Suggestion from checkhealth to make sure highlighting works after restoring a session?
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-
--- vim.o.winborder = "rounded"
