@@ -43,8 +43,9 @@ stow -v -t ~ git
 stow -v -t ~ kmonad
 stow -v -t ~ nvim
 stow -v -t ~ ripgrep
+stow -v -t ~ sesh
 stow -v -t ~ tmux
-stow -v -t ~ wezterm
+stow -v -t ~ ghostty
 stow -v -t ~ yazi
 stow -v -t ~ zsh
 

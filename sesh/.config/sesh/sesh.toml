@@ -1,0 +1,27 @@
+[default_session]
+startup_command = "yazi"
+
+[[session]]
+name = "dotfiles"
+path = "~/.dotfiles"
+windows = ["nvim", "ghostty", "tmux", "zsh"]
+
+[[window]]
+name = "nvim"
+path = "~/.dotfiles/nvim/.config/nvim"
+startup_script = "nvim"
+
+[[window]]
+name = "ghostty"
+path = "~/.dotfiles/ghostty/.config/ghostty"
+startup_script = "nvim"
+
+[[window]]
+name = "tmux"
+path = "~/.dotfiles/tmux/.config/tmux"
+startup_script = "nvim"
+
+[[window]]
+name = "zsh"
+path = "~/.dotfiles/zsh/.config/zsh"
+startup_script = "nvim"
