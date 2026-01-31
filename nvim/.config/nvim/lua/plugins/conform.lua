@@ -60,7 +60,7 @@ vim.keymap.set("n", "<leader>tf", function()
 end, { desc = "Toggle Autoformat" })
 
 -- Keymap to display diagnostics about formatters
-vim.keymap.set({ "n", "v" }, "<leader>cn", "<cmd>ConformInfo<cr>", { desc = "Conform Info" })
+-- vim.keymap.set({ "n", "v" }, "<leader>cn", "<cmd>ConformInfo<cr>", { desc = "Conform Info" })
 
 -- Keymap to manually apply formatter
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
