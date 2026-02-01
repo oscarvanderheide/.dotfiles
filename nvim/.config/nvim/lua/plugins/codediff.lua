@@ -15,3 +15,6 @@ require("codediff").setup({
 		char_brightness = 1.6,
 	},
 })
+
+-- Set keymap to <leader>gd to open codediff
+vim.keymap.set("n", "<leader>gd", ":CodeDiff<CR>", { noremap = true, silent = true, desc = "CodeDiff" })
