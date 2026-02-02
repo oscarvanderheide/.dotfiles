@@ -5,38 +5,38 @@ vim.pack.add({
 
 local renderOpts = {
 	heading = {
-		enabled = true,
-		render_modes = true,
-		sign = true,
-		icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
-		position = "overlay",
-		signs = { "󰫎 " },
-		width = "full",
-		left_margin = 0,
-		left_pad = 0,
-		right_pad = 0,
-		min_width = 0,
-		border = false,
-		border_virtual = false,
-		border_prefix = false,
-		above = "▄",
-		below = "▀",
-		backgrounds = {
-			"RenderMarkdownH1Bg",
-			"RenderMarkdownH2Bg",
-			"RenderMarkdownH3Bg",
-			"RenderMarkdownH4Bg",
-			"RenderMarkdownH5Bg",
-			"RenderMarkdownH6Bg",
-		},
-		foregrounds = {
-			"RenderMarkdownH1",
-			"RenderMarkdownH2",
-			"RenderMarkdownH3",
-			"RenderMarkdownH4",
-			"RenderMarkdownH5",
-			"RenderMarkdownH6",
-		},
+		enabled = false,
+		-- 	render_modes = true,
+		-- 	sign = true,
+		-- 	-- icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+		-- 	position = "overlay",
+		-- 	signs = { "󰫎 " },
+		-- 	width = "block",
+		-- 	left_margin = 0,
+		-- 	left_pad = 0,
+		-- 	right_pad = 0,
+		-- 	min_width = 0,
+		-- 	border = false,
+		-- 	border_virtual = false,
+		-- 	border_prefix = false,
+		-- 	above = "▄",
+		-- 	below = "▀",
+		-- 	backgrounds = {
+		-- 		"RenderMarkdownH1Bg",
+		-- 		"RenderMarkdownH2Bg",
+		-- 		"RenderMarkdownH3Bg",
+		-- 		"RenderMarkdownH4Bg",
+		-- 		"RenderMarkdownH5Bg",
+		-- 		"RenderMarkdownH6Bg",
+		-- 	},
+		-- 	foregrounds = {
+		-- 		"RenderMarkdownH1",
+		-- 		"RenderMarkdownH2",
+		-- 		"RenderMarkdownH3",
+		-- 		"RenderMarkdownH4",
+		-- 		"RenderMarkdownH5",
+		-- 		"RenderMarkdownH6",
+		-- 	},
 	},
 	paragraph = {
 		enabled = true,
@@ -53,7 +53,7 @@ local renderOpts = {
 		language_pad = 0,
 		language_name = true,
 		disable_background = { "diff" },
-		width = "full",
+		width = "block",
 		left_margin = 0,
 		left_pad = 0,
 		right_pad = 0,
@@ -75,7 +75,7 @@ local renderOpts = {
 		highlight = "RenderMarkdownDash",
 	},
 	bullet = {
-		enabled = true,
+		enabled = false,
 		render_modes = true,
 		-- icons = { "●", "○", "◆", "◇" },
 		-- ordered_icons = function(level, index, value)
@@ -217,7 +217,7 @@ vim.keymap.set("n", "<leader>tm", function()
 end, { desc = "Toggle Render Markdown" })
 
 -- Markdown preview
-vim.keymap.set("n", "<leader>cp", function()
+vim.keymap.set("n", "<leader>mp", function()
 	vim.fn["mkdp#util#install"]()
 	vim.cmd("MarkdownPreviewToggle")
 end, { desc = "Markdown preview" })
