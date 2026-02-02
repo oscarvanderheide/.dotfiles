@@ -222,4 +222,10 @@ set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle Wrap", silent = tr
 set("n", "<leader>to", "<cmd>set foldenable!<CR>", { desc = "Toggle Folding", silent = true })
 
 -- Show LSP code actions
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
+set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
+
+-- Update packages
+set("n", "<leader>uu", "<cmd>lua vim.pack.update()<CR>", { desc = "Update Packages" })
+
+-- Cleanup unused package
+set("n", "<leader>uc", functions.pack_clean, { desc = "Clean Unused Packages" })
