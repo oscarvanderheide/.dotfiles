@@ -9,7 +9,7 @@ vim.pack.add({ "https://github.com/jonarrien/telescope-cmdline.nvim" })
 
 -- Optional: Icons (only if you have a Nerd Font)
 if vim.g.have_nerd_font then
-  vim.pack.add({ "https://github.com/nvim-tree/nvim-web-devicons" })
+	vim.pack.add({ "https://github.com/nvim-tree/nvim-web-devicons" })
 end
 
 -- IMPORTANT: Native package manager usually doesn't run 'make' automatically.
@@ -82,7 +82,7 @@ local function smart_open()
   telescope.extensions.smart_open.smart_open { cwd_only = true }
 end
 
-local smart_open_opts = { noremap = true, silent = true, desc = 'Smart Open' }
-vim.keymap.set('n', '<C-p>', smart_open, smart_open_opts)
-vim.keymap.set('n', '<M-p>', smart_open, smart_open_opts)
-vim.keymap.set('n', '<D-p>', smart_open, smart_open_opts)
+local smart_open_opts = { noremap = true, silent = true, desc = "Smart Open" }
+vim.keymap.set("n", "<C-p>", smart_open, smart_open_opts)
+vim.keymap.set("n", "<M-p>", smart_open, smart_open_opts)
+vim.keymap.set("n", "<D-p>", smart_open, smart_open_opts)

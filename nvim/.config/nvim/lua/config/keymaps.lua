@@ -70,10 +70,11 @@ set("n", "<D-a>", "ggVG", { noremap = true, silent = true, desc = "Select entire
 
 -- Bridge the signals from Ghostty to <D-...>
 -- We use 'remap = true' so they trigger your actual bindings
-vim.keymap.set({ "n", "i", "v" }, "<M-a>", "<D-a>", { remap = true })
-vim.keymap.set({ "n", "i", "v" }, "<M-p>", "<D-p>", { remap = true })
-vim.keymap.set({ "n", "i", "v" }, "<M-f>", "<D-f>", { remap = true })
-vim.keymap.set({ "n", "i", "v" }, "<M-s>", "<D-s>", { remap = true })
+vim.keymap.set({ "n", "v" }, "<M-a>", "<D-a>", { remap = true })
+vim.keymap.set({ "n", "v" }, "<M-p>", "<D-p>", { remap = true })
+vim.keymap.set({ "n", "v" }, "<M-f>", "<D-f>", { remap = true })
+vim.keymap.set({ "n", "v" }, "<M-s>", "<D-s>", { remap = true })
+
 -- Yank stuff around brackets (useful for lua tables)
 
 set("n", "<C-y>", "vabVy", { noremap = true, silent = true, desc = "Yank entire buffer" })
