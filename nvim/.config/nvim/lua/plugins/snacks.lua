@@ -162,7 +162,7 @@ local keymaps = {
 	{
 		"<leader>n",
 		function()
-			Snacks.picker.notifications()
+			Snacks.notifier.show_history()
 		end,
 		desc = "Notification History",
 	},
@@ -211,11 +211,11 @@ local keymaps = {
 				-- Save current register
 				local save_reg = vim.fn.getreg('"')
 				local save_regtype = vim.fn.getregtype('"')
-				
+
 				-- Yank visual selection
-				vim.cmd('normal! y')
+				vim.cmd("normal! y")
 				search_term = vim.fn.getreg('"')
-				
+
 				-- Restore register
 				vim.fn.setreg('"', save_reg, save_regtype)
 			end
