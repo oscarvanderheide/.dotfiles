@@ -34,7 +34,7 @@ ueberzug_offset = [0, 0, 0, 0]
 view-npy = [
   # The command to run. "$@" passes all selected file paths to the script.
   # 'block = true' makes yazi wait for the script to finish.
-  { run = 'uvx --from https://github.com/oscarvanderheide/arrayview.git arrayview "$0"', orphan = true },
+  { run = 'uvx --from https://github.com/oscarvanderheide/arrayview.git arrayview "$1" --browser', orphan = true },
 ]
 open = [
   { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
@@ -61,7 +61,7 @@ play = [
 
 rules = [
   # Array files 
-  { name = "*.{mat,npy,npz,nii,nii.gz}", use = "view-npy" },
+  { url = "*.{mat,npy,npz,nii,nii.gz}", use = "view-npy" },
   # Folder
   { name = "*/", use = [
     "edit",
