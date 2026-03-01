@@ -74,6 +74,10 @@
       "rev": "e99d3e28c5a2066d2d368dfe4ef3827c8d75d337",
       "src": "https://github.com/kawre/neotab.nvim"
     },
+    "noice.nvim": {
+      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
+      "src": "https://github.com/folke/noice.nvim"
+    },
     "nord.nvim": {
       "rev": "03e7691f9cf88aa8d97e3db252511a1e7aab838a",
       "src": "https://github.com/gbprod/nord.nvim",
